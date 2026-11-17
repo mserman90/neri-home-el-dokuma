@@ -42,8 +42,8 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#onizleme" className="hover:text-[var(--plum)] transition">
-                  Koltuk Kombin & Önizleme Aracı
+                <a href="#yasam-alanlari" className="hover:text-[var(--plum)] transition">
+                  Yaşam Alanlarında Neri Home
                 </a>
               </li>
               <li>

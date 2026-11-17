@@ -9,7 +9,6 @@ import { useTheme } from "./hooks/useTheme";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { LivingSpaces } from "./components/LivingSpaces";
-import { RoomVisualizer } from "./components/RoomVisualizer";
 import { ProductGrid } from "./components/ProductGrid";
 import { ProductModal } from "./components/ProductModal";
 import { CartDrawer } from "./components/CartDrawer";
@@ -202,14 +201,7 @@ export default function App() {
         {/* 3. Yaşam Alanlarında Neri Home */}
         <LivingSpaces products={products} openModal={(p) => setSelectedProduct(p)} />
 
-        {/* 4. Koltuk Kombin & Mekân Önizleme Aracı */}
-        <RoomVisualizer
-          products={products}
-          onOpenModal={(p) => setSelectedProduct(p)}
-          onAddToCart={(p) => handleAddToCart(p, 0)}
-        />
-
-        {/* 5. Koleksiyon & Filtreler */}
+        {/* 4. Koleksiyon & Filtreler */}
         <ProductGrid
           products={products}
           favIds={favIds}

@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const nav = [
     { href: "#koleksiyon", label: "Koleksiyon" },
-    { href: "#onizleme", label: "Mekânda Gör" },
+    { href: "#yasam-alanlari", label: "Yaşam Alanları" },
     { href: "#motifler", label: "Motiflerin Dili" },
     { href: "#zanaat", label: "Keçi Kılı & Cicim" },
     { href: "#sertifika", label: "Menşe Belgesi" },

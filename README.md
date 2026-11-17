@@ -9,7 +9,7 @@ Tekirdağ Saray Küçükyoncalı (Küçükmanika) köyünde 1875 Rumeli göç mi
 ## 🧶 Özellikler
 
 - **1875 Sandık Mirası & Motifler:** Su Yolu, Göç Yolları, Eli Belinde, Koçboynuzu, Pıtrak ve Üç Güller motiflerinin hikayelerini içeren interaktif motif sözlüğü.
-- **İnteraktif Koltuk & Mekân Önizleme:** Müşterilerin koltuk kumaşı rengini (Krem, Antrasit, Zümrüt Yeşili, Taba) seçerek kırlentlerin duruşunu görebildikleri simülasyon.
+- **Gerçek Yaşam Alanları & İlham:** Ürünlerin koltukta, sofrada ve antrede gerçek yaşam alanlarındaki duruşunu gösteren ilham galerisi.
 - **Doku Büyüteci (Image Magnifier):** Ürün detayında el dokumasının ilmeklerini yakından inceleme imkânı.
 - **Sipariş & Ödeme Seçenekleri:** Doğrudan WhatsApp hattı ve kredi kartı/taksitli güvenli ödeme bağlantısı (Shopier/iyzico uyumlu).
 - **Açık / Koyu Tema:** Sistem tercihiyle senkronize veya manuel değiştirilebilir sıcak toprak tonları.
