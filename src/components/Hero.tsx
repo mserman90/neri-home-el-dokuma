@@ -1,7 +1,7 @@
 import React from "react";
 import { Sparkles, Phone, ArrowDownRight } from "lucide-react";
 import { waLink } from "../utils/formatters";
-import { imgFullFlat, imgLivingSofa, imgRunnerTable } from "../data/products";
+import { imgFullFlat, imgNery741Lifestyle, imgRunnerTable } from "../data/products";
 import { useLanguage } from "../context/LanguageContext";
 
 export const Hero: React.FC = () => {
@@ -109,12 +109,12 @@ export const Hero: React.FC = () => {
                   <div className="bg-[var(--card)] p-2 sm:p-2.5 rounded-xl sm:rounded-2xl border border-[var(--line)]">
                     <div className="relative aspect-[4/3] sm:aspect-[16/10] rounded-lg sm:rounded-xl overflow-hidden">
                       <img
-                        src={imgLivingSofa}
-                        alt="Salon Kombini"
+                        src={imgNery741Lifestyle}
+                        alt="Berjerde Nery 741"
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
                       <span className="absolute top-2 left-2 bg-[var(--ink)]/90 text-[var(--surface)] text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full">
-                        {lang === "tr" ? "Salonda" : "Living Room"}
+                        {lang === "tr" ? "Berjerde" : "Armchair"}
                       </span>
                     </div>
                   </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Product } from "../types";
-import { imgLivingSofa, imgRunnerTable, imgBagEntry, imgFullFlat } from "../data/products";
+import { imgLivingSofa, imgRunnerTable, imgBagEntry, imgFullFlat, imgNery741Lifestyle } from "../data/products";
 import { useLanguage } from "../context/LanguageContext";
 
 type LivingSpacesProps = {
@@ -13,6 +13,15 @@ export const LivingSpaces: React.FC<LivingSpacesProps> = ({ products, openModal 
   const isEn = lang === "en";
 
   const items = [
+    {
+      img: imgNery741Lifestyle,
+      label: isEn ? "Living Space / Armchair" : "Yaşam Alanı / Berjerde",
+      title: isEn ? "Armchair Calm" : "Berjer & Okuma Köşesi",
+      desc: isEn
+        ? "Nery 741 handwoven cushion on a neutral linen armchair beside an olive tree in soft sunlight."
+        : "Doğal ışık alan pencere önünde zeytin fidanı eşliğinde keten berjerde Nery 741 el dokuması kırlent.",
+      id: "nery-kirlent-741",
+    },
     {
       img: imgLivingSofa,
       label: isEn ? "Living Space / Living Room" : "Yaşam Alanı / Salonda",
@@ -69,7 +78,7 @@ export const LivingSpaces: React.FC<LivingSpacesProps> = ({ products, openModal 
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
         {items.map((item) => {
           const product = products.find((p) => p.id === item.id);
           return (

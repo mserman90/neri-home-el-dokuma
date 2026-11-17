@@ -10,6 +10,11 @@ import imgGocAlt from "../assets/murdum-cizgili-bel-yastigi-editorial.jpg";
 import imgKareAlt from "../assets/4a133cdf98bd6864-WhatsApp_Image_2026-11-16_at_18_54_43.jpeg";
 import imgRunnerTable from "../assets/b734caefff2a6d9e-Gemini_Generated_Image_n8fuovn8fuovn8fu_1.jpg";
 import imgBagEntry from "../assets/b9ac0c1b88d107b1-Gemini_Generated_Image_n8fuovn8fuovn8fu_2.jpg";
+import imgNery741Studio from "../assets/nery-741-studio-catalog.jpg";
+import imgNery741Lifestyle from "../assets/nery-741-lifestyle-living.jpg";
+import imgNery741Berjer from "../assets/nery-741-berjer-yasam-alani.jpg";
+import imgNery741Usta from "../assets/nery-741-usta-damgasi-detay.jpg";
+import imgNery741Astar from "../assets/nery-741-astar-fermuar-detay.jpg";
 
 export {
   imgGanos,
@@ -22,9 +27,19 @@ export {
   imgKareAlt,
   imgRunnerTable,
   imgBagEntry,
+  imgNery741Studio,
+  imgNery741Lifestyle,
+  imgNery741Berjer,
+  imgNery741Usta,
+  imgNery741Astar,
 };
 
 export const livingLabel = (img: string, isEn = false): string | undefined => {
+  if (img === imgNery741Studio) return isEn ? "Studio Catalog" : "Stüdyo Çekimi";
+  if (img === imgNery741Lifestyle) return isEn ? "Living Space / Armchair" : "Yaşam Alanı / Berjerde";
+  if (img === imgNery741Berjer) return isEn ? "Living Space / Sunlight" : "Yaşam Alanı / Gün Işığında";
+  if (img === imgNery741Usta) return isEn ? "Master's Mark Detail" : "Usta Damgası Detay";
+  if (img === imgNery741Astar) return isEn ? "Lining & Zipper Detail" : "Astar & Fermuar Detay";
   if (img === imgLivingSofa) return isEn ? "Living Space / Living Room" : "Yaşam Alanı / Salonda";
   if (img === imgRunnerTable) return isEn ? "Living Space / Dining Table" : "Yaşam Alanı / Sofrada";
   if (img === imgBagEntry) return isEn ? "Living Space / Entryway" : "Yaşam Alanı / Girişte";
@@ -46,7 +61,7 @@ export const products: Product[] = [
     motif: "Su Yolu & Usta Damgası",
     motifEn: "Waterway & Master's Seal",
     price: 3250,
-    images: [imgLivingSofa, imgGanos, imgGocAlt],
+    images: [imgNery741Studio, imgNery741Lifestyle, imgNery741Berjer, imgNery741Usta, imgNery741Astar],
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
