@@ -1,6 +1,6 @@
 import React from "react";
 import { Product } from "../types";
-import { Heart, Eye, Plus, CheckCircle2, Clock } from "lucide-react";
+import { Heart, Plus, CheckCircle2, Clock } from "lucide-react";
 import { tl } from "../utils/formatters";
 
 type ProductCardProps = {
@@ -38,32 +38,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </button>
 
           {/* Sol Üst: Dokuma Süresi Rozeti */}
-          <div className="absolute top-3 left-3 bg-[var(--ink)]/90 text-[var(--surface)] text-[10px] font-semibold px-2.5 py-1 rounded-full shadow">
+          <div className="absolute top-3 left-3 bg-[var(--ink)]/90 text-[var(--surface)] text-[10px] font-semibold px-2.5 py-1 rounded-full shadow pointer-events-none">
             {product.weavingTime}
           </div>
 
-          {/* Sağ Üst: Favori Butonu */}
-          <button
-            type="button"
-            onClick={() => onToggleFav(product.id)}
-            aria-label={isFav ? `${product.name} favorilerden çıkar` : `${product.name} favorilere ekle`}
-            aria-pressed={isFav}
-            className="absolute top-3 right-3 p-2 rounded-full bg-white/95 text-[var(--ink)] shadow hover:scale-110 transition-transform focus:outline-none"
-          >
-            <Heart className={`w-4 h-4 ${isFav ? "fill-[var(--plum)] text-[var(--plum)]" : ""}`} />
-          </button>
-
-          {/* Sağ Alt: Hızlı İncele Butonu */}
-          <button
-            type="button"
-            onClick={() => onOpenModal(product)}
-            className="absolute bottom-3 right-3 bg-white/95 text-[var(--ink)] text-xs font-semibold px-3 py-1.5 rounded-xl shadow flex items-center gap-1 hover:bg-white transition"
-          >
-            <Eye className="w-3.5 h-3.5" /> İncele
-          </button>
-
           {/* Sol Alt: Stok Durumu Rozeti */}
-          <div className="absolute bottom-3 left-3">
+          <div className="absolute bottom-3 left-3 pointer-events-none">
             {product.stockStatus === "in_stock" ? (
               <span className="inline-flex items-center gap-1 bg-[#2D4537]/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow backdrop-blur-sm">
                 <CheckCircle2 className="w-3 h-3 text-[#A8B184]" /> Stokta Hazır
@@ -78,9 +58,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Ürün Metin Alanı */}
         <div className="p-4 space-y-2">
-          <div className="flex items-center justify-between text-[11px] font-semibold text-[var(--plum)]">
-            <span>{product.series}</span>
-            <span className="opacity-70 text-[var(--ink)]">{product.size}</span>
+          <div className="flex items-center justify-between text-[11px] font-semibold">
+            <span className="text-[var(--plum)]">{product.series}</span>
+            <div className="flex items-center gap-2">
+              <span className="opacity-70 text-[var(--ink)]">{product.size}</span>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleFav(product.id);
+                }}
+                aria-label={isFav ? `${product.name} favorilerden çıkar` : `${product.name} favorilere ekle`}
+                aria-pressed={isFav}
+                className="p-1 rounded-lg text-[var(--ink)] hover:text-[var(--plum)] hover:bg-[var(--surface-2)] transition focus:outline-none"
+              >
+                <Heart className={`w-4 h-4 ${isFav ? "fill-[var(--plum)] text-[var(--plum)]" : "opacity-60 hover:opacity-100"}`} />
+              </button>
+            </div>
           </div>
 
           <h3 className="font-serif-display text-xl font-bold leading-snug">

@@ -63,7 +63,7 @@ export const RoomVisualizer: React.FC<RoomVisualizerProps> = ({
               </div>
 
               {/* Bilgi Etiketi */}
-              <div className="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-semibold shadow-sm text-neutral-800 dark:text-neutral-200">
+              <div className="absolute top-4 right-4 bg-[var(--card)]/90 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-semibold shadow-sm text-[var(--ink)] border border-[var(--line)]">
                 Kumaş: <strong>{selectedSofa.name}</strong>
               </div>
             </div>
