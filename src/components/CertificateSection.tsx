@@ -74,7 +74,7 @@ export const CertificateSection: React.FC = () => {
                 <div className="space-y-2 text-xs opacity-90">
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
                     <span className="opacity-70">{isEn ? "Registration:" : "Ürün Tescili:"}</span>
-                    <strong className="text-[var(--plum)]">Neri Home Collection</strong>
+                    <strong className="text-[var(--plum)]">Nery Home Collection</strong>
                   </div>
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
                     <span className="opacity-70">{isEn ? "Weaving Technique:" : "Dokuma Tekniği:"}</span>
@@ -82,7 +82,7 @@ export const CertificateSection: React.FC = () => {
                   </div>
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
                     <span className="opacity-70">{isEn ? "Raw Materials:" : "Hammadde:"}</span>
-                    <strong>{isEn ? "100% Goat Hair & Virgin Wool" : "%100 Keçi Kılı & Koyun Yünü"}</strong>
+                    <strong>{isEn ? "100% Naturally Dyed Wool & Cotton Warp" : "%100 Yün İplik (Kök Boya) & Pamuk Çözgü"}</strong>
                   </div>
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
                     <span className="opacity-70">{isEn ? "Provenance:" : "Menşe:"}</span>

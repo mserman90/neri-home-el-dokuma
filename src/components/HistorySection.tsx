@@ -82,7 +82,7 @@ export const HistorySection: React.FC = () => {
             </div>
             <div className="px-3 py-3.5 flex justify-between items-center text-xs opacity-80">
               <span className="font-semibold">
-                {isEn ? "Neri Home Women Weaving Collective" : "Neri Home Kadın Dokuma İnisiyatifi"}
+                {isEn ? "Nery Home Women Weaving Collective" : "Nery Home Kadın Dokuma İnisiyatifi"}
               </span>
               <span>Küçükyoncalı</span>
             </div>

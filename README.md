@@ -1,6 +1,6 @@
-# Neri Home | El Dokuma Keçi Kılı & Cicim Tekstil
+# Nery Home: Doğal Dokunuşlar | El Dokuma Kırlent & Ev Tekstili
 
-Tekirdağ Saray Küçükyoncalı (Küçükmanika) köyünde 1875 Rumeli göç mirasıyla, kadın dokuma ustalarımızın ahşap el tezgâhlarında %100 doğal keçi kılı ve yün ipliklerle dokunan kırlent, dolay yastık, çanta, heybe ve runner koleksiyonu.
+Anadolu'nun geleneksel dokumalarını modern yaşam alanları ile buluşturuyoruz. Tekirdağ Saray Küçükyoncalı (Küçükmanika) köyünde 1875 Rumeli göç mirasıyla, kadın dokuma ustalarımızın ahşap el tezgâhlarında kök boyalı %100 doğal yün ve pamuk çözgü ile dokunan kırlent, dolay yastık, çanta, heybe ve runner koleksiyonu.
 
 🌐 **Canlı Site:** [https://mserman90.github.io/neri-home-el-dokuma/](https://mserman90.github.io/neri-home-el-dokuma/)
 
@@ -44,4 +44,4 @@ npm run dev
 
 ---
 
-© 2026 Neri Home — Saray / Tekirdağ. Tüm hakları saklıdır.
+© 2026 Nery Home — Saray / Tekirdağ. Tüm hakları saklıdır.

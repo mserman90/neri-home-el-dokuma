@@ -39,8 +39,8 @@ export const CustomOrderSection: React.FC = () => {
     storage.set("neri_custom_orders", [...savedOrders, orderData]);
 
     const msg = isEn
-      ? `Hello Ms. Neriman, I would like to request a Custom Atelier quote from Neri Home:\n\nName / Company: ${formName.trim()}\nRequest Type: ${formType}\nDetails & Dimensions: ${formNote.trim()}`
-      : `Merhaba Neriman Hanım, Neri Home üzerinden Özel / Kurumsal Dokuma teklifi almak istiyorum:\n\nAd / Firma: ${formName.trim()}\nTalep Türü: ${formType}\nDetay & Ölçü: ${formNote.trim()}`;
+      ? `Hello Ms. Neriman, I would like to request a Custom Atelier quote from Nery Home:\n\nName / Company: ${formName.trim()}\nRequest Type: ${formType}\nDetails & Dimensions: ${formNote.trim()}`
+      : `Merhaba Neriman Hanım, Nery Home üzerinden Özel / Kurumsal Dokuma teklifi almak istiyorum:\n\nAd / Firma: ${formName.trim()}\nTalep Türü: ${formType}\nDetay & Ölçü: ${formNote.trim()}`;
 
     const url = waLink(msg);
 

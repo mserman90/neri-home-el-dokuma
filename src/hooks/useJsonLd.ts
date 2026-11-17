@@ -6,7 +6,7 @@ export function useJsonLd(products: Product[], faqs: FAQ[]) {
     const siteUrl = "https://mserman90.github.io/neri-home-el-dokuma/";
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.id = "neri-home-jsonld";
+    script.id = "nery-home-jsonld";
     script.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
@@ -14,16 +14,16 @@ export function useJsonLd(products: Product[], faqs: FAQ[]) {
           "@type": "WebSite",
           "@id": `${siteUrl}#website`,
           url: siteUrl,
-          name: "Neri Home | El Dokuma Keçi Kılı & Cicim Tekstil",
-          description: "Tekirdağ Saray Küçükyoncalı 1875 Rumeli göç mirası el dokuması kırlent, dolay yastık ve çanta mağazası.",
+          name: "Nery Home: Doğal Dokunuşlar | El Dokuma Kırlent & Ev Tekstili",
+          description: "Anadolu'nun geleneksel dokumalarını modern yaşam alanları ile buluşturuyoruz. Tekirdağ Saray Küçükyoncalı 1875 Rumeli göç mirası el dokuması kırlent ve tekstil mağazası.",
           inLanguage: "tr-TR",
         },
         {
           "@type": "HomeGoodsStore",
           "@id": `${siteUrl}#store`,
-          name: "Neri Home",
+          name: "Nery Home",
           description:
-            "Tekirdağ Saray Küçükyoncalı Mahallesi'nde 200 yıllık Rumeli sandık motifleriyle ahşap el tezgâhlarında dokunan doğal keçi kılı ve yün cicim kırlent, dolay yastık, heybe, çanta ve runner atölyesi.",
+            "Nery Home: Doğal Dokunuşlar. Tekirdağ Saray Küçükyoncalı Mahallesi'nde kök boyalı %100 doğal yün ve pamuk çözgüyle ahşap el tezgâhlarında dokunan el dokuması kırlent, dolay yastık, heybe, çanta ve runner atölyesi.",
           url: siteUrl,
           telephone: "+905376966502",
           founder: {
@@ -66,7 +66,7 @@ export function useJsonLd(products: Product[], faqs: FAQ[]) {
         {
           "@type": "ItemList",
           "@id": `${siteUrl}#collection`,
-          name: "Neri Home El Dokuma Koleksiyonu",
+          name: "Nery Home El Dokuma Koleksiyonu",
           itemListElement: products.map((p, i) => ({
             "@type": "ListItem",
             position: i + 1,
@@ -76,7 +76,7 @@ export function useJsonLd(products: Product[], faqs: FAQ[]) {
               name: p.name,
               sku: p.id,
               description: p.shortDesc,
-              brand: { "@type": "Brand", name: "Neri Home" },
+              brand: { "@type": "Brand", name: "Nery Home" },
               material: p.material,
               category: p.category,
               itemCondition: "https://schema.org/NewCondition",
@@ -91,7 +91,7 @@ export function useJsonLd(products: Product[], faqs: FAQ[]) {
                 url: `${siteUrl}?product=${p.id}`,
                 seller: {
                   "@type": "Organization",
-                  name: "Neri Home",
+                  name: "Nery Home",
                 },
               },
             },

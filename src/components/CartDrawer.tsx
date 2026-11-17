@@ -42,12 +42,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     const isEn = lang === "en";
     const lines = isEn
       ? [
-          "Hello Ms. Neriman, I would like to place an order from Neri Home:",
+          "Hello Ms. Neriman, I would like to place an order from Nery Home:",
           "",
           "📋 ORDER ITEMS:",
         ]
       : [
-          "Merhaba Neriman Hanım, Neri Home web sitesi üzerinden sipariş oluşturmak istiyorum:",
+          "Merhaba Neriman Hanım, Nery Home web sitesi üzerinden sipariş oluşturmak istiyorum:",
           "",
           "📋 SİPARİŞ LİSTESİ:",
         ];

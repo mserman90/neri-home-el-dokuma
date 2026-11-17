@@ -65,7 +65,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Neri Home | ${displayName}`,
+          title: `Nery Home | ${displayName}`,
           text: displayDesc,
           url: shareUrl,
         });

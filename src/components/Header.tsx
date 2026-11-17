@@ -54,10 +54,10 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
               <div className="min-w-0">
                 <span className="font-serif-display text-xl sm:text-2xl lg:text-3xl font-bold leading-none block truncate">
-                  Neri Home
+                  Nery Home
                 </span>
                 <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.16em] sm:tracking-[0.2em] text-[var(--brass)] font-semibold block">
-                  Küçükyoncalı • 1875
+                  {lang === "tr" ? "Doğal Dokunuşlar" : "Natural Touches"}
                 </span>
               </div>
             </a>
@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({
 
               {/* Masaüstü WhatsApp Butonu */}
               <a
-                href={waLink("Merhaba Neriman Hanım, Neri Home el dokuma ürünleriniz hakkında bilgi almak istiyorum.")}
+                href={waLink(lang === "tr" ? "Merhaba Neriman Hanım, Nery Home el dokuma ürünleriniz hakkında bilgi almak istiyorum." : "Hello Ms. Neriman, I would like to inquire about Nery Home handwoven textiles.")}
                 target="_blank"
                 rel="noopener"
                 className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[var(--olive)] text-white text-xs font-semibold hover:bg-[var(--olive-dark)] transition shadow-sm"
@@ -177,7 +177,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="pt-2 border-t border-[var(--line)]">
               <a
-                href={waLink("Merhaba Neriman Hanım, Neri Home el dokuma ürünleriniz hakkında bilgi almak istiyorum.")}
+                href={waLink(lang === "tr" ? "Merhaba Neriman Hanım, Nery Home el dokuma ürünleriniz hakkında bilgi almak istiyorum." : "Hello Ms. Neriman, I would like to inquire about Nery Home handwoven textiles.")}
                 target="_blank"
                 rel="noopener"
                 onClick={() => setMobileMenu(false)}

@@ -63,7 +63,7 @@ export const Hero: React.FC = () => {
                 {t.hero.exploreBtn} <ArrowDownRight className="w-4 h-4" />
               </a>
               <a
-                href={waLink("Merhaba Neriman Hanım, Neri Home koleksiyonu hakkında bilgi almak istiyorum.")}
+                href={waLink(lang === "tr" ? "Merhaba Neriman Hanım, Nery Home koleksiyonu hakkında bilgi almak istiyorum." : "Hello Ms. Neriman, I would like to inquire about the Nery Home collection.")}
                 target="_blank"
                 rel="noopener"
                 className="w-full sm:w-auto px-4 py-3 sm:px-5 sm:py-3.5 rounded-xl bg-[var(--surface-2)] border border-[var(--brass)]/50 font-semibold text-xs sm:text-sm hover:bg-[var(--surface-3)] transition flex items-center justify-center gap-2 text-center"

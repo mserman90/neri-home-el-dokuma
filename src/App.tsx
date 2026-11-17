@@ -131,8 +131,8 @@ function MainAppContent() {
       <a
         href={waLink(
           lang === "en"
-            ? "Hello Ms. Neriman, I would like to inquire about Neri Home handwoven textiles."
-            : "Merhaba Neriman Hanım, Neri Home el dokuma ürünleriniz hakkında bilgi almak istiyorum."
+            ? "Hello Ms. Neriman, I would like to inquire about Nery Home handwoven textiles."
+            : "Merhaba Neriman Hanım, Nery Home el dokuma ürünleriniz hakkında bilgi almak istiyorum."
         )}
         target="_blank"
         rel="noopener"

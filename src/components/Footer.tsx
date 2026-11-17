@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
                   <path d="M3 23L8 18L14 24L20 18L25 23" stroke="#F9F6F0" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <span className="font-serif-display text-2xl font-bold">Neri Home</span>
+              <span className="font-serif-display text-2xl font-bold">Nery Home</span>
             </div>
             <p className="text-xs sm:text-sm opacity-80 leading-relaxed">
               {t.footer.about}
@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
               </div>
               <div className="pt-2 flex flex-wrap gap-2.5">
                 <a
-                  href={waLink(isEn ? "Hello Ms. Neriman, I am contacting you via Neri Home website." : "Merhaba Neriman Hanım, Neri Home web sitenizden ulaşıyorum.")}
+                  href={waLink(isEn ? "Hello Ms. Neriman, I am contacting you via Nery Home website." : "Merhaba Neriman Hanım, Nery Home web sitenizden ulaşıyorum.")}
                   target="_blank"
                   rel="noopener"
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white text-xs font-semibold shadow-xs transition"

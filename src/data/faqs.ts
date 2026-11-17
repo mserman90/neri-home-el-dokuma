@@ -2,16 +2,22 @@ import { FAQ } from "../types";
 
 export const faqs: FAQ[] = [
   {
-    q: "Keçi kılı ve cicim el dokuma ürünler nasıl temizlenir?",
-    qEn: "How do I care for and clean natural goat hair & cicim textiles?",
-    a: "Doğal keçi kılı, yün lifleri ve kök boya tonlarının uzun ömürlü kalması için çamaşır makinesinde yıkanması önerilmez. Nemli beyaz bir bezle nazikçe silebilir, elektrik süpürgesinin düşük ayarında tozunu alabilir veya kuru temizleme yaptırabilirsiniz.",
-    aEn: "To preserve natural goat hair and wool fibers, machine washing is not recommended. Wipe gently with a damp white cloth, use a low-suction vacuum, or have it professionally dry cleaned.",
+    q: "Nery Home el dokuması kırlent ve tekstil ürünleri nasıl temizlenir ve yıkanır?",
+    qEn: "How do I care for and wash Nery Home handwoven cushions?",
+    a: "Ürün, makinenin yün hassas ayarında 30 derecede yıkamaya ve elde yıkamaya uygundur. Ayrıca ütülenebilir. Dokuma kırlentin arkasında ve iç astarında %100 pamuk ham bez kullanıldığından nefes alır ve formunu korur.",
+    aEn: "Suitable for machine washing on 30°C delicate/wool cycle and gentle hand washing. Iron-safe. Backed and lined with 100% natural cotton canvas for lasting durability.",
   },
   {
-    q: "Keçi kılı dokumalar batma veya koku yapar mı?",
-    qEn: "Does goat hair prickle or retain odors?",
-    a: "Hayır. İplik hazırlığı sırasında uygulanan özel tarama ve doğal yün harmanlama işlemleri sayesinde yüzeyi pürüzsüzleştirilmiştir. Nefes alan yapısı terletmez, koku barındırmaz ve güve oluşumunu doğal olarak engeller.",
-    aEn: "No. Through special carding and virgin wool blending, the weave is smooth and pleasant to touch. Its breathable structure naturally repels moisture, moths, and odors.",
+    q: "Kırlentlerin dolgu ve astar malzemesi nedir?",
+    qEn: "What are the lining and insert materials used in cushions?",
+    a: "Dokuma kırlentlerimizin arkasında ve iç astarında %100 pamuk ham bez kullanılmıştır. Kırlentin dolgu malzemesi ise formunu uzun süre koruyan ve çökme yapmayan birinci sınıf boncuk elyaftır.",
+    aEn: "The back and inner lining are crafted from 100% unbleached cotton canvas. The cushion filling is premium resilient bead fiber.",
+  },
+  {
+    q: "İplikler ve boyalar doğal mıdır?",
+    qEn: "Are the yarns and dyes 100% natural?",
+    a: "Evet. Dokumalarımız %100 yün iplikle dokunmuş olup, yün iplikler geleneksel kök boya ile renklendirilmiştir. Çözgüsünde ise %100 pamuk çözgü ipi kullanılmıştır.",
+    aEn: "Yes. Our textiles are woven with 100% natural wool yarns dyed with traditional plant-based root extracts, paired with 100% cotton warp.",
   },
   {
     q: "Sipariş ve kargo süreci nasıl işliyor?",
@@ -28,7 +34,7 @@ export const faqs: FAQ[] = [
   {
     q: "Ürünlerin orijinallik belgesi veya garantisi var mı?",
     qEn: "Do products include a certificate of provenance?",
-    a: "Evet. Tüm Neri Home ürünleri, Tekirdağ Saray Küçükyoncalı El Dokuma Atölyesi menşe mühürlü, dokuyan ustanın adını ve tamamlanma tarihini içeren özel 'Usta İmzalı Özgünlük Sertifikası' ile birlikte özel ambalajında teslim edilir.",
-    aEn: "Yes. Every single Neri Home piece is delivered in protective packaging with an official certificate containing the master weaver's signature, date of completion, and origin seal.",
+    a: "Evet. Tüm Nery Home ürünleri, Tekirdağ Saray Küçükyoncalı El Dokuma Atölyesi menşe mühürlü, dokuyan ustanın adını ve tamamlanma tarihini içeren özel 'Usta İmzalı Özgünlük Sertifikası' ile birlikte özel ambalajında teslim edilir.",
+    aEn: "Yes. Every single Nery Home piece is delivered in protective packaging with an official certificate containing the master weaver's signature, date of completion, and origin seal.",
   },
 ];

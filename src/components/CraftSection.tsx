@@ -1,5 +1,5 @@
 import React from "react";
-import { Droplets, Wind, Shield, Layers, X, Check, Sparkles, Ruler } from "lucide-react";
+import { Sparkles, Wind, Layers, Check, ShieldCheck, Shirt } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
 export const CraftSection: React.FC = () => {
@@ -8,22 +8,22 @@ export const CraftSection: React.FC = () => {
 
   const features = [
     {
-      icon: Droplets,
+      icon: Shirt,
       t: t.craftSection.feature1Title,
       d: t.craftSection.feature1Desc,
     },
     {
-      icon: Wind,
+      icon: Sparkles,
       t: t.craftSection.feature2Title,
       d: t.craftSection.feature2Desc,
     },
     {
-      icon: Shield,
+      icon: Layers,
       t: t.craftSection.feature3Title,
       d: t.craftSection.feature3Desc,
     },
     {
-      icon: Layers,
+      icon: Wind,
       t: t.craftSection.feature4Title,
       d: t.craftSection.feature4Desc,
     },
@@ -63,18 +63,18 @@ export const CraftSection: React.FC = () => {
 
           <div className="rounded-3xl border border-[var(--line)] bg-[var(--surface-2)] p-6">
             <p className="font-serif-display text-2xl font-bold">
-              {isEn ? "Stitch by Stitch on the Loom" : "Tezgâhta İlmek İlmek"}
+              {isEn ? "Stitch by Stitch on Wooden Looms" : "Tezgâhta İlmek İlmek Doğallık"}
             </p>
             <p className="mt-2 text-sm opacity-80 leading-relaxed">
               {isEn
-                ? "Every row progresses with the intuitive tactile memory of our artisans. Containing zero industrial shortcuts, these heirloom pieces are made to endure for generations."
-                : "Ahşap el tezgâhında her sıra, ustanın el hafızasıyla ilerler. Fabrikasyon hiçbir parça barındırmayan bu kumaşlar, zamana meydan okuyan dayanıklılıklarıyla nesilden nesile aktarılır."}
+                ? "Bringing Anatolia's traditional weaves to contemporary living spaces. With the legacy of the past, we weave a sustainable future."
+                : "Anadolu'nun geleneksel dokumalarını modern yaşam alanları ile buluşturuyoruz. Ahşap tezgâhlarda kök boyalı saf yünle dokunan her parça, geçmişin mirasıyla sürdürülebilir bir gelecek kurar."}
             </p>
             <a
               href="#hikayemiz"
               className="mt-4 inline-flex px-4 py-2.5 rounded-xl bg-[var(--ink)] text-[var(--surface)] text-sm font-semibold hover:bg-[var(--plum)] transition"
             >
-              {isEn ? "Read Our 1875 Story" : "1875 Hikâyemizi Oku"}
+              {isEn ? "Read Our Heritage Story" : "Mirasımızın Hikâyesini Oku"}
             </a>
           </div>
         </div>
@@ -88,49 +88,49 @@ export const CraftSection: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-serif-display text-2xl font-bold">
-                  {isEn ? "Care & Usage Guide" : "Kullanım & Bakım Rehberi"}
+                  {isEn ? "Care & Usage Guide" : "Kullanım & Bakım Talimatı"}
                 </h3>
                 <p className="text-xs opacity-70">
-                  {isEn ? "Preserving heirloom beauty for generations" : "Nesiller boyu ilk günkü formunu koruması için"}
+                  {isEn ? "Official Nery Home garment & textile care" : "Nery Home resmi bakım ve kullanım kılavuzu"}
                 </p>
               </div>
             </div>
 
             <ul className="space-y-3.5 text-xs sm:text-sm opacity-90">
               <li className="flex gap-2.5">
-                <X className="w-4 h-4 text-[var(--mustard)] shrink-0 mt-0.5" />
-                <span>
-                  <strong>{isEn ? "Do Not Machine Wash: " : "Çamaşır Makinesinde Yıkanmaz: "}</strong>
-                  {isEn
-                    ? "To protect natural fibers and vegetable dyes, avoid machine washing or spin drying."
-                    : "Doğal keçi kılı, yün lifleri ve kök boya tonlarını korumak için makinede yıkama ve sıkma yapmayınız."}
-                </span>
-              </li>
-              <li className="flex gap-2.5">
                 <Check className="w-4 h-4 text-[var(--olive)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>{isEn ? "Practical Cleaning: " : "Pratik Temizlik: "}</strong>
+                  <strong>{isEn ? "30°C Delicate & Hand Wash: " : "30°C Yün Hassas Yıkama: "}</strong>
                   {isEn
-                    ? "Gently wipe with a damp white cloth, vacuum on low suction, or use professional dry cleaning."
-                    : "Nemli beyaz bir bezle nazikçe silebilir, elektrik süpürgesinin düşük ayarında tozunu alabilir veya profesyonel kuru temizleme yaptırabilirsiniz."}
+                    ? "Suitable for machine washing at 30°C on wool/delicate cycle and for gentle hand washing."
+                    : "Ürün, makinenin yün hassas ayarında 30 derecede yıkamaya ve elde yıkamaya uygundur."}
                 </span>
               </li>
               <li className="flex gap-2.5">
-                <Sparkles className="w-4 h-4 text-[var(--mustard)] shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-[var(--mustard)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>{isEn ? "Softened Texture Comfort: " : "Yumuşatılmış Yüzey Konforu: "}</strong>
+                  <strong>{isEn ? "Iron-Safe: " : "Ütülenebilir: "}</strong>
                   {isEn
-                    ? "Through carding and wool blending, fibers are smooth and non-prickly against skin."
-                    : "Özel tarama ve yün harmanlama işlemleri sayesinde lifleri pürüzsüzleştirilmiştir; sırt ve bel yastığı kullanımında batma yapmaz."}
+                    ? "The natural wool and cotton fibers can be safely ironed at low to medium wool temperatures."
+                    : "Ürün, düşük/orta ısıda yün ayarında rahatlıkla ütülenebilir."}
                 </span>
               </li>
               <li className="flex gap-2.5">
-                <Ruler className="w-4 h-4 text-[var(--brass)] shrink-0 mt-0.5" />
+                <ShieldCheck className="w-4 h-4 text-[var(--brass)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>{isEn ? "Artisan Uniqueness: " : "El İşçiliği Özgünlüğü: "}</strong>
+                  <strong>{isEn ? "100% Cotton Canvas Lining: " : "%100 Pamuk Ham Bez Astar: "}</strong>
                   {isEn
-                    ? "Subtle dimensional variations (±1-2 cm) and natural fiber gradients reflect authentic handloom heritage."
-                    : "El tezgâhında dokunduğu için ölçülerde ±1–2 cm farklılık ve doğal lif ton geçişleri görülebilir; bu durum her parçanın tek ve benzersiz olduğunun kanıtıdır."}
+                    ? "Crafted with 100% unbleached natural cotton fabric for back lining and inner casing."
+                    : "Dokuma kırlentin arkasında ve iç astarında %100 pamuk ham bez kullanılmıştır."}
+                </span>
+              </li>
+              <li className="flex gap-2.5">
+                <Sparkles className="w-4 h-4 text-[var(--olive)] shrink-0 mt-0.5" />
+                <span>
+                  <strong>{isEn ? "Resilient Bead Fiber Insert: " : "Boncuk Elyaf Dolgusu: "}</strong>
+                  {isEn
+                    ? "Filled with premium bead fiber padding that retains fullness and bounce over years."
+                    : "Kırlentin dolgu malzemesi, formunu kaybetmeyen birinci sınıf boncuk elyaftır."}
                 </span>
               </li>
             </ul>
@@ -138,11 +138,11 @@ export const CraftSection: React.FC = () => {
             <div className="pt-4 border-t border-white/20">
               <blockquote className="font-serif-display italic text-base sm:text-lg leading-snug">
                 {isEn
-                  ? "“We call this zigzag motif ‘Waterway’; it embodies pure wellness. Weaving it on the loom feels like the serene quiet of clean mountain streams.”"
-                  : "“Bu zikzak desenine ‘Su Yolu’ deriz; bedensel ve ruhsal sağlığı anlatır. Biz onu tezgâhta dokurken sanki dereden su akıyormuş gibi o dinginliği hissederiz.”"}
+                  ? "“Bringing Anatolia's traditional weaves to contemporary living spaces. With the legacy of the past, we weave a sustainable future.”"
+                  : "“Anadolu'nun geleneksel dokumalarını modern yaşam alanları ile buluşturuyoruz. Geçmişin mirasıyla, sürdürülebilir bir gelecek dokuyoruz.”"}
               </blockquote>
               <p className="text-xs text-[var(--mustard)] font-semibold mt-2">
-                — {isEn ? "Master Weavers of Küçükyoncalı, Tekirdağ" : "Küçükyoncalı Dokuma Ustaları, Saray / Tekirdağ"}
+                — Nery Home, Küçükyoncalı / Tekirdağ
               </p>
             </div>
           </div>

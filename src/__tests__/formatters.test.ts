@@ -9,9 +9,9 @@ describe("formatters utils", () => {
   });
 
   it("generates correct WhatsApp links", () => {
-    const link = waLink("Merhaba Neri Home");
+    const link = waLink("Merhaba Nery Home");
     expect(link).toContain(WA_BASE);
-    expect(link).toContain("text=Merhaba%20Neri%20Home");
+    expect(link).toContain("text=Merhaba%20Nery%20Home");
   });
 
   it("has valid constants", () => {
