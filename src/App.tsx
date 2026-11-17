@@ -214,9 +214,9 @@ function MainAppContent() {
         target="_blank"
         rel="noopener"
         aria-label="WhatsApp ile Neriman Çakır'a yazın"
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white px-4 py-3 rounded-full shadow-2xl border border-white/20 hover:scale-105 transition"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white p-3 sm:px-4 sm:py-3 rounded-full shadow-2xl border border-white/20 hover:scale-105 active:scale-95 transition"
       >
-        <MessageCircle className="w-5 h-5" />
+        <MessageCircle className="w-5 h-5 shrink-0" />
         <span className="text-xs font-bold hidden sm:inline">WhatsApp Sipariş & Danışma</span>
       </a>
 

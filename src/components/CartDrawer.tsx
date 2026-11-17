@@ -111,13 +111,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       {/* Arka Plan Perdesi */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={onClose} />
 
-      {/* Sepet Çekmecesi */}
-      <div className="relative w-full max-w-md bg-[var(--surface)] shadow-2xl border-l border-[var(--line)] flex flex-col h-full z-10">
+      {/* Sepet Çekmecesi: Mobilde tam ekran, sm ve üstünde max-w-md */}
+      <div className="relative w-full sm:max-w-md bg-[var(--surface)] shadow-2xl border-l border-[var(--line)] flex flex-col h-full z-10 max-h-screen">
         {/* Çekmece Başlığı */}
-        <div className="px-6 py-4 bg-[var(--surface-2)] border-b border-[var(--line)] flex items-center justify-between">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-[var(--surface-2)] border-b border-[var(--line)] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-[var(--plum)]" />
-            <h3 className="font-serif-display text-2xl font-bold">{t.cart.title}</h3>
+            <h3 className="font-serif-display text-xl sm:text-2xl font-bold">{t.cart.title}</h3>
           </div>
           <button
             type="button"
@@ -130,7 +130,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         </div>
 
         {/* Sepet Ürünleri Listesi */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        <div className="flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-3">
           {cart.length === 0 ? (
             <div className="text-center py-16 space-y-3">
               <div className="w-16 h-16 rounded-2xl bg-[var(--surface-2)] mx-auto flex items-center justify-center">
@@ -155,38 +155,38 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               return (
                 <div
                   key={c.id}
-                  className="flex gap-3 p-3.5 rounded-2xl bg-[var(--surface-2)]/70 border border-[var(--line)] items-center"
+                  className="flex gap-2.5 sm:gap-3 p-3 rounded-xl sm:rounded-2xl bg-[var(--surface-2)]/70 border border-[var(--line)] items-center"
                 >
-                  <div className="w-20 h-16 rounded-xl overflow-hidden shrink-0 border border-[var(--line)] bg-[var(--surface-3)]">
+                  <div className="w-16 h-16 sm:w-20 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden shrink-0 border border-[var(--line)] bg-[var(--surface-3)]">
                     <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-serif-display text-base font-bold truncate">{p.name}</h4>
-                    <p className="text-[11px] opacity-70 truncate">
+                  <div className="flex-1 min-w-0 pr-1">
+                    <h4 className="font-serif-display text-sm sm:text-base font-bold truncate">{p.name}</h4>
+                    <p className="text-[10px] sm:text-[11px] opacity-70 truncate">
                       {p.size} • {c.value.optionLabel}
                     </p>
                     <div className="text-xs font-bold text-[var(--plum)] mt-0.5">
                       {tl(c.value.unitPrice * c.value.qty)}
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <div className="flex items-center gap-1 bg-[var(--card)] px-2 py-1 rounded-xl border border-[var(--line)]">
+                  <div className="flex flex-col items-end gap-1.5 shrink-0">
+                    <div className="flex items-center gap-1 bg-[var(--card)] px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-lg border border-[var(--line)]">
                       <button
                         type="button"
                         onClick={() => onChangeQty(c, -1)}
                         aria-label="Decrease quantity"
-                        className="w-6 h-6 flex items-center justify-center font-bold hover:text-[var(--plum)]"
+                        className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center font-bold hover:text-[var(--plum)]"
                       >
-                        <Minus className="w-3.5 h-3.5" />
+                        <Minus className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </button>
-                      <span className="text-xs font-bold w-4 text-center">{c.value.qty}</span>
+                      <span className="text-xs font-bold w-3.5 sm:w-4 text-center">{c.value.qty}</span>
                       <button
                         type="button"
                         onClick={() => onChangeQty(c, 1)}
                         aria-label="Increase quantity"
-                        className="w-6 h-6 flex items-center justify-center font-bold hover:text-[var(--plum)]"
+                        className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center font-bold hover:text-[var(--plum)]"
                       >
-                        <Plus className="w-3.5 h-3.5" />
+                        <Plus className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </button>
                     </div>
                     <button
@@ -195,7 +195,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       aria-label={`${p.name} remove`}
                       className="p-1 text-[var(--plum)] hover:opacity-75 transition"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </button>
                   </div>
                 </div>
@@ -206,43 +206,37 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Sepet Alt Özeti ve Ödeme Alanı */}
         {cart.length > 0 && (
-          <div className="p-5 bg-[var(--surface-2)] border-t border-[var(--line)] space-y-3.5">
+          <div className="p-3.5 sm:p-5 bg-[var(--surface-2)] border-t border-[var(--line)] space-y-2.5 sm:space-y-3 shrink-0 overflow-y-auto max-h-[55vh]">
             {/* Ücretsiz Kargo Çubuğu */}
             <div>
-              <div className="flex justify-between text-xs mb-1.5">
-                <span>
+              <div className="flex justify-between text-xs mb-1">
+                <span className="truncate pr-1 text-[11px] sm:text-xs">
                   {cartTotal >= FREE_SHIPPING
                     ? t.cart.freeShippingReached
                     : t.cart.freeShippingRemaining.replace("{amount}", tl(FREE_SHIPPING - cartTotal))}
                 </span>
-                <span className="font-bold">{Math.round(progress)}%</span>
+                <span className="font-bold text-xs">{Math.round(progress)}%</span>
               </div>
-              <div className="h-2 rounded-full bg-[var(--surface-3)] overflow-hidden">
+              <div className="h-1.5 sm:h-2 rounded-full bg-[var(--surface-3)] overflow-hidden">
                 <div
                   className="h-full bg-[var(--olive)] transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <p className="text-[11px] opacity-70 mt-1.5 flex items-center gap-1">
-                <Package className="w-3.5 h-3.5 shrink-0" />{" "}
+              <p className="text-[10px] sm:text-[11px] opacity-70 mt-1 flex items-center gap-1">
+                <Package className="w-3 h-3 shrink-0" />{" "}
                 {t.cart.freeShippingNote.replace("{amount}", tl(FREE_SHIPPING))}
               </p>
             </div>
 
-            {/* Sosyal Etki Katkısı */}
-            <div className="flex justify-between text-xs opacity-80 pt-1">
-              <span>{t.cart.socialImpact}</span>
-              <span className="font-semibold text-[var(--olive)]">{t.cart.socialImpactSub}</span>
-            </div>
-
             {/* Ara Toplam */}
-            <div className="flex justify-between text-base font-bold border-t border-[var(--line)] pt-2">
+            <div className="flex justify-between text-sm sm:text-base font-bold border-t border-[var(--line)] pt-2">
               <span>{t.cart.subtotal}</span>
-              <span className="font-serif-display text-2xl text-[var(--plum)]">{tl(cartTotal)}</span>
+              <span className="font-serif-display text-xl sm:text-2xl text-[var(--plum)]">{tl(cartTotal)}</span>
             </div>
 
             {/* Müşteri Bilgileri */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <input
                 type="text"
                 value={custName}
@@ -262,15 +256,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             </div>
 
             {/* Hediye Paketi & Notu */}
-            <div className="bg-[var(--surface)] p-2.5 rounded-xl border border-[var(--line)] space-y-2">
-              <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold select-none">
+            <div className="bg-[var(--surface)] p-2 sm:p-2.5 rounded-xl border border-[var(--line)] space-y-1.5">
+              <label className="flex items-center gap-2 cursor-pointer text-[11px] sm:text-xs font-semibold select-none">
                 <input
                   type="checkbox"
                   checked={isGift}
                   onChange={(e) => setIsGift(e.target.checked)}
                   className="rounded text-[var(--plum)] focus:ring-[var(--plum)]"
                 />
-                <Gift className="w-3.5 h-3.5 text-[var(--plum)]" />
+                <Gift className="w-3.5 h-3.5 text-[var(--plum)] shrink-0" />
                 <span>{t.cart.giftWrapLabel}</span>
               </label>
               {isGift && (
@@ -285,33 +279,33 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             </div>
 
             {/* Ödeme Yöntemi Seçimi */}
-            <div className="space-y-1.5">
-              <label className="block text-[11px] font-bold uppercase tracking-wider opacity-75">
+            <div className="space-y-1">
+              <label className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-75">
                 {t.cart.paymentMethodLabel}
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("whatsapp")}
-                  className={`p-2 rounded-xl border text-left text-xs font-semibold flex items-center gap-2 transition ${
+                  className={`p-2 rounded-xl border text-left text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 sm:gap-2 transition ${
                     paymentMethod === "whatsapp"
                       ? "bg-[var(--card)] border-[var(--olive)] ring-1 ring-[var(--olive)]"
                       : "bg-[var(--surface)] border-[var(--line)] opacity-80"
                   }`}
                 >
-                  <MessageCircle className="w-4 h-4 text-[var(--olive)] shrink-0" />
+                  <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[var(--olive)] shrink-0" />
                   <span className="truncate">{t.cart.payWa}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("card")}
-                  className={`p-2 rounded-xl border text-left text-xs font-semibold flex items-center gap-2 transition ${
+                  className={`p-2 rounded-xl border text-left text-[11px] sm:text-xs font-semibold flex items-center gap-1.5 sm:gap-2 transition ${
                     paymentMethod === "card"
                       ? "bg-[var(--card)] border-[var(--plum)] ring-1 ring-[var(--plum)]"
                       : "bg-[var(--surface)] border-[var(--line)] opacity-80"
                   }`}
                 >
-                  <CreditCard className="w-4 h-4 text-[var(--plum)] shrink-0" />
+                  <CreditCard className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[var(--plum)] shrink-0" />
                   <span className="truncate">{t.cart.payCard}</span>
                 </button>
               </div>
@@ -321,7 +315,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <button
               type="button"
               onClick={() => checkout(paymentMethod)}
-              className={`w-full py-3.5 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition ${
+              className={`w-full py-3 sm:py-3.5 rounded-xl text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition active:scale-98 ${
                 paymentMethod === "card"
                   ? "bg-[var(--plum)] hover:bg-[var(--plum-dark)]"
                   : "bg-[var(--olive)] hover:bg-[var(--olive-dark)]"
@@ -338,8 +332,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               )}
             </button>
 
-            <div className="flex items-center justify-center gap-1.5 text-[11px] text-center opacity-75">
-              <ShieldCheck className="w-3.5 h-3.5 text-[var(--olive)]" />
+            <div className="flex items-center justify-center gap-1.5 text-[10px] sm:text-[11px] text-center opacity-75 leading-tight">
+              <ShieldCheck className="w-3.5 h-3.5 text-[var(--olive)] shrink-0" />
               <span>
                 {t.cart.securityNote.replace("{phone}", PHONE).replace("{contact}", "Neriman Çakır")}
               </span>

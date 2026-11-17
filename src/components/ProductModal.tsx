@@ -80,35 +80,35 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label={`${product.name} ${lang === "en" ? "product details" : "ürün detayı"}`}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-2 sm:p-4 overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-[var(--surface)] rounded-3xl max-w-3xl w-full border border-[var(--line)] shadow-2xl overflow-hidden my-8">
+      <div className="bg-[var(--surface)] rounded-2xl sm:rounded-3xl max-w-3xl w-full border border-[var(--line)] shadow-2xl overflow-hidden my-4 sm:my-8 max-h-[92vh] flex flex-col">
         {/* Üst Başlık ve Kapat Butonu */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[var(--surface-2)] border-b border-[var(--line)]">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-[var(--plum)]">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-[var(--surface-2)] border-b border-[var(--line)] shrink-0">
+          <div className="flex items-center gap-2 truncate pr-2">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[var(--plum)] truncate">
               {product.series} • {product.weavingTime}
             </span>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 shrink-0">
             <button
               type="button"
               onClick={handleShare}
               aria-label={t.common.share}
-              className="p-1.5 rounded-lg hover:bg-[var(--surface-3)] transition flex items-center gap-1 text-xs font-semibold px-2.5"
+              className="p-1.5 sm:px-2.5 rounded-lg hover:bg-[var(--surface-3)] transition flex items-center gap-1 text-xs font-semibold"
               title={t.common.share}
             >
               {copiedLink ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  <span className="text-emerald-600">{t.common.copied}</span>
+                  <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
+                  <span className="text-emerald-600 text-[11px] sm:text-xs">{t.common.copied}</span>
                 </>
               ) : (
                 <>
-                  <Share2 className="w-4 h-4 opacity-80" />
+                  <Share2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-80" />
                   <span className="hidden sm:inline opacity-80">{t.common.share}</span>
                 </>
               )}
@@ -124,7 +124,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           </div>
         </div>
 
-        <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div className="p-4 sm:p-6 lg:p-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start overflow-y-auto">
           {/* Sol Kolon: Görsel Galerisi & Doku Büyüteci */}
           <div className="space-y-3">
             <div
@@ -135,7 +135,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               onTouchStart={() => setIsZooming(true)}
               onTouchEnd={() => setIsZooming(false)}
               onTouchMove={handleTouchMove}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[var(--line)] bg-[var(--surface-2)] cursor-crosshair select-none touch-none"
+              className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--line)] bg-[var(--surface-2)] cursor-crosshair select-none touch-none"
             >
               <img
                 src={currentImg}
@@ -154,20 +154,20 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
               {/* Yaşam Alanı veya Kapak Etiketi */}
               {label && (
-                <span className="absolute top-3 left-3 bg-[var(--ink)]/90 text-[var(--surface)] text-[11px] font-semibold px-3 py-1.5 rounded-full shadow pointer-events-none">
+                <span className="absolute top-2.5 left-2.5 bg-[var(--ink)]/90 text-[var(--surface)] text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-full shadow pointer-events-none">
                   {label}
                 </span>
               )}
 
               {/* Büyüteç İpucu Rozeti */}
-              <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium px-2 py-1 rounded-md flex items-center gap-1 pointer-events-none">
+              <div className="absolute bottom-2.5 right-2.5 bg-black/60 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-medium px-2 py-1 rounded-md flex items-center gap-1 pointer-events-none">
                 <ZoomIn className="w-3 h-3" />{" "}
                 {isZooming ? t.productModal.zoomHintActive : t.productModal.zoomHintTouch}
               </div>
             </div>
 
             {/* Küçük Görsel Küçük Resimleri */}
-            <div className="flex gap-2.5 flex-wrap">
+            <div className="flex gap-2 overflow-x-auto pb-1">
               {product.images.map((img, idx) => (
                 <button
                   key={img + idx}
@@ -175,7 +175,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   onClick={() => setModalImg(idx)}
                   aria-label={`${product.name} ${idx + 1}`}
                   aria-pressed={modalImg === idx}
-                  className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 shrink-0 transition ${
+                  className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 shrink-0 transition ${
                     idx === modalImg
                       ? "border-[var(--plum)] ring-2 ring-[var(--plum)]/30 scale-105"
                       : "border-[var(--line)] opacity-75 hover:opacity-100"
@@ -187,37 +187,37 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             {/* Motif Hikayesi Kutusu */}
-            <div className="p-4 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] text-xs space-y-1.5">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] text-xs space-y-1">
               <div className="font-bold flex items-center gap-1.5 text-[var(--plum)]">
-                <Sparkles className="w-4 h-4" /> {t.productModal.motifStoryTitle}
+                <Sparkles className="w-3.5 h-3.5" /> {t.productModal.motifStoryTitle}
               </div>
               <p className="opacity-85 leading-relaxed">{product.motifStory}</p>
             </div>
           </div>
 
           {/* Sağ Kolon: Bilgiler ve Sipariş */}
-          <div className="space-y-4">
+          <div className="space-y-3.5 sm:space-y-4">
             <div>
               {/* Stok Durumu */}
-              <div className="mb-1.5">
+              <div className="mb-1">
                 {product.stockStatus === "in_stock" ? (
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#5A6344]">
-                    <CheckCircle2 className="w-4 h-4" />{" "}
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[#5A6344]">
+                    <CheckCircle2 className="w-3.5 h-3.5" />{" "}
                     {product.stockNote || (lang === "en" ? "Ready in Stock • Same Day Dispatch" : "Atölyede Hazır Stok • Aynı Gün Kargo")}
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--mustard)]">
-                    <Clock className="w-4 h-4" />{" "}
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-[var(--mustard)]">
+                    <Clock className="w-3.5 h-3.5" />{" "}
                     {product.stockNote || (lang === "en" ? "Made to Order (3–7 Days)" : "Siparişe Özel Dokunur (3–7 Gün)")}
                   </span>
                 )}
               </div>
-              <h3 className="font-serif-display text-2xl sm:text-3xl font-bold leading-tight">
+              <h3 className="font-serif-display text-xl sm:text-2xl lg:text-3xl font-bold leading-tight">
                 {product.name}
               </h3>
             </div>
 
-            <div className="font-serif-display text-3xl font-bold text-[var(--plum)]">
+            <div className="font-serif-display text-2xl sm:text-3xl font-bold text-[var(--plum)]">
               {tl(modalPrice)}
             </div>
 
@@ -226,11 +226,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </p>
 
             {/* Özellikler Tablosu */}
-            <div className="space-y-2 text-xs border-y border-[var(--line)] py-3">
+            <div className="space-y-1.5 sm:space-y-2 text-xs border-y border-[var(--line)] py-2.5 sm:py-3">
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.sizeLabel}</span>
                 <strong className="text-right">
-                  {product.size} {lang === "en" ? "(±1-2 cm handloom variance)" : "(±1-2 cm el tezgâhı)"}
+                  {product.size} {lang === "en" ? "(±1-2 cm)" : "(±1-2 cm)"}
                 </strong>
               </div>
               <div className="flex justify-between gap-3">
@@ -243,7 +243,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </div>
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.originLabel}</span>
-                <strong className="text-right">Küçükyoncalı, Saray / Tekirdağ</strong>
+                <strong className="text-right">Küçükyoncalı / Saray</strong>
               </div>
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.certificateLabel}</span>
@@ -253,14 +253,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
             {/* Seçenek Seçimi */}
             <div>
-              <label htmlFor="modal-option" className="block text-xs font-bold mb-1.5">
+              <label htmlFor="modal-option" className="block text-xs font-bold mb-1">
                 {product.optionsLabel}:
               </label>
               <select
                 id="modal-option"
                 value={modalOpt}
                 onChange={(e) => setModalOpt(Number(e.target.value))}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[var(--mustard)]"
+                className="w-full px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[var(--mustard)]"
               >
                 {product.options.map((o, i) => (
                   <option key={o.label} value={i}>
@@ -276,14 +276,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             {/* Butonlar */}
-            <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
+            <div className="flex flex-col sm:flex-row gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => {
                   onAddToCart(product, modalOpt);
                   onClose();
                 }}
-                className="flex-1 py-3 px-4 rounded-xl bg-[var(--ink)] hover:bg-[var(--plum)] text-[var(--surface)] font-semibold text-sm flex items-center justify-center gap-2 transition shadow-sm"
+                className="w-full py-3 px-4 rounded-xl bg-[var(--ink)] hover:bg-[var(--plum)] text-[var(--surface)] font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-sm active:scale-98"
               >
                 <ShoppingBag className="w-4 h-4" /> {t.common.addToCart}
               </button>
@@ -295,7 +295,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 )}
                 target="_blank"
                 rel="noopener"
-                className="py-3 px-4 rounded-xl bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white font-semibold text-sm flex items-center justify-center gap-2 transition shadow-sm"
+                className="w-full py-3 px-4 rounded-xl bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-sm text-center"
               >
                 <MessageCircle className="w-4 h-4" /> {t.productModal.fastWaBtn}
               </a>
