@@ -6,7 +6,7 @@ import imgLivingSofa from "../assets/3c8596234219cadd-Gemini_Generated_Image_n8f
 import imgFullFlat from "../assets/4248d23782e10ebc-Gemini_Generated_Image_u02zlpu02zlpu02z.jpg";
 import imgBagDuo from "../assets/b61dd98e1c266dc0-WhatsApp_Image_2026-11-16_at_20_29_57.jpeg";
 import imgBagBlack from "../assets/cfb06e20a575b30b-WhatsApp_Image_2026-11-16_at_18_54_44_2.jpeg";
-import imgGocAlt from "../assets/06b4ee5ae704c3dc-WhatsApp_Image_2026-11-16_at_18_54_44_1.jpeg";
+import imgGocAlt from "../assets/murdum-cizgili-bel-yastigi-editorial.jpg";
 import imgKareAlt from "../assets/4a133cdf98bd6864-WhatsApp_Image_2026-11-16_at_18_54_43.jpeg";
 import imgRunnerTable from "../assets/b734caefff2a6d9e-Gemini_Generated_Image_n8fuovn8fuovn8fu_1.jpg";
 import imgBagEntry from "../assets/b9ac0c1b88d107b1-Gemini_Generated_Image_n8fuovn8fuovn8fu_2.jpg";
