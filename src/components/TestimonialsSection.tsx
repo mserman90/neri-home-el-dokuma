@@ -1,6 +1,6 @@
 import React from "react";
 import { testimonials } from "../data/testimonials";
-import { Star, CheckCircle, Quote } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 export const TestimonialsSection: React.FC = () => {
   return (
@@ -46,10 +46,9 @@ export const TestimonialsSection: React.FC = () => {
                 <p className="text-[11px] opacity-70">{t.city}</p>
               </div>
               <div className="text-right">
-                <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[var(--olive)]">
-                  <CheckCircle className="w-3 h-3" /> Doğrulanmış Sipariş
+                <span className="inline-block text-[11px] font-semibold text-[var(--plum)] bg-[var(--surface-2)] px-2.5 py-1 rounded-lg border border-[var(--line)]">
+                  {t.productName}
                 </span>
-                <span className="block text-[10px] opacity-70">{t.productName}</span>
               </div>
             </div>
           </div>
