@@ -6,6 +6,7 @@ import { waLink } from "./utils/formatters";
 import { useTheme } from "./hooks/useTheme";
 import { CartProvider, useCart } from "./context/CartContext";
 import { FavoritesProvider, useFavorites } from "./context/FavoritesContext";
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
 
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -256,10 +257,12 @@ function MainAppContent() {
 
 export default function App() {
   return (
-    <FavoritesProvider>
-      <CartProvider>
-        <MainAppContent />
-      </CartProvider>
-    </FavoritesProvider>
+    <LanguageProvider>
+      <FavoritesProvider>
+        <CartProvider>
+          <MainAppContent />
+        </CartProvider>
+      </FavoritesProvider>
+    </LanguageProvider>
   );
 }

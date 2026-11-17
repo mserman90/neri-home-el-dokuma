@@ -2,6 +2,7 @@ import React from "react";
 import { Product } from "../types";
 import { Heart, Plus, CheckCircle2, Clock } from "lucide-react";
 import { tl } from "../utils/formatters";
+import { useLanguage } from "../context/LanguageContext";
 
 type ProductCardProps = {
   product: Product;
@@ -18,6 +19,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onOpenModal,
   onAddToCart,
 }) => {
+  const { lang, t } = useLanguage();
+
   return (
     <article className="product-card bg-[var(--card)] rounded-2xl border border-[var(--line)] overflow-hidden flex flex-col justify-between group">
       <div>
@@ -27,7 +30,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             type="button"
             onClick={() => onOpenModal(product)}
             className="block w-full h-full cursor-pointer focus:outline-none"
-            aria-label={`${product.name} ürününü incele`}
+            aria-label={`${product.name} ${t.common.viewProduct}`}
           >
             <img
               src={product.images[0]}
@@ -46,11 +49,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <div className="absolute bottom-3 left-3 pointer-events-none">
             {product.stockStatus === "in_stock" ? (
               <span className="inline-flex items-center gap-1 bg-[#2D4537]/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow backdrop-blur-sm">
-                <CheckCircle2 className="w-3 h-3 text-[#A8B184]" /> Stokta Hazır
+                <CheckCircle2 className="w-3 h-3 text-[#A8B184]" /> {t.common.inStock}
               </span>
             ) : (
               <span className="inline-flex items-center gap-1 bg-[#4A3B32]/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow backdrop-blur-sm">
-                <Clock className="w-3 h-3 text-[var(--mustard)]" /> Siparişe Özel
+                <Clock className="w-3 h-3 text-[var(--mustard)]" /> {t.common.madeToOrder}
               </span>
             )}
           </div>
@@ -93,7 +96,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           <div className="pt-1 flex items-center justify-between">
             <span className="inline-block text-[11px] bg-[var(--surface-2)] px-2.5 py-1 rounded-lg border border-[var(--line)]">
-              Motif: <strong>{product.motif}</strong>
+              {lang === "en" ? "Motif:" : "Motif:"} <strong>{product.motif}</strong>
             </span>
             {product.stockNote && (
               <span className="text-[10px] opacity-70 italic truncate max-w-[140px]">
@@ -107,7 +110,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Alt Fiyat ve Sepete Ekle */}
       <div className="px-4 pb-4 pt-2 border-t border-[var(--line)] flex items-center justify-between gap-2">
         <div>
-          <span className="text-[10px] block opacity-70">El Dokuma Fiyatı</span>
+          <span className="text-[10px] block opacity-70">
+            {lang === "en" ? "Handloom Price" : "El Dokuma Fiyatı"}
+          </span>
           <span className="font-serif-display text-2xl font-bold">{tl(product.price)}</span>
         </div>
         <button
@@ -115,7 +120,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           onClick={() => onAddToCart(product)}
           className="px-3.5 py-2.5 rounded-xl bg-[var(--ink)] hover:bg-[var(--plum)] text-[var(--surface)] text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
         >
-          <Plus className="w-3.5 h-3.5" /> Sepete Ekle
+          <Plus className="w-3.5 h-3.5" /> {t.common.addToCart}
         </button>
       </div>
     </article>

@@ -3,6 +3,7 @@ import { Product } from "../types";
 import { X, Sparkles, ShoppingBag, MessageCircle, ZoomIn, CheckCircle2, Clock, Share2, Check } from "lucide-react";
 import { tl, waLink } from "../utils/formatters";
 import { livingLabel } from "../data/products";
+import { useLanguage } from "../context/LanguageContext";
 
 type ProductModalProps = {
   product: Product;
@@ -15,6 +16,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onClose,
   onAddToCart,
 }) => {
+  const { lang, t } = useLanguage();
   const [modalImg, setModalImg] = useState(0);
   const [modalOpt, setModalOpt] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
@@ -56,8 +58,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           url: shareUrl,
         });
         return;
-      } catch (err) {
-        // Kullanıcı paylaşımı iptal ettiyse veya desteklenmiyorsa panoya kopyala
+      } catch {
+        // Fallback
       }
     }
 
@@ -77,7 +79,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`${product.name} ürün detayı`}
+      aria-label={`${product.name} ${lang === "en" ? "product details" : "ürün detayı"}`}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -95,26 +97,26 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             <button
               type="button"
               onClick={handleShare}
-              aria-label="Ürün bağlantısını paylaş"
+              aria-label={t.common.share}
               className="p-1.5 rounded-lg hover:bg-[var(--surface-3)] transition flex items-center gap-1 text-xs font-semibold px-2.5"
-              title="Ürün bağlantısını kopyala"
+              title={t.common.share}
             >
               {copiedLink ? (
                 <>
                   <Check className="w-4 h-4 text-emerald-600" />
-                  <span className="text-emerald-600">Kopyalandı</span>
+                  <span className="text-emerald-600">{t.common.copied}</span>
                 </>
               ) : (
                 <>
                   <Share2 className="w-4 h-4 opacity-80" />
-                  <span className="hidden sm:inline opacity-80">Paylaş</span>
+                  <span className="hidden sm:inline opacity-80">{t.common.share}</span>
                 </>
               )}
             </button>
             <button
               type="button"
               onClick={onClose}
-              aria-label="Ürün detayını kapat"
+              aria-label={t.common.close}
               className="p-1.5 rounded-lg hover:bg-[var(--surface-3)] transition"
             >
               <X className="w-5 h-5" />
@@ -159,9 +161,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
               {/* Büyüteç İpucu Rozeti */}
               <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium px-2 py-1 rounded-md flex items-center gap-1 pointer-events-none">
-                <ZoomIn className="w-3 h-3" /> {isZooming ? "Doku İnceleniyor" : "Yakınlaştırmak için dokunun veya üzerine gelin"}
-              </div>
-            </div>
+                <ZoomIn className="w-3 h-3" />{" "}
+                {isZooming ? t.productModal.zoomHintActive : t.productModal.zoomHintTouch}
               </div>
             </div>
 
@@ -172,7 +173,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   key={img + idx}
                   type="button"
                   onClick={() => setModalImg(idx)}
-                  aria-label={`${product.name} görünüm ${idx + 1}`}
+                  aria-label={`${product.name} ${idx + 1}`}
                   aria-pressed={modalImg === idx}
                   className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 shrink-0 transition ${
                     idx === modalImg
@@ -188,7 +189,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             {/* Motif Hikayesi Kutusu */}
             <div className="p-4 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] text-xs space-y-1.5">
               <div className="font-bold flex items-center gap-1.5 text-[var(--plum)]">
-                <Sparkles className="w-4 h-4" /> Bu Üründeki Motifin Hikâyesi
+                <Sparkles className="w-4 h-4" /> {t.productModal.motifStoryTitle}
               </div>
               <p className="opacity-85 leading-relaxed">{product.motifStory}</p>
             </div>
@@ -201,11 +202,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div className="mb-1.5">
                 {product.stockStatus === "in_stock" ? (
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#5A6344]">
-                    <CheckCircle2 className="w-4 h-4" /> {product.stockNote || "Atölyede Hazır Stok • Aynı Gün Kargo"}
+                    <CheckCircle2 className="w-4 h-4" />{" "}
+                    {product.stockNote || (lang === "en" ? "Ready in Stock • Same Day Dispatch" : "Atölyede Hazır Stok • Aynı Gün Kargo")}
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--mustard)]">
-                    <Clock className="w-4 h-4" /> {product.stockNote || "Siparişe Özel Dokunur (3–7 Gün)"}
+                    <Clock className="w-4 h-4" />{" "}
+                    {product.stockNote || (lang === "en" ? "Made to Order (3–7 Days)" : "Siparişe Özel Dokunur (3–7 Gün)")}
                   </span>
                 )}
               </div>
@@ -225,24 +228,26 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             {/* Özellikler Tablosu */}
             <div className="space-y-2 text-xs border-y border-[var(--line)] py-3">
               <div className="flex justify-between gap-3">
-                <span className="opacity-70">Ölçü:</span>
-                <strong className="text-right">{product.size} (±1-2 cm el tezgâhı)</strong>
+                <span className="opacity-70">{t.productModal.sizeLabel}</span>
+                <strong className="text-right">
+                  {product.size} {lang === "en" ? "(±1-2 cm handloom variance)" : "(±1-2 cm el tezgâhı)"}
+                </strong>
               </div>
               <div className="flex justify-between gap-3">
-                <span className="opacity-70">Materyal:</span>
+                <span className="opacity-70">{t.productModal.materialLabel}</span>
                 <strong className="text-right">{product.material}</strong>
               </div>
               <div className="flex justify-between gap-3">
-                <span className="opacity-70">Motif:</span>
+                <span className="opacity-70">{t.productModal.motifLabel}</span>
                 <strong className="text-right">{product.motif}</strong>
               </div>
               <div className="flex justify-between gap-3">
-                <span className="opacity-70">Üretim Yeri:</span>
+                <span className="opacity-70">{t.productModal.originLabel}</span>
                 <strong className="text-right">Küçükyoncalı, Saray / Tekirdağ</strong>
               </div>
               <div className="flex justify-between gap-3">
-                <span className="opacity-70">Sertifika:</span>
-                <strong className="text-right text-[var(--olive)]">Usta İmzalı Menşe Belgesi Dahil</strong>
+                <span className="opacity-70">{t.productModal.certificateLabel}</span>
+                <strong className="text-right text-[var(--olive)]">{t.productModal.certificateValue}</strong>
               </div>
             </div>
 
@@ -280,17 +285,19 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 }}
                 className="flex-1 py-3 px-4 rounded-xl bg-[var(--ink)] hover:bg-[var(--plum)] text-[var(--surface)] font-semibold text-sm flex items-center justify-center gap-2 transition shadow-sm"
               >
-                <ShoppingBag className="w-4 h-4" /> Sepete Ekle
+                <ShoppingBag className="w-4 h-4" /> {t.common.addToCart}
               </button>
               <a
                 href={waLink(
-                  `Merhaba Neriman Hanım, ${product.name} (${selectedOpt.label}) ürünü hakkında bilgi/sipariş almak istiyorum. Tutar: ${tl(modalPrice)}`
+                  lang === "en"
+                    ? `Hello Ms. Neriman, I would like to get information/order ${product.name} (${selectedOpt.label}). Price: ${tl(modalPrice)}`
+                    : `Merhaba Neriman Hanım, ${product.name} (${selectedOpt.label}) ürünü hakkında bilgi/sipariş almak istiyorum. Tutar: ${tl(modalPrice)}`
                 )}
                 target="_blank"
                 rel="noopener"
                 className="py-3 px-4 rounded-xl bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white font-semibold text-sm flex items-center justify-center gap-2 transition shadow-sm"
               >
-                <MessageCircle className="w-4 h-4" /> Hızlı WhatsApp
+                <MessageCircle className="w-4 h-4" /> {t.productModal.fastWaBtn}
               </a>
             </div>
           </div>

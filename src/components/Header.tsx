@@ -1,6 +1,7 @@
 import React from "react";
-import { MessageCircle, Heart, ShoppingBag, Menu, Sun, Moon } from "lucide-react";
+import { MessageCircle, Heart, ShoppingBag, Menu, Sun, Moon, Globe } from "lucide-react";
 import { waLink } from "../utils/formatters";
+import { useLanguage } from "../context/LanguageContext";
 
 type HeaderProps = {
   cartCount: number;
@@ -22,17 +23,18 @@ export const Header: React.FC<HeaderProps> = ({
   toggleTheme,
 }) => {
   const [mobileMenu, setMobileMenu] = React.useState(false);
+  const { lang, toggleLang, t } = useLanguage();
 
   const nav = [
-    { href: "#koleksiyon", label: "Koleksiyon" },
-    { href: "#yasam-alanlari", label: "Yaşam Alanları" },
-    { href: "#motifler", label: "Motiflerin Dili" },
-    { href: "#zanaat", label: "Keçi Kılı & Cicim" },
-    { href: "#sertifika", label: "Menşe Belgesi" },
-    { href: "#hikayemiz", label: "1875 Mirasımız" },
-    { href: "#yorumlar", label: "Müşteri Deneyimi" },
-    { href: "#ozel-siparis", label: "Özel Dokuma" },
-    { href: "#iletisim", label: "İletişim" },
+    { href: "#koleksiyon", label: t.nav.collection },
+    { href: "#yasam-alanlari", label: t.nav.livingSpaces },
+    { href: "#motifler", label: t.nav.motifs },
+    { href: "#zanaat", label: t.nav.craft },
+    { href: "#sertifika", label: t.nav.certificate },
+    { href: "#hikayemiz", label: t.nav.heritage },
+    { href: "#yorumlar", label: t.nav.reviews },
+    { href: "#ozel-siparis", label: t.nav.customOrder },
+    { href: "#iletisim", label: t.nav.contact },
   ];
 
   return (
@@ -67,6 +69,18 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Aksiyon Butonları */}
             <div className="flex items-center gap-2">
+              {/* Dil Değiştirici (TR / EN) */}
+              <button
+                type="button"
+                onClick={toggleLang}
+                aria-label="Dili değiştir / Change language"
+                className="px-2.5 py-2 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] hover:bg-[var(--surface-3)] transition flex items-center gap-1.5 text-xs font-bold tracking-wider"
+                title={lang === "tr" ? "Switch to English" : "Türkçe'ye geç"}
+              >
+                <Globe className="w-3.5 h-3.5 text-[var(--plum)]" />
+                <span>{lang.toUpperCase()}</span>
+              </button>
+
               {/* WhatsApp Butonu */}
               <a
                 href={waLink("Merhaba Neriman Hanım, Neri Home el dokuma ürünleriniz hakkında bilgi almak istiyorum.")}
@@ -97,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className="relative p-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] hover:bg-[var(--surface-3)] transition"
                 aria-label="Favorileri göster"
               >
-                <Heart className={`w-5 h-5 ${favOnly ? "fill-[var(--plum)] text-[var(--plum)]" : ""}`} />
+                <Heart className={`w-4 h-4 ${favOnly ? "fill-[var(--plum)] text-[var(--plum)]" : ""}`} />
                 <span className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 rounded-full bg-[var(--plum)] text-white text-[11px] font-bold flex items-center justify-center">
                   {favCount}
                 </span>
@@ -110,8 +124,8 @@ export const Header: React.FC<HeaderProps> = ({
                 className="relative p-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] hover:bg-[var(--surface-3)] transition"
                 aria-label="Sepeti aç"
               >
-                <ShoppingBag className="w-5 h-5" />
-                <span className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 rounded-full bg-[var(--plum)] text-white text-[11px] font-bold flex items-center justify-center">
+                <ShoppingBag className="w-4 h-4 text-[var(--plum)]" />
+                <span className="absolute -top-1.5 -right-1.5 min-w-5 h-5 px-1 rounded-full bg-[var(--ink)] text-[var(--surface)] text-[11px] font-bold flex items-center justify-center">
                   {cartCount}
                 </span>
               </button>
@@ -120,9 +134,8 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => setMobileMenu(!mobileMenu)}
-                className="xl:hidden p-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] hover:bg-[var(--surface-3)] transition"
-                aria-label="Menüyü aç veya kapat"
-                aria-expanded={mobileMenu}
+                className="xl:hidden p-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--line)]"
+                aria-label="Menüyü aç/kapat"
               >
                 <Menu className="w-5 h-5" />
               </button>
@@ -130,20 +143,30 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Mobil Menü İçeriği */}
+        {/* Mobil Menü Çekmecesi */}
         {mobileMenu && (
-          <nav className="xl:hidden border-t border-[var(--line)] px-4 py-4 space-y-1 text-sm font-medium bg-[var(--surface)]" aria-label="Mobil menü">
+          <div className="xl:hidden border-t border-[var(--line)] bg-[var(--surface)] px-4 py-4 space-y-2">
+            <div className="flex items-center justify-between pb-2 border-b border-[var(--line)]">
+              <span className="text-xs font-semibold opacity-70">Dil Seçimi / Language:</span>
+              <button
+                type="button"
+                onClick={toggleLang}
+                className="px-3 py-1 rounded-lg bg-[var(--surface-2)] border border-[var(--line)] text-xs font-bold"
+              >
+                {lang === "tr" ? "🇹🇷 Türkçe (Switch to EN)" : "🇬🇧 English (Türkçe'ye geç)"}
+              </button>
+            </div>
             {nav.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
                 onClick={() => setMobileMenu(false)}
-                className="block py-2.5 px-3 rounded-lg hover:bg-[var(--surface-2)] transition"
+                className="block py-2 text-sm font-medium hover:text-[var(--plum)]"
               >
                 {n.label}
               </a>
             ))}
-          </nav>
+          </div>
         )}
       </header>
     </>

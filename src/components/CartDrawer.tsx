@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CartRecord, Product } from "../types";
 import { ShoppingBag, X, Plus, Minus, Trash2, Package, MessageCircle, CreditCard, ShieldCheck, Gift } from "lucide-react";
 import { tl, waLink, FREE_SHIPPING, PHONE } from "../utils/formatters";
+import { useLanguage } from "../context/LanguageContext";
 
 type CartDrawerProps = {
   cart: CartRecord[];
@@ -20,6 +21,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onRemoveCart,
   onShowToast,
 }) => {
+  const { lang, t } = useLanguage();
   const [custName, setCustName] = useState("");
   const [custCity, setCustCity] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<"whatsapp" | "card">("whatsapp");
@@ -33,21 +35,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
   const checkout = (method: "whatsapp" | "card") => {
     if (!cart.length) {
-      onShowToast("Lütfen önce sepetinize ürün ekleyiniz.");
+      onShowToast(t.cart.emptyToast);
       return;
     }
 
-    const lines = [
-      "Merhaba Neriman Hanım, Neri Home web sitesi üzerinden sipariş oluşturmak istiyorum:",
-      "",
-      "📋 SİPARİŞ LİSTESİ:",
-    ];
+    const isEn = lang === "en";
+    const lines = isEn
+      ? [
+          "Hello Ms. Neriman, I would like to place an order from Neri Home:",
+          "",
+          "📋 ORDER ITEMS:",
+        ]
+      : [
+          "Merhaba Neriman Hanım, Neri Home web sitesi üzerinden sipariş oluşturmak istiyorum:",
+          "",
+          "📋 SİPARİŞ LİSTESİ:",
+        ];
 
     cart.forEach((c, i) => {
       const p = productById(c.value.productId);
       if (p) {
         lines.push(
-          `${i + 1}. ${p.name} (${p.size} | ${c.value.optionLabel}) x ${c.value.qty} Adet = ${tl(
+          `${i + 1}. ${p.name} (${p.size} | ${c.value.optionLabel}) x ${c.value.qty} ${isEn ? "Pcs" : "Adet"} = ${tl(
             c.value.unitPrice * c.value.qty
           )}`
         );
@@ -56,37 +65,49 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
     lines.push(
       "",
-      `💰 Toplam Tutar: ${tl(cartTotal)}`,
-      `👤 Müşteri: ${custName.trim() || "Belirtilmedi"}`,
-      `📍 Teslimat İl/İlçe: ${custCity.trim() || "Belirtilmedi"}`,
-      `💳 Tercih Edilen Ödeme: ${
+      `${isEn ? "💰 Total Amount:" : "💰 Toplam Tutar:"} ${tl(cartTotal)}`,
+      `${isEn ? "👤 Customer:" : "👤 Müşteri:"} ${custName.trim() || (isEn ? "Not specified" : "Belirtilmedi")}`,
+      `${isEn ? "📍 City / Address:" : "📍 Teslimat İl/İlçe:"} ${custCity.trim() || (isEn ? "Not specified" : "Belirtilmedi")}`,
+      `${isEn ? "💳 Payment Method:" : "💳 Tercih Edilen Ödeme:"} ${
         method === "card"
-          ? "Kredi Kartı / Taksitli Güvenli Ödeme Linki (Shopier / iyzico)"
+          ? isEn
+            ? "Credit Card / Secure Payment Link (Shopier / iyzico)"
+            : "Kredi Kartı / Taksitli Güvenli Ödeme Linki (Shopier / iyzico)"
+          : isEn
+          ? "Bank Transfer / Inquiry via WhatsApp"
           : "WhatsApp üzerinden Havale / EFT / Kapıda Bilgi"
       }`
     );
 
     if (isGift) {
       lines.push(
-        `🎁 Hediye Paketi Talebi: Evet`,
-        `📝 Hediye Notu: "${giftNote.trim() || "Özel hediye paketi rica olunur."}"`
+        isEn ? "🎁 Gift Wrapping: Yes" : "🎁 Hediye Paketi Talebi: Evet",
+        isEn
+          ? `📝 Gift Note: "${giftNote.trim() || "Please add complimentary gift packaging."}"`
+          : `📝 Hediye Notu: "${giftNote.trim() || "Özel hediye paketi rica olunur."}"`
       );
     }
 
     lines.push(
       "",
       cartTotal >= FREE_SHIPPING
-        ? "✨ Ücretsiz Kargo eşiğine ulaşılmıştır."
+        ? isEn
+          ? "✨ Free Shipping threshold reached."
+          : "✨ Ücretsiz Kargo eşiğine ulaşılmıştır."
+        : isEn
+        ? `📦 Add ${tl(FREE_SHIPPING - cartTotal)} more for free shipping.`
         : `📦 Kargo durumu: ${tl(FREE_SHIPPING - cartTotal)} tutarında ürün eklenirse kargo ücretsiz olacaktır.`,
       "",
-      "Sipariş onayı ve kargo detayları için dönüşünüzü rica ederim."
+      isEn
+        ? "Looking forward to your confirmation and shipping details."
+        : "Sipariş onayı ve kargo detayları için dönüşünüzü rica ederim."
     );
 
     window.open(waLink(lines.join("\n")), "_blank", "noopener");
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" aria-label="Sepet">
+    <div className="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" aria-label={t.cart.title}>
       {/* Arka Plan Perdesi */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={onClose} />
 
@@ -96,12 +117,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         <div className="px-6 py-4 bg-[var(--surface-2)] border-b border-[var(--line)] flex items-center justify-between">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-[var(--plum)]" />
-            <h3 className="font-serif-display text-2xl font-bold">Sepetiniz</h3>
+            <h3 className="font-serif-display text-2xl font-bold">{t.cart.title}</h3>
           </div>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Sepeti kapat"
+            aria-label={t.common.close}
             className="p-1.5 rounded-lg hover:bg-[var(--surface-3)] transition"
           >
             <X className="w-5 h-5" />
@@ -115,16 +136,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="w-16 h-16 rounded-2xl bg-[var(--surface-2)] mx-auto flex items-center justify-center">
                 <ShoppingBag className="w-8 h-8 opacity-50" />
               </div>
-              <p className="font-serif-display text-2xl font-bold">Sepetiniz Boş</p>
+              <p className="font-serif-display text-2xl font-bold">{t.cart.emptyTitle}</p>
               <p className="text-xs opacity-80 max-w-xs mx-auto">
-                Küçükyoncalı kadın dokuma ustalarının el tezgâhlarında hazırladığı eşsiz parçaları koleksiyonumuzdan seçebilirsiniz.
+                {t.cart.emptyDesc}
               </p>
               <button
                 type="button"
                 onClick={onClose}
                 className="mt-3 px-5 py-2.5 rounded-xl bg-[var(--ink)] text-[var(--surface)] text-xs font-semibold hover:bg-[var(--plum)] transition"
               >
-                Koleksiyona Dön
+                {t.common.backToCollection}
               </button>
             </div>
           ) : (
@@ -153,7 +174,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <button
                         type="button"
                         onClick={() => onChangeQty(c, -1)}
-                        aria-label="Adedi azalt"
+                        aria-label="Decrease quantity"
                         className="w-6 h-6 flex items-center justify-center font-bold hover:text-[var(--plum)]"
                       >
                         <Minus className="w-3.5 h-3.5" />
@@ -162,7 +183,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <button
                         type="button"
                         onClick={() => onChangeQty(c, 1)}
-                        aria-label="Adedi artır"
+                        aria-label="Increase quantity"
                         className="w-6 h-6 flex items-center justify-center font-bold hover:text-[var(--plum)]"
                       >
                         <Plus className="w-3.5 h-3.5" />
@@ -171,7 +192,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <button
                       type="button"
                       onClick={() => onRemoveCart(c)}
-                      aria-label={`${p.name} sepetten sil`}
+                      aria-label={`${p.name} remove`}
                       className="p-1 text-[var(--plum)] hover:opacity-75 transition"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -191,8 +212,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="flex justify-between text-xs mb-1.5">
                 <span>
                   {cartTotal >= FREE_SHIPPING
-                    ? "🎉 Ücretsiz kargo eşiğine ulaştınız!"
-                    : `Ücretsiz kargo için ${tl(FREE_SHIPPING - cartTotal)} kaldı`}
+                    ? t.cart.freeShippingReached
+                    : t.cart.freeShippingRemaining.replace("{amount}", tl(FREE_SHIPPING - cartTotal))}
                 </span>
                 <span className="font-bold">{Math.round(progress)}%</span>
               </div>
@@ -203,19 +224,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 />
               </div>
               <p className="text-[11px] opacity-70 mt-1.5 flex items-center gap-1">
-                <Package className="w-3.5 h-3.5 shrink-0" /> {tl(FREE_SHIPPING)} ve üzeri siparişlerde kargo ücretsizdir.
+                <Package className="w-3.5 h-3.5 shrink-0" />{" "}
+                {t.cart.freeShippingNote.replace("{amount}", tl(FREE_SHIPPING))}
               </p>
             </div>
 
             {/* Sosyal Etki Katkısı */}
             <div className="flex justify-between text-xs opacity-80 pt-1">
-              <span>Sosyal Etki & Kadın Emeği Katkısı:</span>
-              <span className="font-semibold text-[var(--olive)]">Küçükyoncalı Üreticiler</span>
+              <span>{t.cart.socialImpact}</span>
+              <span className="font-semibold text-[var(--olive)]">{t.cart.socialImpactSub}</span>
             </div>
 
             {/* Ara Toplam */}
             <div className="flex justify-between text-base font-bold border-t border-[var(--line)] pt-2">
-              <span>Ara Toplam:</span>
+              <span>{t.cart.subtotal}</span>
               <span className="font-serif-display text-2xl text-[var(--plum)]">{tl(cartTotal)}</span>
             </div>
 
@@ -225,16 +247,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 type="text"
                 value={custName}
                 onChange={(e) => setCustName(e.target.value)}
-                placeholder="Adınız Soyadınız"
-                aria-label="Adınız Soyadınız"
+                placeholder={t.cart.custNamePlaceholder}
+                aria-label={t.cart.custNamePlaceholder}
                 className="px-3 py-2 rounded-xl bg-[var(--surface)] border border-[var(--line)] text-xs focus:outline-none focus:ring-1 focus:ring-[var(--mustard)]"
               />
               <input
                 type="text"
                 value={custCity}
                 onChange={(e) => setCustCity(e.target.value)}
-                placeholder="Teslimat İl / İlçe"
-                aria-label="Teslimat İl / İlçe"
+                placeholder={t.cart.custCityPlaceholder}
+                aria-label={t.cart.custCityPlaceholder}
                 className="px-3 py-2 rounded-xl bg-[var(--surface)] border border-[var(--line)] text-xs focus:outline-none focus:ring-1 focus:ring-[var(--mustard)]"
               />
             </div>
@@ -249,14 +271,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   className="rounded text-[var(--plum)] focus:ring-[var(--plum)]"
                 />
                 <Gift className="w-3.5 h-3.5 text-[var(--plum)]" />
-                <span>Hediye Paketi & Özel Not Ekle (Ücretsiz)</span>
+                <span>{t.cart.giftWrapLabel}</span>
               </label>
               {isGift && (
                 <input
                   type="text"
                   value={giftNote}
                   onChange={(e) => setGiftNote(e.target.value)}
-                  placeholder="Hediye notunuzu yazın (örn: Sevgilerle...)"
+                  placeholder={t.cart.giftWrapPlaceholder}
                   className="w-full px-2.5 py-1.5 rounded-lg bg-[var(--surface-2)] border border-[var(--line)] text-xs focus:outline-none focus:ring-1 focus:ring-[var(--mustard)]"
                 />
               )}
@@ -265,7 +287,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             {/* Ödeme Yöntemi Seçimi */}
             <div className="space-y-1.5">
               <label className="block text-[11px] font-bold uppercase tracking-wider opacity-75">
-                Ödeme Yöntemi Tercihiniz:
+                {t.cart.paymentMethodLabel}
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <button
@@ -278,7 +300,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   }`}
                 >
                   <MessageCircle className="w-4 h-4 text-[var(--olive)] shrink-0" />
-                  <span className="truncate">Havale / WhatsApp</span>
+                  <span className="truncate">{t.cart.payWa}</span>
                 </button>
                 <button
                   type="button"
@@ -290,7 +312,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   }`}
                 >
                   <CreditCard className="w-4 h-4 text-[var(--plum)] shrink-0" />
-                  <span className="truncate">Kredi Kartı / Taksit</span>
+                  <span className="truncate">{t.cart.payCard}</span>
                 </button>
               </div>
             </div>
@@ -307,11 +329,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             >
               {paymentMethod === "card" ? (
                 <>
-                  <CreditCard className="w-4 h-4" /> Kredi Kartı / Güvenli Link ile Sipariş Ver
+                  <CreditCard className="w-4 h-4" /> {t.cart.btnCompleteCard}
                 </>
               ) : (
                 <>
-                  <MessageCircle className="w-4 h-4" /> Siparişi WhatsApp ile Tamamla
+                  <MessageCircle className="w-4 h-4" /> {t.cart.btnCompleteWa}
                 </>
               )}
             </button>
@@ -319,7 +341,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div className="flex items-center justify-center gap-1.5 text-[11px] text-center opacity-75">
               <ShieldCheck className="w-3.5 h-3.5 text-[var(--olive)]" />
               <span>
-                Doğrudan <strong>Neriman Çakır ({PHONE})</strong> hattına iletilir. Sitede şifre veya kart bilgisi saklanmaz.
+                {t.cart.securityNote.replace("{phone}", PHONE).replace("{contact}", "Neriman Çakır")}
               </span>
             </div>
           </div>
