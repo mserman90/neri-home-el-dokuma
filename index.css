@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #F9F6F0;
+  --surface-2: #F2ECE1;
+  --surface-3: #E6DEC8;
+  --ink: #2E231D;
+  --ink-soft: #4A3B32;
+  --plum: #7A2E3B;
+  --plum-dark: #5E212B;
+  --olive: #5A6344;
+  --olive-dark: #434B32;
+  --mustard: #B89B3E;
+  --brass: #A68246;
+  --line: #E6DEC8;
+  --card: #FFFDF8;
+}
+
+.dark, html.dark {
+  --surface: #1E1712;
+  --surface-2: #2A211B;
+  --surface-3: #3A2E24;
+  --ink: #F9F6F0;
+  --ink-soft: #E8DFD2;
+  --plum: #C07A87;
+  --plum-dark: #8E4A58;
+  --olive: #A8B184;
+  --olive-dark: #7E8A62;
+  --mustard: #D5BE6E;
+  --brass: #C5A66B;
+  --line: #3A2E24;
+  --card: #261D17;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { 
+  margin: 0; 
+  background: var(--surface); 
+  color: var(--ink); 
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.font-serif-display { font-family: "Cormorant Garamond", Georgia, serif; }
+
+.woven-bg {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(46,35,29,.028) 0, rgba(46,35,29,.028) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(46,35,29,.028) 0, rgba(46,35,29,.028) 1px, transparent 1px, transparent 4px);
+}
+
+.dark .woven-bg, html.dark .woven-bg {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(249,246,240,.035) 0, rgba(249,246,240,.035) 1px, transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(249,246,240,.035) 0, rgba(249,246,240,.035) 1px, transparent 1px, transparent 4px);
+}
+
+.product-card { 
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .2s ease; 
+}
+.product-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 20px 35px -12px rgba(46,35,29,.16); 
+}
+.dark .product-card:hover {
+  box-shadow: 0 20px 35px -12px rgba(0,0,0,.45);
+}
+
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--surface-2); }
+::-webkit-scrollbar-thumb { background: var(--brass); border-radius: 4px; }
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { 
+  outline: 3px solid var(--mustard); 
+  outline-offset: 2px; 
+}
