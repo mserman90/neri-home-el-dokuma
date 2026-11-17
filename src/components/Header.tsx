@@ -1,6 +1,6 @@
 import React from "react";
-import { MessageCircle, Heart, ShoppingBag, Menu, Sun, Moon, Phone } from "lucide-react";
-import { PHONE, waLink } from "../utils/formatters";
+import { MessageCircle, Heart, ShoppingBag, Menu, Sun, Moon } from "lucide-react";
+import { waLink } from "../utils/formatters";
 
 type HeaderProps = {
   cartCount: number;
@@ -37,19 +37,6 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      {/* Üst Bilgi Çubuğu */}
-      <div className="bg-[var(--ink)] text-[var(--surface)] text-xs sm:text-sm px-4 py-2.5 transition-colors">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
-          <span className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-[var(--mustard)] animate-pulse" />
-            Tekirdağ Saray Küçükyoncalı’dan <strong>%100 El Dokuma Keçi Kılı & Yün</strong> | Kadın Emeği Mirası
-          </span>
-          <a href={`tel:${PHONE.replace(/\s+/g, "")}`} className="hover:text-[var(--mustard)] flex items-center gap-1 transition">
-            <Phone className="w-3.5 h-3.5" /> {PHONE} (Neriman Çakır)
-          </a>
-        </div>
-      </div>
-
       {/* Ana Header */}
       <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--line)] transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

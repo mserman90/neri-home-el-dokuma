@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Product } from "../types";
 import { ProductCard } from "./ProductCard";
-import { Search, Heart } from "lucide-react";
+import { Search, Heart, CheckCircle2 } from "lucide-react";
 
 type ProductGridProps = {
   products: Product[];
@@ -25,6 +25,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("recommended");
+  const [inStockOnly, setInStockOnly] = useState(false);
 
   const categories = [
     { id: "all", label: `Tümü (${products.length})` },
@@ -40,6 +41,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
       (p) =>
         (category === "all" || p.category === category) &&
         (!favOnly || favIds.has(p.id)) &&
+        (!inStockOnly || p.stockStatus === "in_stock") &&
         (!q || [p.name, p.motif, p.series, p.shortDesc].join(" ").toLowerCase().includes(q))
     );
 
@@ -47,7 +49,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     if (sort === "price-desc") return [...list].sort((a, b) => b.price - a.price);
     if (sort === "name") return [...list].sort((a, b) => a.name.localeCompare(b.name, "tr"));
     return list;
-  }, [products, category, query, sort, favOnly, favIds]);
+  }, [products, category, query, sort, favOnly, favIds, inStockOnly]);
 
   return (
     <section id="koleksiyon" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,19 +97,34 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             </select>
           </label>
 
+          {/* Stok Filtresi */}
+          <button
+            type="button"
+            onClick={() => setInStockOnly(!inStockOnly)}
+            aria-pressed={inStockOnly}
+            className={`px-3.5 py-2.5 rounded-xl text-sm font-semibold border flex items-center gap-1.5 transition shrink-0 ${
+              inStockOnly
+                ? "bg-[#2D4537] text-white border-[#2D4537] shadow-sm"
+                : "bg-[var(--surface-2)] border-[var(--line)] hover:bg-[var(--surface-3)]"
+            }`}
+          >
+            <CheckCircle2 className={`w-4 h-4 ${inStockOnly ? "text-[#A8B184]" : "opacity-70"}`} />
+            Sadece Hazır Stok
+          </button>
+
           {/* Favoriler Filtresi */}
           <button
             type="button"
             onClick={() => setFavOnly(!favOnly)}
             aria-pressed={favOnly}
-            className={`px-4 py-2.5 rounded-xl text-sm font-semibold border flex items-center gap-2 transition shrink-0 ${
+            className={`px-3.5 py-2.5 rounded-xl text-sm font-semibold border flex items-center gap-1.5 transition shrink-0 ${
               favOnly
                 ? "bg-[var(--plum)] text-white border-[var(--plum)] shadow-sm"
                 : "bg-[var(--surface-2)] border-[var(--line)] hover:bg-[var(--surface-3)]"
             }`}
           >
             <Heart className={`w-4 h-4 ${favOnly ? "fill-white" : ""}`} />
-            Sadece Favoriler ({favIds.size})
+            Favoriler ({favIds.size})
           </button>
         </div>
 

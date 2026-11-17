@@ -1,10 +1,11 @@
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { products } from "./data/products";
 import { faqs } from "./data/faqs";
-import { Product, CartRecord, FavRecord } from "./types";
-import { storage } from "./utils/storage";
+import { Product, CartRecord } from "./types";
 import { waLink } from "./utils/formatters";
 import { useTheme } from "./hooks/useTheme";
+import { CartProvider, useCart } from "./context/CartContext";
+import { FavoritesProvider, useFavorites } from "./context/FavoritesContext";
 
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -23,11 +24,11 @@ import { Footer } from "./components/Footer";
 
 import { MessageCircle, Check } from "lucide-react";
 
-export default function App() {
+function MainAppContent() {
   const { theme, toggleTheme } = useTheme();
+  const { cart, cartCount, addToCart, changeQty, removeCart } = useCart();
+  const { favs, favIds, favCount, toggleFav } = useFavorites();
 
-  const [cart, setCart] = useState<CartRecord[]>(() => storage.get("neri_cart", []));
-  const [favs, setFavs] = useState<FavRecord[]>(() => storage.get("neri_favorites", []));
   const [toast, setToast] = useState("");
   const [cartOpen, setCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -35,14 +36,51 @@ export default function App() {
 
   const toastTimer = useRef<number | null>(null);
 
-  const favIds = useMemo(() => new Set(favs.map((f) => f.value.productId)), [favs]);
-  const cartCount = cart.reduce((s, c) => s + c.value.qty, 0);
+  const showToast = (msg: string) => {
+    setToast(msg);
+    if (toastTimer.current) window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast(""), 2800);
+  };
+
+  // URL Query Param & Hash Senkronizasyonu (Deep Linking)
+  const openProductModal = (product: Product | null, pushState = true) => {
+    setSelectedProduct(product);
+    if (pushState) {
+      const url = new URL(window.location.href);
+      if (product) {
+        url.searchParams.set("product", product.id);
+      } else {
+        url.searchParams.delete("product");
+      }
+      window.history.pushState({ productId: product?.id || null }, "", url.toString());
+    }
+  };
+
+  // İlk yüklemede URL'den ürünü açma ve PopState dinleyicisi
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const params = new URLSearchParams(window.location.search);
+      const prodId = params.get("product");
+      if (prodId) {
+        const found = products.find((p) => p.id === prodId);
+        if (found) {
+          setSelectedProduct(found);
+          return;
+        }
+      }
+      setSelectedProduct(null);
+    };
+
+    handleUrlChange();
+    window.addEventListener("popstate", handleUrlChange);
+    return () => window.removeEventListener("popstate", handleUrlChange);
+  }, []);
 
   // Klavye Escape dinleyicisi
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setSelectedProduct(null);
+        openProductModal(null);
         setCartOpen(false);
       }
     };
@@ -113,80 +151,12 @@ export default function App() {
     };
   }, []);
 
-  const showToast = (msg: string) => {
-    setToast(msg);
-    if (toastTimer.current) window.clearTimeout(toastTimer.current);
-    toastTimer.current = window.setTimeout(() => setToast(""), 2800);
-  };
-
-  const handleAddToCart = (product: Product, optionIndex = 0) => {
-    const opt = product.options[optionIndex] || product.options[0];
-    setCart((prev) => {
-      const existing = prev.find(
-        (c) => c.value.productId === product.id && c.value.optionIndex === optionIndex
-      );
-      let next: CartRecord[];
-      if (existing) {
-        next = prev.map((c) =>
-          c.id === existing.id ? { ...c, value: { ...c.value, qty: c.value.qty + 1 } } : c
-        );
-      } else {
-        const item: CartRecord = {
-          id: `cart-${product.id}-${optionIndex}-${Date.now()}`,
-          value: {
-            productId: product.id,
-            optionIndex,
-            qty: 1,
-            unitPrice: product.price + opt.extraPrice,
-            optionLabel: opt.label,
-          },
-        };
-        next = [...prev, item];
-      }
-      storage.set("neri_cart", next);
-      return next;
-    });
-    showToast(`“${product.name}” sepete eklendi.`);
-  };
-
-  const handleChangeQty = (rec: CartRecord, delta: number) => {
-    setCart((prev) => {
-      const nextQty = rec.value.qty + delta;
-      const next =
-        nextQty <= 0
-          ? prev.filter((c) => c.id !== rec.id)
-          : prev.map((c) => (c.id === rec.id ? { ...c, value: { ...c.value, qty: nextQty } } : c));
-      storage.set("neri_cart", next);
-      return next;
-    });
-  };
-
-  const handleRemoveCart = (rec: CartRecord) => {
-    setCart((prev) => {
-      const next = prev.filter((c) => c.id !== rec.id);
-      storage.set("neri_cart", next);
-      return next;
-    });
-    showToast("Ürün sepetten silindi.");
-  };
-
-  const handleToggleFav = (productId: string) => {
-    setFavs((prev) => {
-      const existing = prev.find((f) => f.value.productId === productId);
-      const next = existing
-        ? prev.filter((f) => f.value.productId !== productId)
-        : [...prev, { id: `fav-${productId}-${Date.now()}`, value: { productId } }];
-      storage.set("neri_favorites", next);
-      return next;
-    });
-  };
-
   return (
     <div className="min-h-screen bg-[var(--surface)] text-[var(--ink)] woven-bg transition-colors duration-300">
-      {/* 1. Header & Üst Bilgi */}
+      {/* 1. Header */}
       <Header
         cartCount={cartCount}
-        favCount={favs.length}
+        favCount={favCount}
         favOnly={favOnly}
         setFavOnly={setFavOnly}
         openCart={() => setCartOpen(true)}
@@ -199,7 +169,7 @@ export default function App() {
         <Hero />
 
         {/* 3. Yaşam Alanlarında Neri Home */}
-        <LivingSpaces products={products} openModal={(p) => setSelectedProduct(p)} />
+        <LivingSpaces products={products} openModal={(p) => openProductModal(p)} />
 
         {/* 4. Koleksiyon & Filtreler */}
         <ProductGrid
@@ -207,9 +177,9 @@ export default function App() {
           favIds={favIds}
           favOnly={favOnly}
           setFavOnly={setFavOnly}
-          onToggleFav={handleToggleFav}
-          onOpenModal={(p) => setSelectedProduct(p)}
-          onAddToCart={(p) => handleAddToCart(p, 0)}
+          onToggleFav={toggleFav}
+          onOpenModal={(p) => openProductModal(p)}
+          onAddToCart={(p) => addToCart(p, 0)}
         />
 
         {/* 6. Motiflerin Gizli Dili Sözlüğü */}
@@ -253,8 +223,8 @@ export default function App() {
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onAddToCart={handleAddToCart}
+          onClose={() => openProductModal(null)}
+          onAddToCart={(p, optIdx) => addToCart(p, optIdx)}
         />
       )}
 
@@ -264,8 +234,8 @@ export default function App() {
           cart={cart}
           products={products}
           onClose={() => setCartOpen(false)}
-          onChangeQty={handleChangeQty}
-          onRemoveCart={handleRemoveCart}
+          onChangeQty={(rec: CartRecord, delta: number) => changeQty(rec, delta)}
+          onRemoveCart={(rec: CartRecord) => removeCart(rec)}
           onShowToast={showToast}
         />
       )}
@@ -281,5 +251,15 @@ export default function App() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <FavoritesProvider>
+      <CartProvider>
+        <MainAppContent />
+      </CartProvider>
+    </FavoritesProvider>
   );
 }

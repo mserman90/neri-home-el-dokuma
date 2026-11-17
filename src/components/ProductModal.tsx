@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Product } from "../types";
-import { X, Sparkles, ShoppingBag, MessageCircle, ZoomIn, CheckCircle2, Clock } from "lucide-react";
+import { X, Sparkles, ShoppingBag, MessageCircle, ZoomIn, CheckCircle2, Clock, Share2, Check } from "lucide-react";
 import { tl, waLink } from "../utils/formatters";
 import { livingLabel } from "../data/products";
 
@@ -19,17 +19,55 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [modalOpt, setModalOpt] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
   const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  const [copiedLink, setCopiedLink] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   const selectedOpt = product.options[modalOpt] || product.options[0];
   const modalPrice = product.price + (selectedOpt?.extraPrice || 0);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const updateCoordinates = (clientX: number, clientY: number) => {
     if (!imageContainerRef.current) return;
     const { left, top, width, height } = imageContainerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
+    const x = ((clientX - left) / width) * 100;
+    const y = ((clientY - top) / height) * 100;
     setZoomPos({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    updateCoordinates(e.clientX, e.clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length > 0) {
+      updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  };
+
+  const handleShare = async () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("product", product.id);
+    const shareUrl = url.toString();
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Neri Home | ${product.name}`,
+          text: product.shortDesc,
+          url: shareUrl,
+        });
+        return;
+      } catch (err) {
+        // Kullanıcı paylaşımı iptal ettiyse veya desteklenmiyorsa panoya kopyala
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2200);
+    } catch {
+      // Fallback
+    }
   };
 
   const currentImg = product.images[modalImg] || product.images[0];
@@ -53,14 +91,35 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               {product.series} • {product.weavingTime}
             </span>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Ürün detayını kapat"
-            className="p-1.5 rounded-lg hover:bg-[var(--surface-3)] transition"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={handleShare}
+              aria-label="Ürün bağlantısını paylaş"
+              className="p-1.5 rounded-lg hover:bg-[var(--surface-3)] transition flex items-center gap-1 text-xs font-semibold px-2.5"
+              title="Ürün bağlantısını kopyala"
+            >
+              {copiedLink ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-600" />
+                  <span className="text-emerald-600">Kopyalandı</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-4 h-4 opacity-80" />
+                  <span className="hidden sm:inline opacity-80">Paylaş</span>
+                </>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Ürün detayını kapat"
+              className="p-1.5 rounded-lg hover:bg-[var(--surface-3)] transition"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
@@ -71,7 +130,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               onMouseEnter={() => setIsZooming(true)}
               onMouseLeave={() => setIsZooming(false)}
               onMouseMove={handleMouseMove}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[var(--line)] bg-[var(--surface-2)] cursor-crosshair select-none"
+              onTouchStart={() => setIsZooming(true)}
+              onTouchEnd={() => setIsZooming(false)}
+              onTouchMove={handleTouchMove}
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-[var(--line)] bg-[var(--surface-2)] cursor-crosshair select-none touch-none"
             >
               <img
                 src={currentImg}
@@ -97,7 +159,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
               {/* Büyüteç İpucu Rozeti */}
               <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-medium px-2 py-1 rounded-md flex items-center gap-1 pointer-events-none">
-                <ZoomIn className="w-3 h-3" /> {isZooming ? "Doku İnceleniyor" : "Yakınlaştırmak için üzerine gelin"}
+                <ZoomIn className="w-3 h-3" /> {isZooming ? "Doku İnceleniyor" : "Yakınlaştırmak için dokunun veya üzerine gelin"}
+              </div>
+            </div>
               </div>
             </div>
 

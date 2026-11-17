@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CartRecord, Product } from "../types";
-import { ShoppingBag, X, Plus, Minus, Trash2, Package, MessageCircle, CreditCard, ShieldCheck } from "lucide-react";
+import { ShoppingBag, X, Plus, Minus, Trash2, Package, MessageCircle, CreditCard, ShieldCheck, Gift } from "lucide-react";
 import { tl, waLink, FREE_SHIPPING, PHONE } from "../utils/formatters";
 
 type CartDrawerProps = {
@@ -23,6 +23,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const [custName, setCustName] = useState("");
   const [custCity, setCustCity] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<"whatsapp" | "card">("whatsapp");
+  const [isGift, setIsGift] = useState(false);
+  const [giftNote, setGiftNote] = useState("");
 
   const productById = (id: string) => products.find((p) => p.id === id);
 
@@ -61,7 +63,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         method === "card"
           ? "Kredi Kartı / Taksitli Güvenli Ödeme Linki (Shopier / iyzico)"
           : "WhatsApp üzerinden Havale / EFT / Kapıda Bilgi"
-      }`,
+      }`
+    );
+
+    if (isGift) {
+      lines.push(
+        `🎁 Hediye Paketi Talebi: Evet`,
+        `📝 Hediye Notu: "${giftNote.trim() || "Özel hediye paketi rica olunur."}"`
+      );
+    }
+
+    lines.push(
       "",
       cartTotal >= FREE_SHIPPING
         ? "✨ Ücretsiz Kargo eşiğine ulaşılmıştır."
@@ -225,6 +237,29 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 aria-label="Teslimat İl / İlçe"
                 className="px-3 py-2 rounded-xl bg-[var(--surface)] border border-[var(--line)] text-xs focus:outline-none focus:ring-1 focus:ring-[var(--mustard)]"
               />
+            </div>
+
+            {/* Hediye Paketi & Notu */}
+            <div className="bg-[var(--surface)] p-2.5 rounded-xl border border-[var(--line)] space-y-2">
+              <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold select-none">
+                <input
+                  type="checkbox"
+                  checked={isGift}
+                  onChange={(e) => setIsGift(e.target.checked)}
+                  className="rounded text-[var(--plum)] focus:ring-[var(--plum)]"
+                />
+                <Gift className="w-3.5 h-3.5 text-[var(--plum)]" />
+                <span>Hediye Paketi & Özel Not Ekle (Ücretsiz)</span>
+              </label>
+              {isGift && (
+                <input
+                  type="text"
+                  value={giftNote}
+                  onChange={(e) => setGiftNote(e.target.value)}
+                  placeholder="Hediye notunuzu yazın (örn: Sevgilerle...)"
+                  className="w-full px-2.5 py-1.5 rounded-lg bg-[var(--surface-2)] border border-[var(--line)] text-xs focus:outline-none focus:ring-1 focus:ring-[var(--mustard)]"
+                />
+              )}
             </div>
 
             {/* Ödeme Yöntemi Seçimi */}
