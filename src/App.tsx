@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { products } from "./data/products";
 import { faqs } from "./data/faqs";
-import { Product, CartRecord } from "./types";
+import { CartRecord } from "./types";
 import { waLink } from "./utils/formatters";
 import { useTheme } from "./hooks/useTheme";
+import { useProductDeepLink } from "./hooks/useProductDeepLink";
+import { useJsonLd } from "./hooks/useJsonLd";
 import { CartProvider, useCart } from "./context/CartContext";
 import { FavoritesProvider, useFavorites } from "./context/FavoritesContext";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
@@ -27,13 +29,16 @@ import { MessageCircle, Check } from "lucide-react";
 
 function MainAppContent() {
   const { theme, toggleTheme } = useTheme();
+  const { lang, t } = useLanguage();
   const { cart, cartCount, addToCart, changeQty, removeCart } = useCart();
-  const { favs, favIds, favCount, toggleFav } = useFavorites();
+  const { favIds, favCount, toggleFav } = useFavorites();
 
   const [toast, setToast] = useState("");
   const [cartOpen, setCartOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [favOnly, setFavOnly] = useState(false);
+
+  const { selectedProduct, openProductModal } = useProductDeepLink(products);
+  useJsonLd(products, faqs);
 
   const toastTimer = useRef<number | null>(null);
 
@@ -43,41 +48,7 @@ function MainAppContent() {
     toastTimer.current = window.setTimeout(() => setToast(""), 2800);
   };
 
-  // URL Query Param & Hash Senkronizasyonu (Deep Linking)
-  const openProductModal = (product: Product | null, pushState = true) => {
-    setSelectedProduct(product);
-    if (pushState) {
-      const url = new URL(window.location.href);
-      if (product) {
-        url.searchParams.set("product", product.id);
-      } else {
-        url.searchParams.delete("product");
-      }
-      window.history.pushState({ productId: product?.id || null }, "", url.toString());
-    }
-  };
-
-  // İlk yüklemede URL'den ürünü açma ve PopState dinleyicisi
-  useEffect(() => {
-    const handleUrlChange = () => {
-      const params = new URLSearchParams(window.location.search);
-      const prodId = params.get("product");
-      if (prodId) {
-        const found = products.find((p) => p.id === prodId);
-        if (found) {
-          setSelectedProduct(found);
-          return;
-        }
-      }
-      setSelectedProduct(null);
-    };
-
-    handleUrlChange();
-    window.addEventListener("popstate", handleUrlChange);
-    return () => window.removeEventListener("popstate", handleUrlChange);
-  }, []);
-
-  // Klavye Escape dinleyicisi
+  // Keyboard Escape listener
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -87,110 +58,18 @@ function MainAppContent() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [openProductModal]);
 
-  // Schema.org ve SEO Yapılandırması (Rich Snippets & Google Arama Optimizasyonu)
+  // Lock scroll when CartDrawer is open
   useEffect(() => {
-    const siteUrl = "https://mserman90.github.io/neri-home-el-dokuma/";
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": `${siteUrl}#website`,
-          url: siteUrl,
-          name: "Neri Home | El Dokuma Keçi Kılı & Cicim Tekstil",
-          description: "Tekirdağ Saray Küçükyoncalı 1875 Rumeli göç mirası el dokuması kırlent, dolay yastık ve çanta mağazası.",
-          inLanguage: "tr-TR",
-        },
-        {
-          "@type": "HomeGoodsStore",
-          "@id": `${siteUrl}#store`,
-          name: "Neri Home",
-          description:
-            "Tekirdağ Saray Küçükyoncalı Mahallesi'nde 200 yıllık Rumeli sandık motifleriyle ahşap el tezgâhlarında dokunan doğal keçi kılı ve yün cicim kırlent, dolay yastık, heybe, çanta ve runner atölyesi.",
-          url: siteUrl,
-          telephone: "+905376966502",
-          founder: {
-            "@type": "Person",
-            name: "Neriman Çakır",
-            jobTitle: "Usta Dokumacı & Kurucu",
-          },
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "Küçükyoncalı Mahallesi 5110. Sokak No: 12",
-            addressLocality: "Saray",
-            addressRegion: "Tekirdağ",
-            postalCode: "59600",
-            addressCountry: "TR",
-          },
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: 41.4428,
-            longitude: 27.9239,
-          },
-          areaServed: ["TR", "US", "EU"],
-          priceRange: "₺₺₺",
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "4.9",
-            reviewCount: "28",
-            bestRating: "5",
-            worstRating: "1",
-          },
-        },
-        {
-          "@type": "FAQPage",
-          "@id": `${siteUrl}#faq`,
-          mainEntity: faqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-          })),
-        },
-        {
-          "@type": "ItemList",
-          "@id": `${siteUrl}#collection`,
-          name: "Neri Home El Dokuma Koleksiyonu",
-          itemListElement: products.map((p, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            item: {
-              "@type": "Product",
-              "@id": `${siteUrl}?product=${p.id}`,
-              name: p.name,
-              sku: p.id,
-              description: p.shortDesc,
-              brand: { "@type": "Brand", name: "Neri Home" },
-              material: p.material,
-              category: p.category,
-              itemCondition: "https://schema.org/NewCondition",
-              offers: {
-                "@type": "Offer",
-                priceCurrency: "TRY",
-                price: p.price,
-                availability:
-                  p.stockStatus === "in_stock"
-                    ? "https://schema.org/InStock"
-                    : "https://schema.org/PreOrder",
-                url: `${siteUrl}?product=${p.id}`,
-                seller: {
-                  "@type": "Organization",
-                  name: "Neri Home",
-                },
-              },
-            },
-          })),
-        },
-      ],
-    });
-    document.head.appendChild(script);
-    return () => {
-      script.remove();
-    };
-  }, []);
+    if (cartOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [cartOpen]);
 
   return (
     <div className="min-h-screen bg-[var(--surface)] text-[var(--ink)] woven-bg transition-colors duration-300">
@@ -206,13 +85,13 @@ function MainAppContent() {
       />
 
       <main id="top">
-        {/* 2. Hero Bölümü */}
+        {/* 2. Hero */}
         <Hero />
 
-        {/* 3. Yaşam Alanlarında Neri Home */}
+        {/* 3. Living Spaces */}
         <LivingSpaces products={products} openModal={(p) => openProductModal(p)} />
 
-        {/* 4. Koleksiyon & Filtreler */}
+        {/* 4. Collection & Filters */}
         <ProductGrid
           products={products}
           favIds={favIds}
@@ -223,44 +102,48 @@ function MainAppContent() {
           onAddToCart={(p) => addToCart(p, 0)}
         />
 
-        {/* 6. Motiflerin Gizli Dili Sözlüğü */}
+        {/* 5. Motif Dictionary */}
         <MotifDictionary />
 
-        {/* 7. Doğal Keçi Kılı & Cicim Zanaati */}
+        {/* 6. Craft Section */}
         <CraftSection />
 
-        {/* 8. Usta İmzalı Menşe & Özgünlük Sertifikası */}
+        {/* 7. Certificate of Provenance */}
         <CertificateSection />
 
-        {/* 9. 1875 Mirasımız (Zaman Çizelgesi) */}
+        {/* 8. 1875 Heritage History */}
         <HistorySection />
 
-        {/* 10. Müşteri Deneyimi & Sosyal Kanıt */}
+        {/* 9. Testimonials & Social Proof */}
         <TestimonialsSection />
 
-        {/* 11. B2B & Kurumsal Özel Dokuma */}
+        {/* 10. B2B & Custom Weaving */}
         <CustomOrderSection />
 
-        {/* 12. Sıkça Sorulan Sorular */}
+        {/* 11. FAQ */}
         <FaqSection />
       </main>
 
-      {/* 13. Footer */}
+      {/* 12. Footer */}
       <Footer />
 
-      {/* Sabit Kayan WhatsApp Sipariş Butonu */}
+      {/* Floating WhatsApp Action Button */}
       <a
-        href={waLink("Merhaba Neriman Hanım, Neri Home el dokuma ürünleriniz hakkında bilgi almak istiyorum.")}
+        href={waLink(
+          lang === "en"
+            ? "Hello Ms. Neriman, I would like to inquire about Neri Home handwoven textiles."
+            : "Merhaba Neriman Hanım, Neri Home el dokuma ürünleriniz hakkında bilgi almak istiyorum."
+        )}
         target="_blank"
         rel="noopener"
-        aria-label="WhatsApp ile Neriman Çakır'a yazın"
+        aria-label={t.common.quickWhatsApp}
         className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white p-3 sm:px-4 sm:py-3 rounded-full shadow-2xl border border-white/20 hover:scale-105 active:scale-95 transition"
       >
         <MessageCircle className="w-5 h-5 shrink-0" />
-        <span className="text-xs font-bold hidden sm:inline">WhatsApp Sipariş & Danışma</span>
+        <span className="text-xs font-bold hidden sm:inline">{t.common.quickWhatsApp}</span>
       </a>
 
-      {/* Ürün Detay Modalı */}
+      {/* Product Detail Modal */}
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
@@ -269,7 +152,7 @@ function MainAppContent() {
         />
       )}
 
-      {/* Sepet Çekmecesi */}
+      {/* Cart Drawer */}
       {cartOpen && (
         <CartDrawer
           cart={cart}
@@ -281,7 +164,7 @@ function MainAppContent() {
         />
       )}
 
-      {/* Toast Bildirim Kutusu */}
+      {/* Toast Notification */}
       {toast && (
         <div
           role="status"

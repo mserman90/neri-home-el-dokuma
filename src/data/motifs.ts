@@ -1,40 +1,58 @@
 import { Motif } from "../types";
 
 export const motifs: Motif[] = [
-  { 
-    name: "Su Yolu", 
-    tag: "Saflık & Yaşam Akışı", 
-    color: "bg-[var(--olive)] text-white", 
-    desc: "Zikzak ve dalgalı şeritlerle dokunur. Bedensel ve ruhsal sağlığı, arınmayı ve yaşamın kesintisiz akışını simgeler. Ustalar dokurken dereden su akıyormuş gibi dinginlik verir." 
+  {
+    name: "Su Yolu",
+    nameEn: "Waterway",
+    tag: "Saflık & Yaşam Akışı",
+    tagEn: "Purity & Life Flow",
+    color: "bg-[var(--olive)] text-white",
+    desc: "Zikzak ve dalgalı şeritlerle dokunur. Bedensel ve ruhsal sağlığı, arınmayı ve yaşamın kesintisiz akışını simgeler. Ustalar dokurken dereden su akıyormuş gibi dinginlik verir.",
+    descEn: "Woven in zigzags and fluid stripes, symbolizing wellness, purity, and the uninterrupted stream of life.",
   },
-  { 
-    name: "Göç Yolları", 
-    tag: "1875 Rumeli Mirası", 
-    color: "bg-[var(--plum)] text-white", 
-    desc: "Atalarımızın Balkanlar’dan Tekirdağ Saray Küçükyoncalı’ya uzanan tarihi yolculuğunu, dayanışmayı ve yeni yurt kurma umudunu anlatır." 
+  {
+    name: "Göç Yolları",
+    nameEn: "Migration Routes",
+    tag: "1875 Rumeli Mirası",
+    tagEn: "1875 Rumelian Heritage",
+    color: "bg-[var(--plum)] text-white",
+    desc: "Atalarımızın Balkanlar’dan Tekirdağ Saray Küçükyoncalı’ya uzanan tarihi yolculuğunu, dayanışmayı ve yeni yurt kurma umudunu anlatır.",
+    descEn: "Recalls the historic journey of ancestors from the Balkans to Thrace, embodying solidarity and resilience.",
   },
-  { 
-    name: "Eli Belinde", 
-    tag: "Bereket & Annelik", 
-    color: "bg-[var(--brass)] text-white", 
-    desc: "İki yana açılmış kol formuyla dişiliği, anneliği, doğurganlığı, toprağın bereketini ve ev içi kısmeti temsil eder." 
+  {
+    name: "Eli Belinde",
+    nameEn: "Hands on Hips",
+    tag: "Bereket & Annelik",
+    tagEn: "Fertility & Motherhood",
+    color: "bg-[var(--brass)] text-white",
+    desc: "İki yana açılmış kol formuyla dişiliği, anneliği, doğurganlığı, toprağın bereketini ve ev içi kısmeti temsil eder.",
+    descEn: "A feminine silhouette symbolizing maternal grace, earth's harvest abundance, and domestic blessing.",
   },
-  { 
-    name: "Koçboynuzu", 
-    tag: "Güç & Cesaret", 
-    color: "bg-[var(--ink)] text-[var(--surface)]", 
-    desc: "Kıvrımlı ve simetrik boynuz formu; gücü, kuvveti, kahramanlığı, liderliği ve üretkenliği simgeler." 
+  {
+    name: "Koçboynuzu",
+    nameEn: "Ram's Horn",
+    tag: "Güç & Cesaret",
+    tagEn: "Strength & Courage",
+    color: "bg-[var(--ink)] text-[var(--surface)]",
+    desc: "Kıvrımlı ve simetrik boynuz formu; gücü, kuvveti, kahramanlığı, liderliği ve üretkenliği simgeler.",
+    descEn: "Curved and symmetrical horns symbolizing inner resilience, valor, leadership, and generative power.",
   },
-  { 
-    name: "Pıtrak", 
-    tag: "Nazardan Korunma", 
-    color: "bg-[var(--mustard)] text-[var(--ink)]", 
-    desc: "Tarlalardaki dikenli bitkiden ilham alan çok kenarlı yıldız formu; kem gözlerden ve nazardan koruduğuna, eve huzur ve bereket getirdiğine inanılır." 
+  {
+    name: "Pıtrak",
+    nameEn: "Burdock",
+    tag: "Nazardan Korunma",
+    tagEn: "Protection from Evil Eye",
+    color: "bg-[var(--mustard)] text-[var(--ink)]",
+    desc: "Tarlalardaki dikenli bitkiden ilham alan çok kenarlı yıldız formu; kem gözlerden ve nazardan koruduğuna, eve huzur ve bereket getirdiğine inanılır.",
+    descEn: "Inspired by the spiky thistle, a multi-faceted star motif believed to ward off misfortune and bring serene abundance.",
   },
-  { 
-    name: "Üç Güller", 
-    tag: "Sevinç & Hoşsohbet", 
-    color: "bg-[#5E212B] text-white", 
-    desc: "Üç Güller motifi sevinci, mutluluğu ve özlemi; dostlarla yapılan tatlı sohbetleri ve misafirperverliği anlatır." 
-  }
+  {
+    name: "Üç Güller",
+    nameEn: "Three Roses",
+    tag: "Sevinç & Hoşsohbet",
+    tagEn: "Joy & Fellowship",
+    color: "bg-[#5E212B] text-white",
+    desc: "Üç Güller motifi sevinci, mutluluğu ve özlemi; dostlarla yapılan tatlı sohbetleri ve misafirperverliği anlatır.",
+    descEn: "Three Roses celebrate shared laughter, warm hospitality, reunion, and hearthside storytelling.",
+  },
 ];

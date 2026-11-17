@@ -1,7 +1,11 @@
 import React from "react";
 import { Award, Stamp, CheckCircle, PackageCheck, FileCheck } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export const CertificateSection: React.FC = () => {
+  const { lang, t } = useLanguage();
+  const isEn = lang === "en";
+
   return (
     <section id="sertifika" className="py-16 sm:py-24 bg-[var(--surface-2)] border-t border-[var(--line)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,31 +22,39 @@ export const CertificateSection: React.FC = () => {
             {/* Sol: Başlık ve Açıklamalar */}
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface-2)] text-[var(--plum)] text-xs font-bold border border-[var(--line)]">
-                <Award className="w-4 h-4" /> Coğrafi Menşe ve Zanaat Güvencesi
+                <Award className="w-4 h-4" /> {t.certificateSection.badge}
               </div>
               <h2 className="font-serif-display text-3xl sm:text-4xl font-bold">
-                Usta İmzalı Özgünlük & Menşe Belgesi
+                {t.certificateSection.title}
               </h2>
               <p className="text-sm sm:text-base opacity-85 leading-relaxed">
-                Her bir Neri Home dokuması, seri üretim fabrikasyon ürünlerden tamamen farklıdır. Satın aldığınız her parça ile birlikte, atölyemizin resmi mührünü ve eseri ilmek ilmek dokuyan ustanın ıslak imzasını taşıyan <strong>Özgünlük Sertifikası</strong> gönderilir.
+                {t.certificateSection.description}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm">
                   <CheckCircle className="w-4 h-4 text-[var(--olive)] shrink-0 mt-0.5" />
-                  <span><strong>Dokuyan Usta İmzası:</strong> Eseri tezgâhta tamamlayan ustanın adı ve tamamlanma tarihi.</span>
+                  <span>
+                    <strong>{t.certificateSection.p1Title}:</strong> {t.certificateSection.p1Desc}
+                  </span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm">
                   <Stamp className="w-4 h-4 text-[var(--plum)] shrink-0 mt-0.5" />
-                  <span><strong>Küçükyoncalı Menşe Mührü:</strong> Tekirdağ Saray yöresine ait tescilli geleneksel motif kaydı.</span>
+                  <span>
+                    <strong>{t.certificateSection.p2Title}:</strong> {t.certificateSection.p2Desc}
+                  </span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm">
                   <FileCheck className="w-4 h-4 text-[var(--brass)] shrink-0 mt-0.5" />
-                  <span><strong>%100 Doğal Lif Onayı:</strong> Boyasız ham keçi kılı ve kök boyalı yün içerik garantisi.</span>
+                  <span>
+                    <strong>{t.certificateSection.p3Title}:</strong> {t.certificateSection.p3Desc}
+                  </span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm">
                   <PackageCheck className="w-4 h-4 text-[var(--olive)] shrink-0 mt-0.5" />
-                  <span><strong>Özel Hediye Ambalajı:</strong> Çeyiz ve prestijli kurumsal hediyeler için koruyucu özel kılıf.</span>
+                  <span>
+                    <strong>{t.certificateSection.p4Title}:</strong> {t.certificateSection.p4Desc}
+                  </span>
                 </div>
               </div>
             </div>
@@ -55,38 +67,40 @@ export const CertificateSection: React.FC = () => {
                     Tekirdağ Saray Küçükyoncalı
                   </span>
                   <h3 className="font-serif-display text-2xl font-bold text-[var(--ink)] mt-0.5">
-                    Geleneksel El Dokuma Sertifikası
+                    {isEn ? "Traditional Handloom Certificate" : "Geleneksel El Dokuma Sertifikası"}
                   </h3>
                 </div>
 
                 <div className="space-y-2 text-xs opacity-90">
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
-                    <span className="opacity-70">Ürün Tescili:</span>
-                    <strong className="text-[var(--plum)]">Neri Home Koleksiyonu</strong>
+                    <span className="opacity-70">{isEn ? "Registration:" : "Ürün Tescili:"}</span>
+                    <strong className="text-[var(--plum)]">Neri Home Collection</strong>
                   </div>
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
-                    <span className="opacity-70">Dokuma Tekniği:</span>
-                    <strong>Ahşap Tezgâh Çift Yüzlü Cicim</strong>
+                    <span className="opacity-70">{isEn ? "Weaving Technique:" : "Dokuma Tekniği:"}</span>
+                    <strong>{isEn ? "Double-Sided Wooden Loom Cicim" : "Ahşap Tezgâh Çift Yüzlü Cicim"}</strong>
                   </div>
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
-                    <span className="opacity-70">Hammadde:</span>
-                    <strong>%100 Keçi Kılı & Koyun Yünü</strong>
+                    <span className="opacity-70">{isEn ? "Raw Materials:" : "Hammadde:"}</span>
+                    <strong>{isEn ? "100% Goat Hair & Virgin Wool" : "%100 Keçi Kılı & Koyun Yünü"}</strong>
                   </div>
                   <div className="flex justify-between py-1 border-b border-[var(--line)]/50">
-                    <span className="opacity-70">Menşe:</span>
+                    <span className="opacity-70">{isEn ? "Provenance:" : "Menşe:"}</span>
                     <strong>Küçükyoncalı (Küçükmanika)</strong>
                   </div>
                 </div>
 
                 <div className="pt-2 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] block opacity-70">Atölye Sorumlusu</span>
+                    <span className="text-[10px] block opacity-70">
+                      {isEn ? "Master Artisan" : "Atölye Sorumlusu"}
+                    </span>
                     <span className="font-serif-display text-base font-bold text-[var(--ink)] italic">
                       Neriman Çakır
                     </span>
                   </div>
                   <div className="w-12 h-12 rounded-full border-2 border-[var(--plum)] flex items-center justify-center text-[9px] font-bold text-[var(--plum)] uppercase text-center leading-tight">
-                    Mühürlü<br />1875
+                    {isEn ? "SEALED\n1875" : "Mühürlü\n1875"}
                   </div>
                 </div>
               </div>

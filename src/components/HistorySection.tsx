@@ -1,21 +1,31 @@
 import React from "react";
+import { useLanguage } from "../context/LanguageContext";
 
 export const HistorySection: React.FC = () => {
+  const { lang, t } = useLanguage();
+  const isEn = lang === "en";
+
   const steps = [
     {
-      y: "1875 • Büyük Rumeli Göçü",
-      t: "Balkanlar’dan Tekirdağ’a Yolculuk",
-      d: "Aileler, çeyiz sandıklarında sakladıkları asırlık motifleri, tezgâh hafızalarını ve yaşama umutlarını Tekirdağ Saray Küçükyoncalı’ya (tarihi adıyla Küçükmanika) taşıdı.",
+      y: isEn ? "1875 • The Great Rumelian Migration" : "1875 • Büyük Rumeli Göçü",
+      t: isEn ? "Journey from the Balkans to Thrace" : "Balkanlar’dan Tekirdağ’a Yolculuk",
+      d: isEn
+        ? "Families carried century-old motifs, loom memories, and hope to Tekirdağ Saray Küçükyoncalı (historically known as Küçükmanika)."
+        : "Aileler, çeyiz sandıklarında sakladıkları asırlık motifleri, tezgâh hafızalarını ve yaşama umutlarını Tekirdağ Saray Küçükyoncalı’ya (tarihi adıyla Küçükmanika) taşıdı.",
     },
     {
-      y: "Sandıkların Sessiz Dili",
-      t: "İlmeklere Dönüşen Dualar",
-      d: "Su Yolu, Göç Yolları, Pıtrak ve Üç Güller motifleri; sevinçleri, koruyucu inançları ve misafirperverliği anlatmak üzere genç kızların ve annelerin ellerinde dokundu.",
+      y: isEn ? "The Silent Language of Chests" : "Sandıkların Sessiz Dili",
+      t: isEn ? "Prayers Woven into Stitches" : "İlmeklere Dönüşen Dualar",
+      d: isEn
+        ? "Waterway, Migration Routes, Burdock, and Three Roses were woven by mothers and daughters to express hospitality, joy, and spiritual protection."
+        : "Su Yolu, Göç Yolları, Pıtrak ve Üç Güller motifleri; sevinçleri, koruyucu inançları ve misafirperverliği anlatmak üzere genç kızların ve annelerin ellerinde dokundu.",
     },
     {
-      y: "Bugün • Yaşayan Kadın Atölyesi",
-      t: "Kadın Ustaların Ahşap Tezgâhı",
-      d: "Aynı motifler, Tekirdağ Saray atölyemizde Neriman Çakır öncülüğündeki kadın dokuma ustalarımızın ellerinde boyasız keçi kılı ve yünle modern evlere yeniden can veriyor.",
+      y: isEn ? "Today • A Living Women's Atelier" : "Bugün • Yaşayan Kadın Atölyesi",
+      t: isEn ? "Wooden Handlooms of Master Artisans" : "Kadın Ustaların Ahşap Tezgâhı",
+      d: isEn
+        ? "Led by Neriman Çakır, these motifs continue on wooden looms with raw undyed goat hair and wool, bringing soulful heritage to contemporary living spaces."
+        : "Aynı motifler, Tekirdağ Saray atölyemizde Neriman Çakır öncülüğündeki kadın dokuma ustalarımızın ellerinde boyasız keçi kılı ve yünle modern evlere yeniden can veriyor.",
     },
   ];
 
@@ -26,13 +36,13 @@ export const HistorySection: React.FC = () => {
           {/* Sol Kolon: Zaman Çizelgesi */}
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--plum)]">
-              1875 Mirasımız
+              {t.historySection.subtitle}
             </span>
             <h2 className="font-serif-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-1">
-              Hikâyemiz: Sandıktan Tezgâha
+              {t.historySection.title}
             </h2>
             <p className="mt-3 text-sm sm:text-base opacity-80 leading-relaxed">
-              Neri Home, bir çeyiz sandığının sessiz dilini bugünün çağdaş yaşam alanlarına taşıma arzusuyla kuruldu. Her dokuma, sabrın, göç yolculuğunun ve kadın emeğinin devamıdır.
+              {t.historySection.description}
             </p>
 
             <ol className="mt-8 space-y-0">
@@ -59,18 +69,22 @@ export const HistorySection: React.FC = () => {
                 1875
               </div>
               <p className="font-serif-display text-3xl font-bold text-[var(--ink)]">
-                Küçükyoncalı Atölyesi
+                {isEn ? "Küçükyoncalı Atelier" : "Küçükyoncalı Atölyesi"}
               </p>
               <p className="text-sm opacity-80 max-w-sm leading-relaxed">
-                Ahşap tezgâhta, her santimetresi hesaplanarak devam eden kadim dokuma geleneği. Kadın üreticilerimizin emeğini doğrudan evinizde yaşatın.
+                {isEn
+                  ? "A timeless handweaving heritage where every centimeter is crafted with human dedication. Support women master weavers directly."
+                  : "Ahşap tezgâhta, her santimetresi hesaplanarak devam eden kadim dokuma geleneği. Kadın üreticilerimizin emeğini doğrudan evinizde yaşatın."}
               </p>
               <p className="text-xs font-bold text-[var(--plum)] uppercase tracking-widest mt-1">
                 Saray • Tekirdağ
               </p>
             </div>
             <div className="px-3 py-3.5 flex justify-between items-center text-xs opacity-80">
-              <span className="font-semibold">Neri Home Kadın Dokuma İnisiyatifi</span>
-              <span>Küçükyoncalı Mahallesi</span>
+              <span className="font-semibold">
+                {isEn ? "Neri Home Women Weaving Collective" : "Neri Home Kadın Dokuma İnisiyatifi"}
+              </span>
+              <span>Küçükyoncalı</span>
             </div>
           </div>
         </div>

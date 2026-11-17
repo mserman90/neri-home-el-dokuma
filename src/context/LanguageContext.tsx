@@ -15,7 +15,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [lang, setLangState] = useState<Language>(() => {
-    const saved = storage.get("neri_lang", "");
+    const saved = storage.get<string>("neri_lang", "");
     if (saved === "tr" || saved === "en") return saved;
     // Tarayıcı diline göre varsayılan belirleme
     if (typeof navigator !== "undefined" && navigator.language?.startsWith("en")) {

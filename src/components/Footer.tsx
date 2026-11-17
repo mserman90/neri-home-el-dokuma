@@ -1,8 +1,12 @@
 import React from "react";
 import { UserCheck, MapPin, Phone, MessageCircle } from "lucide-react";
 import { PHONE, waLink } from "../utils/formatters";
+import { useLanguage } from "../context/LanguageContext";
 
 export const Footer: React.FC = () => {
+  const { lang, t } = useLanguage();
+  const isEn = lang === "en";
+
   return (
     <footer id="iletisim" className="bg-[var(--surface-2)] border-t border-[var(--line)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
@@ -20,45 +24,40 @@ export const Footer: React.FC = () => {
               <span className="font-serif-display text-2xl font-bold">Neri Home</span>
             </div>
             <p className="text-xs sm:text-sm opacity-80 leading-relaxed">
-              Tekirdağ Saray Küçükyoncalı’nın 200 yıllık cicim dokuma geleneğini doğal keçi kılı ve yün liflerle modern yaşam alanlarına taşıyoruz.
+              {t.footer.about}
             </p>
             <p className="text-xs font-semibold text-[var(--plum)] italic pt-1">
-              “Bazı Miraslar Yalnızca Anlatılmaz; Dokunur, Yaşatılır ve Geleceğe Emanet Edilir.”
+              {t.footer.quote}
             </p>
           </div>
 
           {/* 2. Sütun: Hızlı Bağlantılar */}
           <div className="space-y-2.5 text-sm">
-            <h4 className="font-serif-display text-xl font-bold">Koleksiyon & Rehber</h4>
+            <h4 className="font-serif-display text-xl font-bold">{t.footer.col1Title}</h4>
             <ul className="space-y-2 opacity-80 text-xs sm:text-sm">
               <li>
                 <a href="#koleksiyon" className="hover:text-[var(--plum)] transition">
-                  El Dokuma Bel Yastıkları
-                </a>
-              </li>
-              <li>
-                <a href="#koleksiyon" className="hover:text-[var(--plum)] transition">
-                  Kare & Dolay (Silindir) Yastıklar
+                  {t.collection.title}
                 </a>
               </li>
               <li>
                 <a href="#yasam-alanlari" className="hover:text-[var(--plum)] transition">
-                  Yaşam Alanlarında Neri Home
+                  {t.livingSpaces.title}
                 </a>
               </li>
               <li>
                 <a href="#motifler" className="hover:text-[var(--plum)] transition">
-                  Motiflerin Gizli Dili Sözlüğü
+                  {t.motifsSection.title}
                 </a>
               </li>
               <li>
                 <a href="#sertifika" className="hover:text-[var(--plum)] transition">
-                  Usta İmzalı Menşe Sertifikası
+                  {t.certificateSection.title}
                 </a>
               </li>
               <li>
                 <a href="#zanaat" className="hover:text-[var(--plum)] transition">
-                  Keçi Kılı Bakım & Kullanım Rehberi
+                  {t.craftSection.title}
                 </a>
               </li>
             </ul>
@@ -66,18 +65,18 @@ export const Footer: React.FC = () => {
 
           {/* 3. ve 4. Sütun: Atölye ve Doğrudan İletişim */}
           <div className="space-y-3.5 text-sm lg:col-span-2">
-            <h4 className="font-serif-display text-xl font-bold">Atölye & Doğrudan İletişim</h4>
+            <h4 className="font-serif-display text-xl font-bold">{t.footer.col3Title}</h4>
             <address className="not-italic bg-[var(--card)] p-5 rounded-2xl border border-[var(--line)] space-y-3 text-xs sm:text-sm shadow-xs">
               <div className="flex gap-2.5">
                 <UserCheck className="w-4 h-4 text-[var(--plum)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>İrtibat Yetkilisi:</strong> Neriman Çakır (Atölye Yöneticisi)
+                  <strong>{isEn ? "Master Weaver & Founder:" : "İrtibat Yetkilisi:"}</strong> Neriman Çakır
                 </span>
               </div>
               <div className="flex gap-2.5">
                 <MapPin className="w-4 h-4 text-[var(--plum)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>Adres:</strong> Küçükyoncalı Mahallesi 5110. Sokak No: 12 Saray / Tekirdağ
+                  <strong>{isEn ? "Address:" : "Adres:"}</strong> {t.footer.address}
                 </span>
               </div>
               <div className="flex gap-2.5">
@@ -88,12 +87,12 @@ export const Footer: React.FC = () => {
               </div>
               <div className="pt-2 flex flex-wrap gap-2.5">
                 <a
-                  href={waLink("Merhaba Neriman Hanım, Neri Home web sitenizden ulaşıyorum.")}
+                  href={waLink(isEn ? "Hello Ms. Neriman, I am contacting you via Neri Home website." : "Merhaba Neriman Hanım, Neri Home web sitenizden ulaşıyorum.")}
                   target="_blank"
                   rel="noopener"
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--olive)] hover:bg-[var(--olive-dark)] text-white text-xs font-semibold shadow-xs transition"
                 >
-                  <MessageCircle className="w-4 h-4" /> WhatsApp Hattı ile Hemen Yazın
+                  <MessageCircle className="w-4 h-4" /> {isEn ? "Message via WhatsApp" : "WhatsApp Hattı ile Hemen Yazın"}
                 </a>
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=K%C3%BC%C3%A7%C3%BCkyoncal%C4%B1+Mahallesi+Saray+Tekirda%C4%9F"
@@ -101,7 +100,7 @@ export const Footer: React.FC = () => {
                   rel="noopener"
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--surface)] border border-[var(--line)] hover:bg-[var(--surface-3)] text-xs font-semibold transition"
                 >
-                  <MapPin className="w-4 h-4 text-[var(--plum)]" /> Google Haritalarda Gör
+                  <MapPin className="w-4 h-4 text-[var(--plum)]" /> {isEn ? "View on Google Maps" : "Google Haritalarda Gör"}
                 </a>
               </div>
             </address>
@@ -111,9 +110,9 @@ export const Footer: React.FC = () => {
         {/* Alt Telif ve Konum */}
         <div className="mt-12 pt-6 border-t border-[var(--line)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs opacity-75">
           <span>
-            © 2026 Neri Home — Küçükyoncalı El Dokuma Tekstil Atölyesi. Tüm hakları saklıdır.
+            {t.footer.rights}
           </span>
-          <span>Tekirdağ • Saray • Küçükyoncalı (Küçükmanika)</span>
+          <span>{isEn ? "Tekirdağ • Saray • Küçükyoncalı, Turkey" : "Tekirdağ • Saray • Küçükyoncalı (Küçükmanika)"}</span>
         </div>
       </div>
     </footer>

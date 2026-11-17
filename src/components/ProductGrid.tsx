@@ -23,7 +23,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   onOpenModal,
   onAddToCart,
 }) => {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+  const isEn = lang === "en";
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("recommended");
@@ -44,14 +45,25 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         (category === "all" || p.category === category) &&
         (!favOnly || favIds.has(p.id)) &&
         (!inStockOnly || p.stockStatus === "in_stock") &&
-        (!q || [p.name, p.motif, p.series, p.shortDesc].join(" ").toLowerCase().includes(q))
+        (!q ||
+          [p.name, p.nameEn, p.motif, p.motifEn, p.series, p.seriesEn, p.shortDesc, p.shortDescEn]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase()
+            .includes(q))
     );
 
     if (sort === "price-asc") return [...list].sort((a, b) => a.price - b.price);
     if (sort === "price-desc") return [...list].sort((a, b) => b.price - a.price);
-    if (sort === "name") return [...list].sort((a, b) => a.name.localeCompare(b.name, "tr"));
+    if (sort === "name") {
+      return [...list].sort((a, b) =>
+        isEn
+          ? (a.nameEn || a.name).localeCompare(b.nameEn || b.name, "en")
+          : a.name.localeCompare(b.name, "tr")
+      );
+    }
     return list;
-  }, [products, category, query, sort, favOnly, favIds, inStockOnly]);
+  }, [products, category, query, sort, favOnly, favIds, inStockOnly, isEn]);
 
   return (
     <section id="koleksiyon" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

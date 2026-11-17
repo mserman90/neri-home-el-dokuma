@@ -17,6 +17,18 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   onAddToCart,
 }) => {
   const { lang, t } = useLanguage();
+  const isEn = lang === "en";
+
+  const displayName = (isEn && product.nameEn) ? product.nameEn : product.name;
+  const displaySeries = (isEn && product.seriesEn) ? product.seriesEn : product.series;
+  const displayDesc = (isEn && product.shortDescEn) ? product.shortDescEn : product.shortDesc;
+  const displayMotif = (isEn && product.motifEn) ? product.motifEn : product.motif;
+  const displayMotifStory = (isEn && product.motifStoryEn) ? product.motifStoryEn : product.motifStory;
+  const displayMaterial = (isEn && product.materialEn) ? product.materialEn : product.material;
+  const displayWeavingTime = (isEn && product.weavingTimeEn) ? product.weavingTimeEn : product.weavingTime;
+  const displayStockNote = (isEn && product.stockNoteEn) ? product.stockNoteEn : product.stockNote;
+  const displayOptionsLabel = (isEn && product.optionsLabelEn) ? product.optionsLabelEn : product.optionsLabel;
+
   const [modalImg, setModalImg] = useState(0);
   const [modalOpt, setModalOpt] = useState(0);
   const [isZooming, setIsZooming] = useState(false);
@@ -53,8 +65,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Neri Home | ${product.name}`,
-          text: product.shortDesc,
+          title: `Neri Home | ${displayName}`,
+          text: displayDesc,
           url: shareUrl,
         });
         return;
@@ -73,13 +85,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   };
 
   const currentImg = product.images[modalImg] || product.images[0];
-  const label = livingLabel(currentImg);
+  const label = livingLabel(currentImg, isEn);
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`${product.name} ${lang === "en" ? "product details" : "ürün detayı"}`}
+      aria-label={`${displayName} ${isEn ? "product details" : "ürün detayı"}`}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-2 sm:p-4 overflow-y-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
@@ -90,7 +102,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-[var(--surface-2)] border-b border-[var(--line)] shrink-0">
           <div className="flex items-center gap-2 truncate pr-2">
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[var(--plum)] truncate">
-              {product.series} • {product.weavingTime}
+              {displaySeries} • {displayWeavingTime}
             </span>
           </div>
           <div className="flex items-center gap-1 shrink-0">
@@ -139,7 +151,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             >
               <img
                 src={currentImg}
-                alt={product.name}
+                alt={displayName}
                 className="w-full h-full object-cover"
                 style={
                   isZooming
@@ -191,7 +203,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div className="font-bold flex items-center gap-1.5 text-[var(--plum)]">
                 <Sparkles className="w-3.5 h-3.5" /> {t.productModal.motifStoryTitle}
               </div>
-              <p className="opacity-85 leading-relaxed">{product.motifStory}</p>
+              <p className="opacity-85 leading-relaxed">{displayMotifStory}</p>
             </div>
           </div>
 
@@ -203,17 +215,17 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 {product.stockStatus === "in_stock" ? (
                   <span className="inline-flex items-center gap-1 text-xs font-bold text-[#5A6344]">
                     <CheckCircle2 className="w-3.5 h-3.5" />{" "}
-                    {product.stockNote || (lang === "en" ? "Ready in Stock • Same Day Dispatch" : "Atölyede Hazır Stok • Aynı Gün Kargo")}
+                    {displayStockNote || (isEn ? "Ready in Stock • Same Day Dispatch" : "Atölyede Hazır Stok • Aynı Gün Kargo")}
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1 text-xs font-bold text-[var(--mustard)]">
                     <Clock className="w-3.5 h-3.5" />{" "}
-                    {product.stockNote || (lang === "en" ? "Made to Order (3–7 Days)" : "Siparişe Özel Dokunur (3–7 Gün)")}
+                    {displayStockNote || (isEn ? "Made to Order (3–7 Days)" : "Siparişe Özel Dokunur (3–7 Gün)")}
                   </span>
                 )}
               </div>
               <h3 className="font-serif-display text-xl sm:text-2xl lg:text-3xl font-bold leading-tight">
-                {product.name}
+                {displayName}
               </h3>
             </div>
 
@@ -222,7 +234,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             <p className="text-xs sm:text-sm opacity-80 leading-relaxed">
-              {product.shortDesc}
+              {displayDesc}
             </p>
 
             {/* Özellikler Tablosu */}
@@ -230,20 +242,20 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.sizeLabel}</span>
                 <strong className="text-right">
-                  {product.size} {lang === "en" ? "(±1-2 cm)" : "(±1-2 cm)"}
+                  {product.size} {isEn ? "(±1-2 cm)" : "(±1-2 cm)"}
                 </strong>
               </div>
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.materialLabel}</span>
-                <strong className="text-right">{product.material}</strong>
+                <strong className="text-right">{displayMaterial}</strong>
               </div>
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.motifLabel}</span>
-                <strong className="text-right">{product.motif}</strong>
+                <strong className="text-right">{displayMotif}</strong>
               </div>
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.originLabel}</span>
-                <strong className="text-right">Küçükyoncalı / Saray</strong>
+                <strong className="text-right">{isEn ? "Küçükyoncalı / Saray (Thrace)" : "Küçükyoncalı / Saray"}</strong>
               </div>
               <div className="flex justify-between gap-3">
                 <span className="opacity-70">{t.productModal.certificateLabel}</span>
@@ -254,7 +266,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             {/* Seçenek Seçimi */}
             <div>
               <label htmlFor="modal-option" className="block text-xs font-bold mb-1">
-                {product.optionsLabel}:
+                {displayOptionsLabel}:
               </label>
               <select
                 id="modal-option"
@@ -289,9 +301,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </button>
               <a
                 href={waLink(
-                  lang === "en"
-                    ? `Hello Ms. Neriman, I would like to get information/order ${product.name} (${selectedOpt.label}). Price: ${tl(modalPrice)}`
-                    : `Merhaba Neriman Hanım, ${product.name} (${selectedOpt.label}) ürünü hakkında bilgi/sipariş almak istiyorum. Tutar: ${tl(modalPrice)}`
+                  isEn
+                    ? `Hello Ms. Neriman, I would like to get information/order ${displayName} (${selectedOpt.label}). Price: ${tl(modalPrice)}`
+                    : `Merhaba Neriman Hanım, ${displayName} (${selectedOpt.label}) ürünü hakkında bilgi/sipariş almak istiyorum. Tutar: ${tl(modalPrice)}`
                 )}
                 target="_blank"
                 rel="noopener"

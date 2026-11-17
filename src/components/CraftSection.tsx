@@ -1,27 +1,31 @@
 import React from "react";
 import { Droplets, Wind, Shield, Layers, X, Check, Sparkles, Ruler } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export const CraftSection: React.FC = () => {
+  const { lang, t } = useLanguage();
+  const isEn = lang === "en";
+
   const features = [
     {
       icon: Droplets,
-      t: "Su İtici & Dört Mevsim Kullanım",
-      d: "Keçi kılı doğal yapısı gereği suyu iter ve nemi hapsetmez. Salonunuzun yanı sıra balkon, teras ve kış bahçelerinde güvenle kullanılır.",
+      t: t.craftSection.feature1Title,
+      d: t.craftSection.feature1Desc,
     },
     {
       icon: Wind,
-      t: "Nefes Alan Termal Denge",
-      d: "Doğal lif yapısı kışın sıcak, yazın serin tutar. Terletmez, koku yapmaz ve yıl boyu konforlu bir oturma deneyimi sağlar.",
+      t: t.craftSection.feature2Title,
+      d: t.craftSection.feature2Desc,
     },
     {
       icon: Shield,
-      t: "Antistatik, Toz & Güve Tutmaz",
-      d: "Sentetik kumaşlar gibi elektriklenme yapmaz; tozu içine çekmez ve doğal yapısı sayesinde güve gibi tekstil zararlılarını uzak tutar.",
+      t: t.craftSection.feature3Title,
+      d: t.craftSection.feature3Desc,
     },
     {
       icon: Layers,
-      t: "Modern Terzilik: Astar & Gizli Fermuar",
-      d: "84 ilmeklik simetriyle (“3 al, 2 bırak”) dokunan kumaşlarımız, iç astar ve gizli fermuar işçiliğiyle günlük kullanıma uygun dikilir.",
+      t: t.craftSection.feature4Title,
+      d: t.craftSection.feature4Desc,
     },
   ];
 
@@ -32,13 +36,13 @@ export const CraftSection: React.FC = () => {
         <div className="lg:col-span-7 space-y-6">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--olive)]">
-              Doğal Lif Teknolojisi & Zanaat
+              {t.craftSection.subtitle}
             </span>
             <h2 className="font-serif-display text-3xl sm:text-4xl font-bold mt-1">
-              Neden Keçi Kılı ve Cicim Dokuma?
+              {t.craftSection.title}
             </h2>
             <p className="text-sm sm:text-base opacity-80 mt-2 leading-relaxed">
-              Cicim dokuma; çözgü ve atkı iplikleriyle oluşturulan sık zemin dokusunun üzerine, dokuma sırasında renkli desen ipliklerinin sıkıştırılmasıyla elde edilen <strong>kabartmalı ve çift yüzlü</strong> kadim bir el dokuma tekniğidir.
+              {t.craftSection.description}
             </p>
           </div>
 
@@ -58,15 +62,19 @@ export const CraftSection: React.FC = () => {
           </div>
 
           <div className="rounded-3xl border border-[var(--line)] bg-[var(--surface-2)] p-6">
-            <p className="font-serif-display text-2xl font-bold">Tezgâhta İlmek İlmek</p>
+            <p className="font-serif-display text-2xl font-bold">
+              {isEn ? "Stitch by Stitch on the Loom" : "Tezgâhta İlmek İlmek"}
+            </p>
             <p className="mt-2 text-sm opacity-80 leading-relaxed">
-              Ahşap el tezgâhında her sıra, ustanın el hafızasıyla ilerler. Fabrikasyon hiçbir parça barındırmayan bu kumaşlar, zamana meydan okuyan dayanıklılıklarıyla nesilden nesile aktarılır.
+              {isEn
+                ? "Every row progresses with the intuitive tactile memory of our artisans. Containing zero industrial shortcuts, these heirloom pieces are made to endure for generations."
+                : "Ahşap el tezgâhında her sıra, ustanın el hafızasıyla ilerler. Fabrikasyon hiçbir parça barındırmayan bu kumaşlar, zamana meydan okuyan dayanıklılıklarıyla nesilden nesile aktarılır."}
             </p>
             <a
               href="#hikayemiz"
               className="mt-4 inline-flex px-4 py-2.5 rounded-xl bg-[var(--ink)] text-[var(--surface)] text-sm font-semibold hover:bg-[var(--plum)] transition"
             >
-              1875 Hikâyemizi Oku
+              {isEn ? "Read Our 1875 Story" : "1875 Hikâyemizi Oku"}
             </a>
           </div>
         </div>
@@ -79,8 +87,12 @@ export const CraftSection: React.FC = () => {
                 NH
               </div>
               <div>
-                <h3 className="font-serif-display text-2xl font-bold">Kullanım & Bakım Rehberi</h3>
-                <p className="text-xs opacity-70">Nesiller boyu ilk günkü formunu koruması için</p>
+                <h3 className="font-serif-display text-2xl font-bold">
+                  {isEn ? "Care & Usage Guide" : "Kullanım & Bakım Rehberi"}
+                </h3>
+                <p className="text-xs opacity-70">
+                  {isEn ? "Preserving heirloom beauty for generations" : "Nesiller boyu ilk günkü formunu koruması için"}
+                </p>
               </div>
             </div>
 
@@ -88,35 +100,49 @@ export const CraftSection: React.FC = () => {
               <li className="flex gap-2.5">
                 <X className="w-4 h-4 text-[var(--mustard)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>Çamaşır Makinesinde Yıkanmaz:</strong> Doğal keçi kılı, yün lifleri ve kök boya tonlarını korumak için makinede yıkama ve sıkma yapmayınız.
+                  <strong>{isEn ? "Do Not Machine Wash: " : "Çamaşır Makinesinde Yıkanmaz: "}</strong>
+                  {isEn
+                    ? "To protect natural fibers and vegetable dyes, avoid machine washing or spin drying."
+                    : "Doğal keçi kılı, yün lifleri ve kök boya tonlarını korumak için makinede yıkama ve sıkma yapmayınız."}
                 </span>
               </li>
               <li className="flex gap-2.5">
                 <Check className="w-4 h-4 text-[var(--olive)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>Pratik Temizlik:</strong> Nemli beyaz bir bezle nazikçe silebilir, elektrik süpürgesinin düşük ayarında tozunu alabilir veya profesyonel kuru temizleme yaptırabilirsiniz.
+                  <strong>{isEn ? "Practical Cleaning: " : "Pratik Temizlik: "}</strong>
+                  {isEn
+                    ? "Gently wipe with a damp white cloth, vacuum on low suction, or use professional dry cleaning."
+                    : "Nemli beyaz bir bezle nazikçe silebilir, elektrik süpürgesinin düşük ayarında tozunu alabilir veya profesyonel kuru temizleme yaptırabilirsiniz."}
                 </span>
               </li>
               <li className="flex gap-2.5">
                 <Sparkles className="w-4 h-4 text-[var(--mustard)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>Yumuşatılmış Yüzey Konforu:</strong> Özel tarama ve yün harmanlama işlemleri sayesinde lifleri pürüzsüzleştirilmiştir; sırt ve bel yastığı kullanımında batma yapmaz.
+                  <strong>{isEn ? "Softened Texture Comfort: " : "Yumuşatılmış Yüzey Konforu: "}</strong>
+                  {isEn
+                    ? "Through carding and wool blending, fibers are smooth and non-prickly against skin."
+                    : "Özel tarama ve yün harmanlama işlemleri sayesinde lifleri pürüzsüzleştirilmiştir; sırt ve bel yastığı kullanımında batma yapmaz."}
                 </span>
               </li>
               <li className="flex gap-2.5">
                 <Ruler className="w-4 h-4 text-[var(--brass)] shrink-0 mt-0.5" />
                 <span>
-                  <strong>El İşçiliği Özgünlüğü:</strong> El tezgâhında dokunduğu için ölçülerde ±1–2 cm farklılık ve doğal lif ton geçişleri görülebilir; bu durum her parçanın tek ve benzersiz olduğunun kanıtıdır.
+                  <strong>{isEn ? "Artisan Uniqueness: " : "El İşçiliği Özgünlüğü: "}</strong>
+                  {isEn
+                    ? "Subtle dimensional variations (±1-2 cm) and natural fiber gradients reflect authentic handloom heritage."
+                    : "El tezgâhında dokunduğu için ölçülerde ±1–2 cm farklılık ve doğal lif ton geçişleri görülebilir; bu durum her parçanın tek ve benzersiz olduğunun kanıtıdır."}
                 </span>
               </li>
             </ul>
 
             <div className="pt-4 border-t border-white/20">
               <blockquote className="font-serif-display italic text-base sm:text-lg leading-snug">
-                “Bu zikzak desenine ‘Su Yolu’ deriz; bedensel ve ruhsal sağlığı anlatır. Biz onu tezgâhta dokurken sanki dereden su akıyormuş gibi o dinginliği hissederiz.”
+                {isEn
+                  ? "“We call this zigzag motif ‘Waterway’; it embodies pure wellness. Weaving it on the loom feels like the serene quiet of clean mountain streams.”"
+                  : "“Bu zikzak desenine ‘Su Yolu’ deriz; bedensel ve ruhsal sağlığı anlatır. Biz onu tezgâhta dokurken sanki dereden su akıyormuş gibi o dinginliği hissederiz.”"}
               </blockquote>
               <p className="text-xs text-[var(--mustard)] font-semibold mt-2">
-                — Küçükyoncalı Dokuma Ustaları, Saray / Tekirdağ
+                — {isEn ? "Master Weavers of Küçükyoncalı, Tekirdağ" : "Küçükyoncalı Dokuma Ustaları, Saray / Tekirdağ"}
               </p>
             </div>
           </div>

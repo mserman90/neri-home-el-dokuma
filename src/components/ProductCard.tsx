@@ -20,6 +20,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onAddToCart,
 }) => {
   const { lang, t } = useLanguage();
+  const isEn = lang === "en";
+
+  const displayName = (isEn && product.nameEn) ? product.nameEn : product.name;
+  const displaySeries = (isEn && product.seriesEn) ? product.seriesEn : product.series;
+  const displayDesc = (isEn && product.shortDescEn) ? product.shortDescEn : product.shortDesc;
+  const displayMotif = (isEn && product.motifEn) ? product.motifEn : product.motif;
+  const displayWeavingTime = (isEn && product.weavingTimeEn) ? product.weavingTimeEn : product.weavingTime;
+  const displayStockNote = (isEn && product.stockNoteEn) ? product.stockNoteEn : product.stockNote;
 
   return (
     <article className="product-card bg-[var(--card)] rounded-2xl border border-[var(--line)] overflow-hidden flex flex-col justify-between group shadow-xs">
@@ -30,11 +38,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             type="button"
             onClick={() => onOpenModal(product)}
             className="block w-full h-full cursor-pointer focus:outline-none"
-            aria-label={`${product.name} ${t.common.viewProduct}`}
+            aria-label={`${displayName} ${t.common.viewProduct}`}
           >
             <img
               src={product.images[0]}
-              alt={product.name}
+              alt={displayName}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
@@ -42,7 +50,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           {/* Sol Üst: Dokuma Süresi Rozeti */}
           <div className="absolute top-2.5 left-2.5 bg-[var(--ink)]/90 text-[var(--surface)] text-[9px] sm:text-[10px] font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shadow pointer-events-none">
-            {product.weavingTime}
+            {displayWeavingTime}
           </div>
 
           {/* Sol Alt: Stok Durumu Rozeti */}
@@ -62,7 +70,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Ürün Metin Alanı */}
         <div className="p-3.5 sm:p-4 space-y-1.5 sm:space-y-2">
           <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-semibold">
-            <span className="text-[var(--plum)] truncate">{product.series}</span>
+            <span className="text-[var(--plum)] truncate">{displaySeries}</span>
             <div className="flex items-center gap-1.5 shrink-0">
               <span className="opacity-70 text-[var(--ink)]">{product.size}</span>
               <button
@@ -71,7 +79,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   e.stopPropagation();
                   onToggleFav(product.id);
                 }}
-                aria-label={isFav ? `${product.name} favorilerden çıkar` : `${product.name} favorilere ekle`}
+                aria-label={isFav ? `${displayName} ${isEn ? "remove from favorites" : "favorilerden çıkar"}` : `${displayName} ${isEn ? "add to favorites" : "favorilere ekle"}`}
                 aria-pressed={isFav}
                 className="p-1 rounded-lg text-[var(--ink)] hover:text-[var(--plum)] hover:bg-[var(--surface-2)] transition focus:outline-none"
               >
@@ -86,21 +94,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               onClick={() => onOpenModal(product)}
               className="text-left hover:text-[var(--plum)] transition line-clamp-2"
             >
-              {product.name}
+              {displayName}
             </button>
           </h3>
 
           <p className="text-[11px] sm:text-xs opacity-80 line-clamp-2 leading-relaxed">
-            {product.shortDesc}
+            {displayDesc}
           </p>
 
           <div className="pt-1 flex items-center justify-between text-[10px] sm:text-[11px]">
             <span className="inline-block bg-[var(--surface-2)] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-[var(--line)]">
-              {lang === "en" ? "Motif:" : "Motif:"} <strong>{product.motif}</strong>
+              {isEn ? "Motif:" : "Motif:"} <strong>{displayMotif}</strong>
             </span>
-            {product.stockNote && (
+            {displayStockNote && (
               <span className="opacity-70 italic truncate max-w-[110px] sm:max-w-[140px]">
-                {product.stockNote}
+                {displayStockNote}
               </span>
             )}
           </div>

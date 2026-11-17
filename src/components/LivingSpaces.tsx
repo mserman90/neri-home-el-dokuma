@@ -1,6 +1,7 @@
 import React from "react";
 import { Product } from "../types";
 import { imgLivingSofa, imgRunnerTable, imgBagEntry, imgFullFlat } from "../data/products";
+import { useLanguage } from "../context/LanguageContext";
 
 type LivingSpacesProps = {
   products: Product[];
@@ -8,44 +9,63 @@ type LivingSpacesProps = {
 };
 
 export const LivingSpaces: React.FC<LivingSpacesProps> = ({ products, openModal }) => {
+  const { lang, t } = useLanguage();
+  const isEn = lang === "en";
+
   const items = [
     {
       img: imgLivingSofa,
-      label: "Yaşam Alanı / Salonda",
-      title: "Koltuk Kombini",
-      desc: "Bej koltukta Ganos bel yastığı, dolay silindir ve küçük kare yastık uyumu.",
+      label: isEn ? "Living Space / Living Room" : "Yaşam Alanı / Salonda",
+      title: isEn ? "Sofa Harmony" : "Koltuk Kombini",
+      desc: isEn
+        ? "Ganos lumbar cushion, bolster cylinder, and square accent cushions on a neutral sofa."
+        : "Bej koltukta Ganos bel yastığı, dolay silindir ve küçük kare yastık uyumu.",
       id: "ganos-bel",
     },
     {
       img: imgRunnerTable,
-      label: "Yaşam Alanı / Sofrada",
-      title: "Sofra Çekimi",
-      desc: "Ahşap masada pembe gül motifli boncuk püsküllü runner, kahve cezvesi ve ekmek.",
+      label: isEn ? "Living Space / Table" : "Yaşam Alanı / Sofrada",
+      title: isEn ? "Table Setting" : "Sofra Çekimi",
+      desc: isEn
+        ? "Pink rose motif handwoven runner with beaded tassels, brass pot, and fresh bread on rustic wood."
+        : "Ahşap masada pembe gül motifli boncuk püsküllü runner, kahve cezvesi ve ekmek.",
       id: "gul-boncuk-runner",
     },
     {
       img: imgBagEntry,
-      label: "Yaşam Alanı / Girişte",
-      title: "Giriş Askılığı",
-      desc: "Ahşap askıda asılı siyah büzgülü çanta, şapka ve keten ceket kompozisyonu.",
+      label: isEn ? "Living Space / Entryway" : "Yaşam Alanı / Girişte",
+      title: isEn ? "Entryway Hooks" : "Giriş Askılığı",
+      desc: isEn
+        ? "Handcrafted black drawstring bag, panama hat, and linen jacket on an antique wooden coat rack."
+        : "Ahşap askıda asılı siyah büzgülü çanta, şapka ve keten ceket kompozisyonu.",
       id: "kucukmanika-siyah-canta",
     },
     {
       img: imgFullFlat,
-      label: "Tam Seçki",
-      title: "Tam Koleksiyon Düz Çekim",
-      desc: "Pencere önünde yastıklar, 2 büzgülü çanta ve 3 boncuklu runner parçası.",
+      label: isEn ? "Complete Collection" : "Tam Seçki",
+      title: isEn ? "Full Atelier Ensemble" : "Tam Koleksiyon Düz Çekim",
+      desc: isEn
+        ? "Sunlit curation of lumbar cushions, 2 floral drawstring bags, and beaded runners by the window."
+        : "Pencere önünde yastıklar, 2 büzgülü çanta ve 3 boncuklu runner parçası.",
       id: "neri-tam-koleksiyon-set",
     },
   ];
 
   return (
-    <section id="yasam-alanlari" aria-label="Yaşam Alanlarında Neri Home" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20">
+    <section
+      id="yasam-alanlari"
+      aria-label={t.livingSpaces.title}
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20"
+    >
       <div className="mb-8 max-w-3xl">
-        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--plum)]">Mekânla Bütünleşen Zanaat</span>
-        <h2 className="font-serif-display text-3xl sm:text-4xl font-bold mt-1">Yaşam Alanlarında Neri Home</h2>
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--plum)]">
+          {t.livingSpaces.subtitle}
+        </span>
+        <h2 className="font-serif-display text-3xl sm:text-4xl font-bold mt-1">
+          {t.livingSpaces.title}
+        </h2>
         <p className="text-sm sm:text-base opacity-80 mt-2">
-          El dokuması ürünlerin evin içinde nasıl durduğunu bu dört yaşam alanı fotoğrafında görebilirsiniz. İlgilendiğiniz kareye dokunarak ürünü detaylıca inceleyebilirsiniz.
+          {t.livingSpaces.description}
         </p>
       </div>
 
@@ -62,6 +82,7 @@ export const LivingSpaces: React.FC<LivingSpacesProps> = ({ products, openModal 
                   src={item.img}
                   alt={`${item.title} — ${item.desc}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <span className="absolute top-3 left-3 bg-[var(--ink)]/90 text-[var(--surface)] text-[11px] font-semibold px-3 py-1.5 rounded-full shadow">
                   {item.label}
@@ -76,7 +97,7 @@ export const LivingSpaces: React.FC<LivingSpacesProps> = ({ products, openModal 
                     onClick={() => openModal(product)}
                     className="self-start mt-2 px-4 py-2 rounded-xl bg-[var(--ink)] text-[var(--surface)] text-xs font-semibold hover:bg-[var(--plum)] transition"
                   >
-                    Ürünü İncele
+                    {t.livingSpaces.inspectBtn}
                   </button>
                 )}
               </div>
