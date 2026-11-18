@@ -49,7 +49,9 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
               <div className="bg-[var(--surface-2)] p-2.5 sm:p-3.5 rounded-xl border border-[var(--line)]">
-                <div className="font-serif-display text-lg sm:text-2xl font-bold text-[var(--mustard)]">%100 Doğal</div>
+                <div className="font-serif-display text-lg sm:text-2xl font-bold text-[var(--mustard)]">
+                  {lang === "tr" ? "%100 Doğal" : "100% Natural"}
+                </div>
                 <div className="text-[10px] sm:text-xs opacity-80 mt-0.5 leading-tight">{t.hero.stat2Label}</div>
               </div>
             </div>

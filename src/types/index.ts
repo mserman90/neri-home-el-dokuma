@@ -1,5 +1,6 @@
 export type Option = {
   label: string;
+  labelEn?: string;
   extraPrice: number;
 };
 

@@ -65,8 +65,16 @@ export const products: Product[] = [
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
-      { label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)", extraPrice: 0 },
-      { label: "Boncuk Elyaf Dolgusu Dahil (Kullanıma Hazır)", extraPrice: 250 },
+      {
+        label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)",
+        labelEn: "Cover Only (100% Unbleached Cotton Backing & Lining)",
+        extraPrice: 0,
+      },
+      {
+        label: "Boncuk Elyaf Dolgusu Dahil (Kullanıma Hazır)",
+        labelEn: "Bead Fiber Insert Included (Ready to Use)",
+        extraPrice: 250,
+      },
     ],
     material: "%100 Yün İplik (Kök Boya) & %100 Pamuk Çözgü",
     materialEn: "100% Naturally Dyed Wool & 100% Cotton Warp",
@@ -95,8 +103,16 @@ export const products: Product[] = [
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
-      { label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)", extraPrice: 0 },
-      { label: "Boncuk Elyaf Dolgusu Dahil", extraPrice: 250 },
+      {
+        label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)",
+        labelEn: "Cover Only (100% Unbleached Cotton Backing & Lining)",
+        extraPrice: 0,
+      },
+      {
+        label: "Boncuk Elyaf Dolgusu Dahil",
+        labelEn: "Bead Fiber Insert Included",
+        extraPrice: 250,
+      },
     ],
     material: "%100 Yün İplik (Kök Boya) & %100 Pamuk Çözgü",
     materialEn: "100% Naturally Dyed Wool & 100% Cotton Warp",
@@ -125,8 +141,16 @@ export const products: Product[] = [
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
-      { label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)", extraPrice: 0 },
-      { label: "Boncuk Elyaf Dolgusu Dahil", extraPrice: 250 },
+      {
+        label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)",
+        labelEn: "Cover Only (100% Unbleached Cotton Backing & Lining)",
+        extraPrice: 0,
+      },
+      {
+        label: "Boncuk Elyaf Dolgusu Dahil",
+        labelEn: "Bead Fiber Insert Included",
+        extraPrice: 250,
+      },
     ],
     material: "%100 Yün İplik (Kök Boya) & %100 Pamuk Çözgü",
     materialEn: "100% Naturally Dyed Wool & 100% Cotton Warp",
@@ -155,7 +179,11 @@ export const products: Product[] = [
     optionsLabel: "Askı & Astar Detayı",
     optionsLabelEn: "Strap & Lining Details",
     options: [
-      { label: "Örgü Kordon Askılı & %100 Pamuk Ham Bez Astarlı", extraPrice: 0 },
+      {
+        label: "Örgü Kordon Askılı & %100 Pamuk Ham Bez Astarlı",
+        labelEn: "Braided Cord Strap & 100% Cotton Canvas Lined",
+        extraPrice: 0,
+      },
     ],
     material: "Sık Dokuma Yün & Keçi Kılı, Kök Boya Cicim İşleme",
     materialEn: "Dense Wool & Goat Hair, Natural Dyed Cicim Embroidery",
@@ -184,8 +212,16 @@ export const products: Product[] = [
     optionsLabel: "Set İçeriği",
     optionsLabelEn: "Set Content",
     options: [
-      { label: "1 Adet Ham Ekru + 1 Adet Siyah Çanta Seti (%100 Pamuk Astarlı)", extraPrice: 0 },
-      { label: "Sadece Doğal Ekru & Buz Mavisi Çanta (Tekli)", extraPrice: -3300 },
+      {
+        label: "1 Adet Ham Ekru + 1 Adet Siyah Çanta Seti (%100 Pamuk Astarlı)",
+        labelEn: "1 Raw Ecru + 1 Black Bag Set (100% Cotton Lined)",
+        extraPrice: 0,
+      },
+      {
+        label: "Sadece Doğal Ekru & Buz Mavisi Çanta (Tekli)",
+        labelEn: "Single Raw Ecru & Ice Blue Bag (Individual)",
+        extraPrice: -3300,
+      },
     ],
     material: "Boyasız Doğal Ekru & Koyu Yün Dokuma (%100 Pamuk Astarlı)",
     materialEn: "Natural Ecru & Dark Wool Weave (100% Cotton Lining)",
@@ -214,8 +250,16 @@ export const products: Product[] = [
     optionsLabel: "Kullanım Formu",
     optionsLabelEn: "Usage Form",
     options: [
-      { label: "Tek Parça Uzun Masa Runner (40x135 cm)", extraPrice: 0 },
-      { label: "3’lü Amerikan Servis & Sehpa Örtüsü Seti", extraPrice: 650 },
+      {
+        label: "Tek Parça Uzun Masa Runner (40x135 cm)",
+        labelEn: "Single Long Table Runner (40x135 cm)",
+        extraPrice: 0,
+      },
+      {
+        label: "3’lü Amerikan Servis & Sehpa Örtüsü Seti",
+        labelEn: "3-Piece Placemat & Table Runner Set",
+        extraPrice: 650,
+      },
     ],
     material: "Doğal Pamuk-Yün Karışımlı El Dokuma & El Dizimi Boncuk",
     materialEn: "Natural Cotton-Wool Handweave & Hand-Strung Glass Beads",
@@ -244,8 +288,16 @@ export const products: Product[] = [
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
-      { label: "Boncuk Elyaf Dolgusu Dahil Kullanıma Hazır", extraPrice: 0 },
-      { label: "Sadece Fermuarlı & %100 Pamuk Astarlı Kılıf", extraPrice: -250 },
+      {
+        label: "Boncuk Elyaf Dolgusu Dahil Kullanıma Hazır",
+        labelEn: "Bead Fiber Insert Included (Ready to Use)",
+        extraPrice: 0,
+      },
+      {
+        label: "Sadece Fermuarlı & %100 Pamuk Astarlı Kılıf",
+        labelEn: "Zippered Cover with 100% Cotton Lining Only",
+        extraPrice: -250,
+      },
     ],
     material: "%100 Yün İplik & %100 Pamuk Çözgü (%100 Pamuk Astar)",
     materialEn: "100% Wool & 100% Cotton Warp (100% Cotton Lining)",
@@ -274,8 +326,16 @@ export const products: Product[] = [
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
-      { label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)", extraPrice: 0 },
-      { label: "Boncuk Elyaf Dolgusu Dahil", extraPrice: 250 },
+      {
+        label: "Sadece Kılıf (Arkası & İç Astarı %100 Pamuk Ham Bez)",
+        labelEn: "Cover Only (100% Unbleached Cotton Backing & Lining)",
+        extraPrice: 0,
+      },
+      {
+        label: "Boncuk Elyaf Dolgusu Dahil",
+        labelEn: "Bead Fiber Insert Included",
+        extraPrice: 250,
+      },
     ],
     material: "%100 Yün İplik (Kök Boya) & %100 Pamuk Çözgü",
     materialEn: "100% Naturally Dyed Wool & 100% Cotton Warp",
@@ -304,8 +364,16 @@ export const products: Product[] = [
     optionsLabel: "İç Detay Seçeneği",
     optionsLabelEn: "Interior Details Option",
     options: [
-      { label: "Örgü Omuz Askılı & %100 Pamuk Ham Bez Astarlı", extraPrice: 0 },
-      { label: "Fermuarlı İç Cepli Özel Seri", extraPrice: 250 },
+      {
+        label: "Örgü Omuz Askılı & %100 Pamuk Ham Bez Astarlı",
+        labelEn: "Braided Shoulder Strap & 100% Cotton Canvas Lined",
+        extraPrice: 0,
+      },
+      {
+        label: "Fermuarlı İç Cepli Özel Seri",
+        labelEn: "Special Edition with Interior Zipper Pocket",
+        extraPrice: 250,
+      },
     ],
     material: "%100 Doğal Yün & Pamuk Çözgü, Kök Boyalı Cicim",
     materialEn: "100% Natural Wool & Cotton Warp, Naturally Dyed Cicim",
@@ -334,8 +402,16 @@ export const products: Product[] = [
     optionsLabel: "Set Paket Seçeneği",
     optionsLabelEn: "Set Package Option",
     options: [
-      { label: "4’lü Salon Kırlent Seti (%100 Pamuk Ham Bez Astarlı Kılıf)", extraPrice: 0 },
-      { label: "4’lü Salon Kırlent Seti (Boncuk Elyaf Dolgular Dahil)", extraPrice: 850 },
+      {
+        label: "4’lü Salon Kırlent Seti (%100 Pamuk Ham Bez Astarlı Kılıf)",
+        labelEn: "4-Piece Cushion Cover Set (100% Cotton Lined)",
+        extraPrice: 0,
+      },
+      {
+        label: "4’lü Salon Kırlent Seti (Boncuk Elyaf Dolgular Dahil)",
+        labelEn: "4-Piece Set with Bead Fiber Inserts Included",
+        extraPrice: 850,
+      },
     ],
     material: "%100 Doğal Yün İplik (Kök Boya) & Pamuk Çözgü (%100 Pamuk Astarlı)",
     materialEn: "100% Natural Wool (Vegetable Dyed) & Cotton Warp (100% Cotton Lined)",

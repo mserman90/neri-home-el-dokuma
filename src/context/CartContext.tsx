@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { CartRecord, Product } from "../types";
 import { storage } from "../utils/storage";
+import { useLanguage } from "./LanguageContext";
 
 interface CartContextType {
   cart: CartRecord[];
@@ -18,6 +19,7 @@ export const CartProvider: React.FC<{
   children: React.ReactNode;
   onShowToast?: (msg: string) => void;
 }> = ({ children, onShowToast }) => {
+  const { lang } = useLanguage();
   const [cart, setCart] = useState<CartRecord[]>(() => storage.get("neri_cart", []));
 
   useEffect(() => {
@@ -52,7 +54,8 @@ export const CartProvider: React.FC<{
       }
     });
     if (onShowToast) {
-      onShowToast(`“${product.name}” sepete eklendi.`);
+      const pName = lang === "en" && product.nameEn ? product.nameEn : product.name;
+      onShowToast(lang === "en" ? `“${pName}” added to cart.` : `“${pName}” sepete eklendi.`);
     }
   };
 

@@ -276,7 +276,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               >
                 {product.options.map((o, i) => (
                   <option key={o.label} value={i}>
-                    {o.label}{" "}
+                    {isEn && o.labelEn ? o.labelEn : o.label}{" "}
                     {o.extraPrice > 0
                       ? `(+${tl(o.extraPrice)})`
                       : o.extraPrice < 0
@@ -302,8 +302,8 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <a
                 href={waLink(
                   isEn
-                    ? `Hello Ms. Neriman, I would like to get information/order ${displayName} (${selectedOpt.label}). Price: ${tl(modalPrice)}`
-                    : `Merhaba Neriman Hanım, ${displayName} (${selectedOpt.label}) ürünü hakkında bilgi/sipariş almak istiyorum. Tutar: ${tl(modalPrice)}`
+                    ? `Hello Ms. Neriman, I would like to get information/order ${displayName} (${selectedOpt?.labelEn || selectedOpt?.label}). Price: ${tl(modalPrice)}`
+                    : `Merhaba Neriman Hanım, ${displayName} (${selectedOpt?.label}) ürünü hakkında bilgi/sipariş almak istiyorum. Tutar: ${tl(modalPrice)}`
                 )}
                 target="_blank"
                 rel="noopener"

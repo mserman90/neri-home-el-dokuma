@@ -55,8 +55,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     cart.forEach((c, i) => {
       const p = productById(c.value.productId);
       if (p) {
+        const displayName = isEn && p.nameEn ? p.nameEn : p.name;
+        const opt = p.options?.[c.value.optionIndex];
+        const displayOpt = isEn && opt?.labelEn ? opt.labelEn : (opt?.label || c.value.optionLabel);
         lines.push(
-          `${i + 1}. ${p.name} (${p.size} | ${c.value.optionLabel}) x ${c.value.qty} ${isEn ? "Pcs" : "Adet"} = ${tl(
+          `${i + 1}. ${displayName} (${p.size} | ${displayOpt}) x ${c.value.qty} ${isEn ? "Pcs" : "Adet"} = ${tl(
             c.value.unitPrice * c.value.qty
           )}`
         );
@@ -152,18 +155,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             cart.map((c) => {
               const p = productById(c.value.productId);
               if (!p) return null;
+              const displayName = isEn && p.nameEn ? p.nameEn : p.name;
+              const opt = p.options?.[c.value.optionIndex];
+              const displayOpt = isEn && opt?.labelEn ? opt.labelEn : (opt?.label || c.value.optionLabel);
               return (
                 <div
                   key={c.id}
                   className="flex gap-2.5 sm:gap-3 p-3 rounded-xl sm:rounded-2xl bg-[var(--surface-2)]/70 border border-[var(--line)] items-center"
                 >
                   <div className="w-16 h-16 sm:w-20 sm:h-16 rounded-lg sm:rounded-xl overflow-hidden shrink-0 border border-[var(--line)] bg-[var(--surface-3)]">
-                    <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover" />
+                    <img src={p.images[0]} alt={displayName} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0 pr-1">
-                    <h4 className="font-serif-display text-sm sm:text-base font-bold truncate">{p.name}</h4>
+                    <h4 className="font-serif-display text-sm sm:text-base font-bold truncate">{displayName}</h4>
                     <p className="text-[10px] sm:text-[11px] opacity-70 truncate">
-                      {p.size} • {c.value.optionLabel}
+                      {p.size} • {displayOpt}
                     </p>
                     <div className="text-xs font-bold text-[var(--plum)] mt-0.5">
                       {tl(c.value.unitPrice * c.value.qty)}
