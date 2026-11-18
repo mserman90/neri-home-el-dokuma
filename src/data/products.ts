@@ -5,11 +5,12 @@ import imgMeric from "../assets/dc7b72df498768bd-WhatsApp_Image_2026-11-16_at_20
 import imgLivingSofa from "../assets/3c8596234219cadd-Gemini_Generated_Image_n8fuovn8fuovn8fu.jpg";
 import imgFullFlat from "../assets/4248d23782e10ebc-Gemini_Generated_Image_u02zlpu02zlpu02z.jpg";
 import imgBagDuo from "../assets/b61dd98e1c266dc0-WhatsApp_Image_2026-11-16_at_20_29_57.jpeg";
-import imgBagBlack from "../assets/cfb06e20a575b30b-WhatsApp_Image_2026-11-16_at_18_54_44_2.jpeg";
 import imgGocAlt from "../assets/murdum-cizgili-bel-yastigi-editorial.jpg";
 import imgKareAlt from "../assets/4a133cdf98bd6864-WhatsApp_Image_2026-11-16_at_18_54_43.jpeg";
 import imgRunnerTable from "../assets/b734caefff2a6d9e-Gemini_Generated_Image_n8fuovn8fuovn8fu_1.jpg";
 import imgBagEntry from "../assets/b9ac0c1b88d107b1-Gemini_Generated_Image_n8fuovn8fuovn8fu_2.jpg";
+import imgHeybeLifestyle from "../assets/cift-yuzlu-omuz-heybesi-lifestyle.jpg";
+import imgBagBlackStudio from "../assets/kucukmanika-siyah-canta-studio.webp";
 import imgNery741Studio from "../assets/nery-741-studio-catalog.jpg";
 import imgNery741Lifestyle from "../assets/nery-741-lifestyle-living.jpg";
 import imgNery741Berjer from "../assets/nery-741-berjer-yasam-alani.jpg";
@@ -22,11 +23,12 @@ export {
   imgLivingSofa,
   imgFullFlat,
   imgBagDuo,
-  imgBagBlack,
   imgGocAlt,
   imgKareAlt,
   imgRunnerTable,
   imgBagEntry,
+  imgHeybeLifestyle,
+  imgBagBlackStudio,
   imgNery741Studio,
   imgNery741Lifestyle,
   imgNery741Berjer,
@@ -35,6 +37,8 @@ export {
 };
 
 export const livingLabel = (img: string, isEn = false): string | undefined => {
+  if (img === imgHeybeLifestyle) return isEn ? "Living Space / On Shoulder" : "Yaşam Alanı / Omuzda";
+  if (img === imgBagBlackStudio) return isEn ? "Atelier Craft Shot" : "Atölye Detayı";
   if (img === imgNery741Studio) return isEn ? "Studio Catalog" : "Stüdyo Çekimi";
   if (img === imgNery741Lifestyle) return isEn ? "Living Space / Armchair" : "Yaşam Alanı / Berjerde";
   if (img === imgNery741Berjer) return isEn ? "Living Space / Sunlight" : "Yaşam Alanı / Gün Işığında";
@@ -175,7 +179,7 @@ export const products: Product[] = [
     motif: "Üç Güller & Pıtrak",
     motifEn: "Three Roses & Burdock",
     price: 3850,
-    images: [imgBagBlack, imgBagEntry, imgBagDuo, imgFullFlat],
+    images: [imgBagBlackStudio, imgBagEntry, imgBagDuo, imgHeybeLifestyle],
     optionsLabel: "Askı & Astar Detayı",
     optionsLabelEn: "Strap & Lining Details",
     options: [
@@ -208,7 +212,7 @@ export const products: Product[] = [
     motif: "Üç Güller & Bereket Dalları",
     motifEn: "Three Roses & Branches of Abundance",
     price: 6950,
-    images: [imgBagDuo, imgBagEntry, imgBagBlack, imgFullFlat],
+    images: [imgBagDuo, imgBagBlackStudio, imgBagEntry, imgHeybeLifestyle],
     optionsLabel: "Set İçeriği",
     optionsLabelEn: "Set Content",
     options: [
@@ -360,7 +364,7 @@ export const products: Product[] = [
     motif: "Pıtrak, Koçboynuzu & Bereket Dalları",
     motifEn: "Burdock, Ram's Horn & Abundance Vines",
     price: 4450,
-    images: [imgBagBlack, imgBagEntry, imgBagDuo, imgFullFlat],
+    images: [imgHeybeLifestyle, imgBagBlackStudio, imgBagEntry, imgBagDuo],
     optionsLabel: "İç Detay Seçeneği",
     optionsLabelEn: "Interior Details Option",
     options: [
