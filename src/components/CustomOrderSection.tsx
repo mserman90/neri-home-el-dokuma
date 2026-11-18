@@ -9,7 +9,7 @@ export const CustomOrderSection: React.FC = () => {
   const isEn = lang === "en";
 
   const [formName, setFormName] = useState("");
-  const [formType, setFormType] = useState(isEn ? "Corporate Logo Weaving" : "Kurumsal Logolu Dokuma");
+  const [formType, setFormType] = useState(isEn ? "Custom Dimensions Cushion / Bench Pad" : "Özel Ölçü Kırlent / Sedir Minderi");
   const [formNote, setFormNote] = useState("");
   const [formResult, setFormResult] = useState<{ saved: boolean; msg: string; waUrl?: string } | null>(null);
   const [formBusy, setFormBusy] = useState(false);
@@ -128,9 +128,9 @@ export const CustomOrderSection: React.FC = () => {
                     onChange={(e) => setFormType(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--line)] text-xs focus:outline-none focus:ring-2 focus:ring-[var(--mustard)]"
                   >
-                    <option>{isEn ? "Corporate Logo Weaving" : "Kurumsal Logolu Dokuma"}</option>
-                    <option>{isEn ? "Personalized Monogram Cushion" : "İsme Özel Kırlent / Çeyiz"}</option>
-                    <option>{isEn ? "Boutique Hotel / Architecture (Bulk)" : "Butik Otel / Mimari Proje (Toplu)"}</option>
+                    <option>{isEn ? "Custom Dimensions Cushion / Bench Pad" : "Özel Ölçü Kırlent / Sedir Minderi"}</option>
+                    <option>{isEn ? "Corporate Gifting & Bulk Order" : "Kurumsal Hediye & Toplu Dokuma"}</option>
+                    <option>{isEn ? "Boutique Hotel / Architecture Project" : "Butik Otel / Mimari Proje"}</option>
                     <option>{isEn ? "Custom Size Runner / Kilim" : "Özel Ölçü Yolluk / Kilim"}</option>
                   </select>
                 </div>
@@ -138,7 +138,7 @@ export const CustomOrderSection: React.FC = () => {
 
               <div>
                 <label htmlFor="custom-note" className="block text-xs font-semibold mb-1">
-                  {isEn ? "Custom Dimensions, Name or Notes *" : "Dokunmasını İstediğiniz İsim, Ölçü veya Notunuz *"}
+                  {isEn ? "Custom Dimensions, Colors or Project Notes *" : "İstediğiniz Ölçü, Renk veya Proje Notunuz *"}
                 </label>
                 <textarea
                   id="custom-note"
