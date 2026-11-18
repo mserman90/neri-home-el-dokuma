@@ -3,7 +3,7 @@ import { Product, FAQ } from "../types";
 
 export function useJsonLd(products: Product[], faqs: FAQ[]) {
   useEffect(() => {
-    const siteUrl = "https://mserman90.github.io/neri-home-el-dokuma/";
+    const siteUrl = "https://mserman90.github.io/nery-home-el-dokuma/";
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.id = "nery-home-jsonld";

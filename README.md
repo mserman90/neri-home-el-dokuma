@@ -2,7 +2,7 @@
 
 Anadolu'nun geleneksel dokumalarını modern yaşam alanları ile buluşturuyoruz. Tekirdağ Saray Küçükyoncalı (Küçükmanika) köyünde 1875 Rumeli göç mirasıyla, kadın dokuma ustalarımızın ahşap el tezgâhlarında kök boyalı %100 doğal yün ve pamuk çözgü ile dokunan kırlent, dolay yastık, çanta, heybe ve runner koleksiyonu.
 
-🌐 **Canlı Site:** [https://mserman90.github.io/neri-home-el-dokuma/](https://mserman90.github.io/neri-home-el-dokuma/)
+🌐 **Canlı Site:** [https://mserman90.github.io/nery-home-el-dokuma/](https://mserman90.github.io/nery-home-el-dokuma/)
 
 ---
 
@@ -32,8 +32,8 @@ Anadolu'nun geleneksel dokumalarını modern yaşam alanları ile buluşturuyoru
 
 ```bash
 # Depoyu klonlayın
-git clone https://github.com/mserman90/neri-home-el-dokuma.git
-cd neri-home-el-dokuma
+git clone https://github.com/mserman90/nery-home-el-dokuma.git
+cd nery-home-el-dokuma
 
 # Bağımlılıkları yükleyin
 npm install

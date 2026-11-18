@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mserman90.github.io/neri-home-el-dokuma/sitemap.xml
+Sitemap: https://mserman90.github.io/nery-home-el-dokuma/sitemap.xml
