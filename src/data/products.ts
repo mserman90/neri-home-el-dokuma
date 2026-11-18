@@ -1,7 +1,9 @@
 import { Product } from "../types";
 
 import imgGanos from "../assets/e34e4b08e1004d85-WhatsApp_Image_2026-11-16_at_18_54_44_3.jpeg";
-import imgMeric from "../assets/dc7b72df498768bd-WhatsApp_Image_2026-11-16_at_20_31_30.jpeg";
+import imgBagBlackFlat from "../assets/dc7b72df498768bd-WhatsApp_Image_2026-11-16_at_20_31_30.jpeg";
+import imgHardalReal from "../assets/hardal-cizgili-bel-kirlenti-real.jpg";
+import imgHardalDetay from "../assets/hardal-cizgili-bel-kirlenti-detay.jpg";
 import imgLivingSofa from "../assets/3c8596234219cadd-Gemini_Generated_Image_n8fuovn8fuovn8fu.jpg";
 import imgFullFlat from "../assets/4248d23782e10ebc-Gemini_Generated_Image_u02zlpu02zlpu02z.jpg";
 import imgBagDuo from "../assets/b61dd98e1c266dc0-WhatsApp_Image_2026-11-16_at_20_29_57.jpeg";
@@ -19,7 +21,9 @@ import imgNery741Astar from "../assets/nery-741-astar-fermuar-detay.jpg";
 
 export {
   imgGanos,
-  imgMeric,
+  imgBagBlackFlat,
+  imgHardalReal,
+  imgHardalDetay,
   imgLivingSofa,
   imgFullFlat,
   imgBagDuo,
@@ -37,6 +41,9 @@ export {
 };
 
 export const livingLabel = (img: string, isEn = false): string | undefined => {
+  if (img === imgHardalReal) return isEn ? "Living Space / Window Sill" : "Yaşam Alanı / Pencere Önü";
+  if (img === imgHardalDetay) return isEn ? "Weave & Stripe Detail" : "Dokuma & Çizgi Detay";
+  if (img === imgBagBlackFlat) return isEn ? "Flat Lay / Craft Detail" : "Ürün / Zanaat Detayı";
   if (img === imgHeybeLifestyle) return isEn ? "Living Space / On Shoulder" : "Yaşam Alanı / Omuzda";
   if (img === imgBagBlackStudio) return isEn ? "Atelier Craft Shot" : "Atölye Detayı";
   if (img === imgNery741Studio) return isEn ? "Studio Catalog" : "Stüdyo Çekimi";
@@ -103,7 +110,7 @@ export const products: Product[] = [
     motif: "Su Yolu & Göç Yolları",
     motifEn: "Waterway & Migration Routes",
     price: 2950,
-    images: [imgKareAlt, imgMeric, imgLivingSofa],
+    images: [imgKareAlt, imgHardalReal, imgLivingSofa],
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
@@ -141,7 +148,7 @@ export const products: Product[] = [
     motif: "Göç Yolları & Sofra Şeridi",
     motifEn: "Migration Routes & Hearth Stripes",
     price: 2850,
-    images: [imgGocAlt, imgGanos, imgMeric],
+    images: [imgGocAlt, imgGanos, imgHardalReal],
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
@@ -179,7 +186,7 @@ export const products: Product[] = [
     motif: "Üç Güller & Pıtrak",
     motifEn: "Three Roses & Burdock",
     price: 3850,
-    images: [imgBagBlackStudio, imgBagEntry, imgBagDuo, imgHeybeLifestyle],
+    images: [imgBagBlackStudio, imgBagBlackFlat, imgBagEntry, imgBagDuo],
     optionsLabel: "Askı & Astar Detayı",
     optionsLabelEn: "Strap & Lining Details",
     options: [
@@ -288,7 +295,7 @@ export const products: Product[] = [
     motif: "Göç Yolları & Su Yolu",
     motifEn: "Migration Routes & Waterway",
     price: 3100,
-    images: [imgLivingSofa, imgKareAlt, imgMeric],
+    images: [imgLivingSofa, imgKareAlt, imgHardalReal],
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
@@ -326,7 +333,7 @@ export const products: Product[] = [
     motif: "Elif & İnce Sofra Çizgileri",
     motifEn: "Elif & Fine Hearth Stripes",
     price: 2750,
-    images: [imgMeric, imgKareAlt, imgGanos],
+    images: [imgHardalReal, imgHardalDetay, imgGocAlt],
     optionsLabel: "Dolgu & Astar Seçeneği",
     optionsLabelEn: "Lining & Insert Option",
     options: [
@@ -402,7 +409,7 @@ export const products: Product[] = [
     motif: "Su Yolu, Göç Yolları & Koçboynuzu",
     motifEn: "Waterway, Migration Routes & Ram's Horn",
     price: 10850,
-    images: [imgFullFlat, imgLivingSofa, imgGanos, imgMeric],
+    images: [imgFullFlat, imgLivingSofa, imgGanos, imgHardalReal],
     optionsLabel: "Set Paket Seçeneği",
     optionsLabelEn: "Set Package Option",
     options: [
