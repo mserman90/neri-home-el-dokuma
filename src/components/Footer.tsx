@@ -60,6 +60,11 @@ export const Footer: React.FC = () => {
                   {t.craftSection.title}
                 </a>
               </li>
+              <li>
+                <a href="#basinda-biz" className="hover:text-[var(--plum)] transition">
+                  {t.pressSection.title}
+                </a>
+              </li>
             </ul>
           </div>
 

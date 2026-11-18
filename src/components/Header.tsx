@@ -32,6 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
     { href: "#zanaat", label: t.nav.craft },
     { href: "#sertifika", label: t.nav.certificate },
     { href: "#hikayemiz", label: t.nav.heritage },
+    { href: "#basinda-biz", label: t.nav.press },
     { href: "#yorumlar", label: t.nav.reviews },
     { href: "#ozel-siparis", label: t.nav.customOrder },
     { href: "#iletisim", label: t.nav.contact },

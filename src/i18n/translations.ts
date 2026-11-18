@@ -10,6 +10,7 @@ export const translations = {
       certificate: "Menşe Belgesi",
       heritage: "Mirasımız",
       reviews: "Müşteri Deneyimi",
+      press: "Basında Biz",
       customOrder: "Özel Dokuma",
       contact: "İletişim",
     },
@@ -143,6 +144,13 @@ export const translations = {
       title: "Yaşayan Mekânlardan Yansımalar",
       description: "Tekirdağ Saray Küçükyoncalı'dan evlere, butik otellere ve ofislere uzanan el dokumalarımızın misafirlerimizdeki yankısı.",
     },
+    pressSection: {
+      subtitle: "Ulusal & Bölgesel Basında Küçükyoncalı Dokumaları",
+      title: "Basında Biz",
+      description: "Tekirdağ Saray Küçükyoncalı atölyemizin 200 yıllık Rumeli sandık mirasını, cicim dokuma sanatını ve kadın dokuma ustalarımızın üretimini konu alan ulusal basın haberleri.",
+      googleNewsBtn: "Google News'te Tüm Haberleri Gör",
+      readMore: "Haberi İncele",
+    },
     customOrderSection: {
       badge: "B2B & Kişiye Özel Atölye Üretimi",
       title: "Kurumsal Hediyelik & İsim/Logo Dokuma",
@@ -182,6 +190,7 @@ export const translations = {
       certificate: "Provenance Certificate",
       heritage: "Our Heritage",
       reviews: "Testimonials",
+      press: "In the Press",
       customOrder: "Custom Weaving",
       contact: "Contact",
     },
@@ -314,6 +323,13 @@ export const translations = {
       subtitle: "Customer Experiences",
       title: "Voices from Inspired Homes",
       description: "Echoes from clients, architects, and boutique hotels who welcomed our handloom textiles into their spaces.",
+    },
+    pressSection: {
+      subtitle: "Küçükyoncalı Weaves in National & Regional Press",
+      title: "In the Press",
+      description: "National news features highlighting our 200-year Rumelian chest heritage, cicim handloom art, and women artisan empowerment in Küçükyoncalı, Tekirdağ.",
+      googleNewsBtn: "View All Coverage on Google News",
+      readMore: "Read Coverage",
     },
     customOrderSection: {
       badge: "B2B & Bespoke Atelier Production",

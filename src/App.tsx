@@ -20,6 +20,7 @@ import { MotifDictionary } from "./components/MotifDictionary";
 import { CraftSection } from "./components/CraftSection";
 import { CertificateSection } from "./components/CertificateSection";
 import { HistorySection } from "./components/HistorySection";
+import { PressSection } from "./components/PressSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { CustomOrderSection } from "./components/CustomOrderSection";
 import { FaqSection } from "./components/FaqSection";
@@ -114,7 +115,10 @@ function MainAppContent() {
         {/* 8. 1875 Heritage History */}
         <HistorySection />
 
-        {/* 9. Testimonials & Social Proof */}
+        {/* 9. Press & Media Coverage */}
+        <PressSection />
+
+        {/* 10. Testimonials & Social Proof */}
         <TestimonialsSection />
 
         {/* 10. B2B & Custom Weaving */}
